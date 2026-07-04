@@ -1,0 +1,219 @@
+.page{
+    display: flex;
+    min-height: 100vh;
+    background: #ffffff;
+    font-family: 'Inter','Segeo UI',sans-serif;
+}
+
+.leftPanel{
+    flex: 1;
+    background: #1e3a8a;
+    color: #fff;
+    padding: 40px 56px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.backButton{
+    background: transparent;
+    border:none;
+    color: #93c5fd;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    width: fit-content;
+    font-family: inherit;
+    transition: color 0.15s;
+}
+.backButton:hover{
+    color: #fff;
+}
+.leftContent{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 0;
+}
+.leftLogo{
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 36px;
+    display: block;
+}
+.leftTagLine{
+    font-size: clamp(26px,3vw,38px);
+    font-weight: 800;
+    letter-spacing: -1.2px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.leftSub{
+    font-size: 15px;
+    color: #93c5fd;
+    max-width: 340px;
+    margin-bottom: 52px;
+}
+.leftStats{
+    display: flex;
+    gap: 40px;
+}
+.leftStatItem{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.leftStatNumber{
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.8px;
+}
+.leftStatLabel{
+    font-size: 12px;
+    color: #60a5fa;
+}
+
+.rightPanel{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    background: #f8faff;
+}
+.formBox{
+    width: 100%;
+    max-width: 400px;
+}
+.toggleRow{
+    display: flex;
+    background: #e8f0fe;
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 32px;
+}
+.toggleActive{
+    flex: 1;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e3a8a;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    font-family: inherit;
+    transition: all 0.15s;
+}
+.toggleInactive{
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+}
+.toggleInactive:hover{
+    color: #1e3a8a;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.formTitle{
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+.formSubtitle{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 28px;
+}
+.fieldGroup{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+.fieldLabel{
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+.fieldInput{
+    border: 1.5px solid #e2e8f0;
+    border-radius: 9px;
+    padding: 11px 14px;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.15s;
+    background: #fff;
+    font-family: inherit;
+}
+.fieldInput:focus{
+    border-color: #1d4ed8;
+}
+.fieldInput::placeholder{
+    color: #cbd5e1;
+}
+.errorMessage{
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #dc2626;
+    margin-bottom: 20px;
+}
+.submitButton{
+    background: #1d4ed8;
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
+    transition: background 0.15s;
+    font-family: inherit;
+}
+.submitButton:hover{
+    background: #1e40af;
+}
+.submitButton:disabled{
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+@media (max-width:768px){
+    .page{
+        flex-direction: column;
+    }
+    .leftPanel{
+        min-height: unset;
+        padding: 32px 24px;
+    }
+    .leftSub{
+        display: none;
+    }
+    .leftStats{
+        gap: 24px;
+    }
+    .rightPanel{
+        padding: 40px 24px;
+        background: #fff;
+    }
+}
