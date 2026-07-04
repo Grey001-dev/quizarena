@@ -135,6 +135,35 @@ export default function Dashboard(){
                                     <p className={styles.statLabel}>
                                         ELO rating
                                     </p>
+                                    <p className={styles.statNumber}>
+                                        {/* user elo */}
+                                    </p>
+                                </div>
+
+                                <div className={styles.statCard}>
+                                    <p className={styles.statLabel}>
+                                        Games played
+                                    </p>
+                                    <p className={styles.statNumber}>
+                                        34
+                                    </p>
+                                </div>
+
+                                <div className={styles.statCard}>
+                                    <p className={styles.statLabel}>
+                                        Win rate
+                                    </p>
+                                    <p className={`${styles.statNumber} ${styles.statGreen}`}>
+                                        57%
+                                    </p>
+                                </div> 
+
+                                <div className={styles.statCard}>
+                                    <p className={styles.statLabel}>Best rank</p>
+                                    <p className={styles.statNumber}>
+                                        #1
+                                        {/* Logo depending on rank sha */}
+                                    </p>
                                 </div>
                             </div>
 
