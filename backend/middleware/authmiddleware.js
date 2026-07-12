@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv"
 
 
-const verifyToken=async(req,res,next)=>{
+export const verifyToken=async(req,res,next)=>{
     const authHeaders=req.headers["authorization"];
     const token=authHeaders && authHeaders.split(" ")[1];
 

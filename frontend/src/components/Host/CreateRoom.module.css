@@ -1,0 +1,358 @@
+.page{
+    background: #f0f4ff;
+    min-height: 100vh;
+    font-family: 'Inter','Segoe UI',sans-serif;
+}
+.navbar{
+    background: #1e3a8a;
+    padding: 140x 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navLogo{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+.backButton{
+    background: transparent;
+    border: none;
+    color: #93c5fd;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.15s;
+}
+.backButton:hover{
+    color: #fff;
+}
+.content{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 32px;
+}
+.title{
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom:6px;
+}
+.subTitle{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom:64px ;
+}
+.twoCol{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+.settingsPanel{
+    display: flex;
+    flex-direction: column;
+}
+.mixedToggle{
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+.mixedActive{
+    flex: 1;
+    background: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+    border-radius: 6px;
+    font-family: inherit;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.mixedInactive{
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 8x 12px;
+    font-size: 13px;
+    font-size: 13px;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+.mixedInactive{
+    color: #0f172a;
+}
+
+.sectionLabel{
+    font-size: 11px;
+    font-weight: 700;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+}
+.pillRow{
+    display: flex;
+    flex-wrap:wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.pill{
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #dbeafe;
+    background: #fff;
+    font-size: 13px;
+    color: #475569;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ;
+}
+.pill:hover{
+    border-color: #1d4ed8;
+    color: #1d4ed8;
+}
+.pill:disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.pillActive{
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #1d4ed8;
+    background: #1d4ed8;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
+.diffRow{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+.diffCard{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.diffCard:hover{
+    border-color: #1d4ed8;
+}
+.diffCardActive{
+    background: #1d4ed8;
+    border: 1.5px solid #1d4ed8;
+    border-radius:12px;
+    padding: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+.diffTitle{
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 2px;
+}
+.diffTitleActive{
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 2px;
+}
+.diffSub{
+    font-size: 11px;
+    color: #94a3b8;
+}
+.diffSubActive{
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+}
+.amountRow{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 8px;
+    margin-bottom: 28px;
+}
+.amount{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.amount:hover{
+    border-color: #1d4ed8;
+    color: #1d43d8;
+}
+.amountActive{
+    background: #1d4ed8;
+    border: 1.5px solid #1d4ed8;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+.primaryButton{
+    width: 100%;
+    background: #1d4ed8;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+.primaryButton:hover{
+    background: #1e40af;
+}
+.primaryButton:disabled{
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+.rightPanel{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.codeBox{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+}
+.codeValue{
+    font-size: 38px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 6px;
+    margin-bottom: 6px;
+}
+.codeSub{
+    font-size: 12px;
+    color: #94a3b8;
+}
+.lobbyPanel{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 14px;
+    padding: 20px 24px;
+
+}
+.slotsGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
+.slotCardFilled{
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+.slotCardEmpty{
+    background: #ffffff;
+    border: 2px dashed #e2e8f0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #94a3b8;
+}
+.avatarCicle{
+    width: 40px;
+    height: 40px;
+    background: #1d4ed8;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(29,78,216,0.2);
+}
+.emptyCircle{
+    width: 40px;
+    height: 40px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.playerInfo{
+    display: flex;
+    flex-direction: column;
+}
+.playerName{
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+.playerElo{
+    font-size: 11px;
+    color: #16a34a;
+    font-weight: 600;
+    margin: 0;
+}
+.emptyText{
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+}
+@media (max-width:480px){
+    .slotsGrid{
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width:768px) {
+    .navbar{
+        padding: 14px 20px;
+    }
+    .content{
+        padding: 32px 20px;
+    }
+    .twoCol{
+        grid-template-columns: 1fr;
+    }
+}

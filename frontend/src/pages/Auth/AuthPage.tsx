@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {AuthServices } from "../../services/AuthServices.ts"
 import styles from "./AuthPage.module.css";
 
 type AuthMode="login" | "register";
 
-export default function AuthPage(){
+interface AuthPageProps{
+    setToken:(token:string) => void
+}
+export default function AuthPage({setToken}: AuthPageProps){
     const navigate=useNavigate();
     const [mode,setMode]=useState<AuthMode>("login")
     const [loginEmail,setLoginEmail]=useState<string>("")
@@ -22,51 +26,52 @@ export default function AuthPage(){
     }
     const handleLoginSubmit=async()=>{
         try {
+            setLoading(true)
             const fields={
             mode:mode,
             email:loginEmail,
             password:loginPassword
         }
-            const res=await fetch("http://localhost:5000/api/auth",{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-                },
-                body:JSON.stringify(fields)
-            });
-            const data=await res.json();
+            const data=await AuthServices.submit(fields);
             if(data.token){
                 localStorage.setItem("token",data.token);
+                setToken(data.token)
                 navigate("/dashboard")
+            }else{
+                setError(data.message || "Authentication failed.");
             }
-            if(!res.ok){
-                setError(data.message)
-                return
-            }
+            
             console.log(data.message)   
-        } catch (err) {
+        } catch (err:any) {
+            setError(err.message|| "Something went wrong.")
             console.error('Error handling login form',err)
+        }  finally{
+            setLoading(false)
         }
     }
     const handleRegSubmit=async()=>{
         try {
+            setLoading(true)
             const fields={
                 mode:mode,
                 email:registerEmail,
                 password:registerPassword,
                 username:username,
             }
-            const res=await fetch("http://localhost:5000/api/auth",{
-                method: "POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify(fields)
-            })
-            const data=await res.json()
-            console.log("Succesfully registered",data.message)
-        } catch (err) {
-            console.log("Error registering user",err)
+            const data=await AuthServices.submit(fields)
+            if(data.token){
+                localStorage.setItem("token",data.token)
+                setToken(data.token);
+                navigate("/dashboard");
+            }
+            else{
+                setError(data.message|| "Authentication failed")
+            }
+        } catch (err: any) {
+            setError(err.message || "Something went wrong.");
+            console.error('Error handling form submission', err);
+        }  finally{
+            setLoading(false)
         }
     }
 
@@ -150,8 +155,9 @@ export default function AuthPage(){
 
                             <button
                             className={styles.submitButton}
-                            // ONCLICK
+                            onClick={handleLoginSubmit}
                             disabled={loading}
+                            type="submit"
                             >
                                 {loading ? 'Signing in...' :"Sign in"}
                             </button>
@@ -169,7 +175,7 @@ export default function AuthPage(){
                     {mode==="register" && (
                         <div className={styles.form}>
                             <h1 className={styles.formTitle}>
-                                Create tour accound
+                                Create your account
                             </h1>
                             <p className={styles.formSubtitle}>
                                 Join QuizArena and start battling.
@@ -181,6 +187,7 @@ export default function AuthPage(){
                                 className={styles.fieldInput}
                                 placeholder="Grey001"
                                 value={username}
+                                maxLength={8}
                                 onChange={(e)=>setUsername(e.target.value)} 
                                 type="text" 
                                 />
@@ -209,8 +216,9 @@ export default function AuthPage(){
                             </div>
 
                             <button className={styles.submitButton}
-                            // Onclick
+                            onClick={handleRegSubmit}
                             disabled={loading}
+                            type="submit"
                             >
                                 {loading ? 'Creating account..' :"Create account"}
                             </button>

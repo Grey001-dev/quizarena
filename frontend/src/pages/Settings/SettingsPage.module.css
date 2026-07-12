@@ -1,0 +1,229 @@
+.page{
+    background: #f0f4ff;
+    min-height: 100vh;
+    font-family: 'Inter','Segeo UI',sans-serif;
+}
+.navbar{
+    background: #1e3a8a;
+    padding: 14px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.navLogo{
+    font-family: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+.backButton{
+    background: transparent;
+    border: none;
+    color: #93c5fd;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.15s;
+}
+.backButton:hover{
+    color: #fff;
+}
+.content{
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 48px 32px;
+}
+.title{
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-top: 4px;
+}
+.subtitle{
+    font-size: 13px;
+    color: #64e78b;
+    margin-bottom: 28px;
+}
+.message{
+    font-size: 13px;
+    color: #1d4ed8;
+    background: #dbeafe;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.panel{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    padding: 24px;
+    margin-bottom: 16px;
+    border-radius: 14px;
+}
+.panelLabel{
+    font: 11px;
+    font-weight: 700;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+.avatarSha{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.avatarName{
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+}
+.avatarGrid{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 8px;
+}
+.avatarElo{
+    font-size: 14px;
+    color: #677281;
+    font-weight: 600;
+}
+.avatarOption{
+    border-radius: 50%;
+    border: 1.5px solid #dbeafe;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    overflow: hideen;
+}
+.avatarOption{
+    border-color: #1d4ed8;
+}
+.avatarOptionActive{
+  border-radius: 50%;
+  border: 2px solid #1d4ed8;
+  cursor: pointer;
+  overflow: hidden;
+}
+.shuffleButton{
+    font-size: 12px;
+    color: #1d4ed8;
+    background: #dbeafe;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 99px;
+    cursor: pointer;
+    margin-top: 12px;
+    font-family: inherit;
+    font-family: 600;
+}
+.shuffleButton:hover{
+    background: #bfdbfe;
+}
+.field{
+    margin-bottom: 16px;
+}
+.fieldLabel{
+    font-size: 12px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+    display: block;
+}
+.fieldInput {
+    width: 50%;
+    background: #2d2d2d;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #ffffff;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+.fieldInput:focus{
+    border-radius: #1d4ed8;
+}
+.saveButton{
+    background: #1d4ed8;
+    color: #fff;
+    border-radius: 9px;
+    font-size: 14px;
+    border: none;
+    padding: 11px 22px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+.saveButton:hover{
+    background: #1e40af;
+}
+.saveButton:disabled{
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+.Panel{
+    background: #fff;
+    border: 1.5px solid #fecaca;
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.Label{
+    font-size: 11px;
+    font-weight: 700;
+    color: #dc2626;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+}
+.Row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+.Text{
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+    text-align: center;
+   
+}
+.logOutButton{
+    background: #fff;
+    color: #dc2626;
+    border: 1.5px solid #fecaca;
+    padding: 9px 18px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+.logOutButton:hover{
+    background: #fef2f2;
+}
+@media(max-width:768px){
+    .navbar{
+        padding: 14px 20px;
+    }
+    .content{
+        padding: 32px 20px;
+    }
+    .avatarGrid{
+        grid-template-columns: repeat(4,1fr);
+    }
+    .Row{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,90 @@
+
+.page{
+    background: #f0f4ff;
+    min-height: 100vh;
+    font-family: 'Inter','Segeo UI',sans-serif;
+}
+.navbar{
+    background: #1e3a8a;
+    padding: 14px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top:0;
+    z-index:100;
+    border-radius: 0 0 16px 16px;
+    margin: 0 24px;
+}
+
+.navLogo{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+.backButton{
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #93c5fd;
+    font-size: 13px;
+    cursor:pointer;
+    font-family: inherit;
+    display: flex;
+    align-items:center;
+    gap:8px;
+}
+.contentContainer{
+    max-width:600px;
+    margin:0 auto;
+    padding:64px 24px;
+    text-align: center;
+}
+.title{
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+.subTitle{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 40px;
+}
+.joinForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.codeRow{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
+    width:100%;
+}
+.codeInput{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 34px;
+    font-weight: 800;
+    color: #0f172a;
+    width: 280px;
+    text-align: center;
+    padding: 14px 0;
+    text-transform: uppercase;
+    outline: none;
+    background: #ffffff;
+    border: 2px solid #1d4ed8;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(29,78,216,0.05);
+    letter-spacing: 12px;
+    padding-left: 12px;
+    transition: border-color 0.15s ease;
+}
+.codeInput:focus{
+    border-color: #1e40af;
+    box-shadow: 0 0 0 4px rgba(29,78,216,0.15);
+}

@@ -20,7 +20,7 @@ export const handleauth=async(req,res)=>{
                 return res.status(400).json({message:"Email not found!"})
             }
             const hashedPassword=user.password;
-            const correctPassword=bcrypt.compare(password,hashedPassword);
+            const correctPassword=await bcrypt.compare(password,hashedPassword);
             if (!correctPassword){
                 return res.status(400).json({message:"invalid credentials"})
             }
@@ -34,8 +34,8 @@ export const handleauth=async(req,res)=>{
             return res.status(500).json({message:'Authentication error',error})
         }
     }else{
-        const {username,email,password}=req.body;
         try {
+            const {username,email,password}=req.body;
             if(!email || !password || !username){
                 return res.status(400).json({message:'Provide essential credentials'})
             }
@@ -50,6 +50,7 @@ export const handleauth=async(req,res)=>{
             })
             if(existingUsername){
                 return res.status(400).json({message:'Username already taken try another one'})
+            }
             const hashedPassword=await bcrypt.hash(password,10)
             const user=await prisma.user.create({
                 data:{
@@ -63,8 +64,9 @@ export const handleauth=async(req,res)=>{
                 message:'Succesfully registered user',
                 token,
                 user:{id:user.id,username:user.username,email:user.email}
-            })}
+            })
         } catch (error) {
+            console.error("Registration Controller error:",error)
             return res.status(500).json({message:'Error registering user',error})
         }
     }

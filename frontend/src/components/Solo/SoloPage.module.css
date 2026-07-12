@@ -1,0 +1,414 @@
+.page{
+    background: #f0f4ff;
+    min-height: 100vh;
+    font-family: 'Inter','Segeo UI', sans-serif;
+    width: 100%;
+}
+
+.navbar{
+    background: #1e3a8a;
+    padding: 14px 48px;
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navLogo{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.backButton{
+    background: transparent;
+    border: none;
+    color: #93c5fd;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.15s;
+}
+.backButton:hover{
+    color: #fff;
+}
+.content{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 64px;
+}
+.title{
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    text-align: left;
+}
+.subTitle{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom:40px;
+    text-align: left;
+}
+.sectionLabel{
+    font-size: 11px;
+    font-weight: 700;
+    color: #1d4ed8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    text-align: left;
+}
+.pillRow{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+}
+.pill{
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1.5px solid #dbeafe;
+    background: #fff;
+    font-size: 13px;
+    color: #475569;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.5s;
+}
+.pill:hover{
+    border-color:#1d4ed8;
+    color: #1d4e48;
+}
+.pillActive{
+    padding: 7px 16px;
+    border-radius: 90px;
+    border: 1.5px solid #1d43d8;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    background-color: #1d43d8;
+}
+.diffRow{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+.diffCard{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.diffCard:hover{
+    border-color: #1d43d8;
+    color: #1d43d8;
+}
+.diffCardActive{
+    background: #1d4ed8;
+    border: 1.5px solid #1d4ed8;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+.diffTitle{
+    padding: 7px 16px;
+    border-radius: 999px;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;    
+}
+.diffTitleActive{
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 3px;
+}
+.diffCard{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.diffSub{
+    font-size: 12px;
+    color: #94a3b8;
+}
+.diffSubActive{
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+}
+
+.amountRow{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    margin-bottom: 36px;
+    grid-template-columns: repeat(4,1fr);
+}
+.amount{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+}
+.amount:hover{
+    border-color: #1d4ed8;
+    color: #1d4ed8;
+}
+
+.amountActive{
+    background: #1d4ed8;
+    border: 1.5px solid #1d4ed8;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+.startButton{
+    width: 100%;
+    background: #1d4ed8;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size:15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+}
+
+.startButton:hover {
+  background: #1e40af;
+}
+.startButton:disabled{
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+.mixedToggle{
+    display: flex;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+.mixedActive{
+    flex: 1;
+    background: #ffffff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1d4ed8;
+    border-radius: 6px;
+    font-family: inherit;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.mixedInactive{
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: all 0.15s ease;
+}
+.mixedInactive{
+    color: #0f172a;
+}
+@media (max-width:768px) {
+    .navbar{
+        padding: 14px 20px;
+    }
+    .content{
+        padding: 32px 20px;
+    }
+    .diffRow{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+.gameContainer{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.gameHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+.progressText{
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e3a8a;
+    white-space: nowrap;
+}
+.progressBarFill{
+    width: 40%;
+}
+.progressBarBg{
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+.progressBarFill{
+    height: 100%;
+    background: #1d4ed8;
+}
+.timerBadge{
+    background: #fff;
+    border-radius: 99px;
+    padding: 6px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    border: 1.5px solid #dbeafe;
+}
+.timerNumber{
+    font-size: 22px;
+    font-weight: 900;
+    color: #1d4ed8;
+}
+.timerLabel{
+    font-size: 12px;
+    color: #94a3b8;
+}
+.questionCard{
+    background: #fff;
+    border-radius: 24px;
+    padding: 48px 24px;
+    text-align: center;
+    border: 1.5px solid #dbeafe;
+}
+.questionCategory{
+    font-size: 12px;
+    font-weight: 800;
+    color: #1d4ed8;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+.questionText{
+    font-size: 32px;
+    font-weight: 800;
+    color: #0f172a;
+}
+.optionsGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.optionButton{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+.optionButtonActive{
+    background: #2563eb;
+    border: 1.5px solid #2563eb;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+}
+.optionLetter{
+    background: #dbeafe;
+    color: #1d4ed8;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+.optionLeterActuve{
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+.optionValue{
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+}
+.optionButtonActive .optionValue{
+    color: #fff;
+}
+.standingsCard{
+    background: #fff;
+    border-radius: 24px;
+    padding: 28px;
+    border: 1.5px solid #dbeafe;
+    margin-top: 12px;
+}
+.standingsLabel{
+    font-size: 11px;
+    font-weight: 800;
+    color: #1d4ed8;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+.standingsRow{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #475569;
+}
+.standingsUserActive{
+    color: #1d43d8;
+    font-weight: 700;
+}
+.standingsScore{
+    font-weight: 800;
+    color: #1d4ed8;
+}

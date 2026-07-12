@@ -6,12 +6,11 @@ climb a global ELO leaderboard.
 
 ## What it does
 
-- **Solo play** — pick a category and play alone, your score and ELO still update
-- **Host a game** — create a room, get a 6-character code, share it and play with others
-- **Join a game** — enter a room code and jump straight into a live battle
-- Questions are pulled live from the Open Trivia Database — no manual quiz creation needed
-- Speed-bonus scoring — faster correct answers earn more points
-- ELO ranking system — your rating goes up when you win and down when you lose
+- **Solo play** ,pick a category and play alone, your score and ELO still update
+- **Host a game** , create a room, get a 6-character code, share it and play with others
+- **Join a game** ,enter a room code and jump straight into a live battle
+- Questions are pulled live from the Open Trivia Database no manual quiz creation needed
+- ELO ranking system ,your rating goes up when you win and down when you lose
 
 ## Tech stack
 
@@ -31,4 +30,3 @@ climb a global ELO leaderboard.
 - JWT authentication
 - bcrypt password hashing
 
-## Project structure
