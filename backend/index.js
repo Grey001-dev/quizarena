@@ -6,7 +6,6 @@ import dotenv from 'dotenv'
 import authRouter from './routes/authroutes.js'
 import { settingsRouter } from './routes/settingsroutes.js'
 import { roomRouter } from './routes/roomroutes.js'
-import { codeGetRouter } from './routes/roomCodeRoutes.js'
 import { socketHandlers } from './socket/socketHandler.js'
 dotenv.config()
 const app=express();
@@ -19,13 +18,11 @@ const io=new Server(httpServer,{
 })
 
 app.use(cors())
-
 app.use(express.json())
 
 app.use("/api/auth",authRouter)
 app.use("/api/settings",settingsRouter)
 app.use("/api/room",roomRouter);
-app.use("/api/code",codeGetRouter)
 app.get("/test",(req,res)=>{
     res.json({message:'he is alive'})
 })

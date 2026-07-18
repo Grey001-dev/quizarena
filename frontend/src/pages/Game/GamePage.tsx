@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { socket } from "../../services/socket";
+import { Trophy, Medal, Award } from "lucide-react";
 import styles from "./GamePage.module.css";
 
 interface Question {
@@ -15,13 +17,18 @@ interface Standing {
   score: number;
 }
 
-interface FinalResult extends Standing {
+interface FinalResult{
+  userId: string;
+  username: string;
+  score: number;
   eloChange?: number;
 }
+
 
 export default function GamePage() {
   const { roomCode } = useParams();
   const navigate = useNavigate();
+  const location=useLocation()
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const [question, setQuestion] = useState<Question | null>(null);
@@ -39,6 +46,10 @@ export default function GamePage() {
 
   const [gameOver, setGameOver] = useState(false);
   const [finalResults, setFinalResults] = useState<FinalResult[]>([]);
+
+  function handlePlayAgain(){
+    socket.emit("play-again",{roomCode})
+  }
 
   useEffect(() => {
     socket.on("question-start", (data) => {
@@ -69,6 +80,15 @@ export default function GamePage() {
     socket.on("game-over", (data) => {
       setFinalResults(data.finalResult);
       setGameOver(true);
+    //   Used this to update the users result dynamically from the frontend
+      const userCurrently=data.finalResult.find((result:FinalResult)=>result.userId===user.id);
+        if(userCurrently){
+            const updatedUser={
+                ...user,
+                elo:user.elo + userCurrently.eloChange
+            };
+            localStorage.setItem("user",JSON.stringify(updatedUser));
+        }
     });
 
     return () => {
@@ -79,12 +99,20 @@ export default function GamePage() {
     };
   }, []);
 
+  useEffect(()=>{
+    socket.on("returned-to-lobby",()=>{
+        navigate("/host",{
+            state:{roomCode,isHost:location.state?.isHost,user}
+        });
+    });
+    return ()=>{socket.off("returned-to-lobby")}
+  })
   useEffect(() => {
     if (showResults || gameOver || !question) return;
     if (timeLeft <= 0) return;
 
     const interval = setInterval(() => {
-      setTimeLeft((t) => (t > 0 ? t - 1 : 0));
+      setTimeLeft((time) => (time > 0 ? time - 1 : 0));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -123,7 +151,7 @@ export default function GamePage() {
             <div className={styles.podium}>
               {podium[1] && (
                 <div className={`${styles.podiumItem} ${styles.podium2}`}>
-                  <span className={styles.podiumRank}>🥈</span>
+                  <span className={styles.podiumRank}><Medal color="#C0C0C0" size={32} strokeWidth={2.5} /></span>
                   <div className={styles.podiumAvatar}>
                     {podium[1].username.charAt(0).toUpperCase()}
                   </div>
@@ -133,7 +161,7 @@ export default function GamePage() {
               )}
               {podium[0] && (
                 <div className={`${styles.podiumItem} ${styles.podium1}`}>
-                  <span className={styles.podiumRank}>🥇</span>
+                  <span className={styles.podiumRank}><Trophy color="#FFD700" size={40} strokeWidth={2.5} /></span>
                   <div className={styles.podiumAvatar}>
                     {podium[0].username.charAt(0).toUpperCase()}
                   </div>
@@ -143,7 +171,7 @@ export default function GamePage() {
               )}
               {podium[2] && (
                 <div className={`${styles.podiumItem} ${styles.podium3}`}>
-                  <span className={styles.podiumRank}>🥉</span>
+                  <span className={styles.podiumRank}><Award color="#CD7F32" size={28} strokeWidth={2.5} /></span>
                   <div className={styles.podiumAvatar}>
                     {podium[2].username.charAt(0).toUpperCase()}
                   </div>
@@ -179,9 +207,9 @@ export default function GamePage() {
           </div>
 
           <div className={styles.ctaRow}>
-            <button className={styles.ctaPrimary} onClick={() => navigate("/dashboard")}>
-              Play again
-            </button>
+            <div className={styles.ctaPrimary} onClick={handlePlayAgain}>
+                Play Again
+            </div>
             <button className={styles.ctaSecondary} onClick={() => navigate("/dashboard")}>
               Dashboard
             </button>
@@ -226,7 +254,7 @@ export default function GamePage() {
       <div className={styles.answers}>
         {question.options.map((option, index) => {
           let className = styles.ans;
-
+        //   Logic for the colours so if its correct i show green if its wrong i show red
           if (showResults) {
             if (option === correctAnswer) className = `${styles.ans} ${styles.ansCorrect}`;
             else if (option === selectedAnswer) className = `${styles.ans} ${styles.ansWrong}`;

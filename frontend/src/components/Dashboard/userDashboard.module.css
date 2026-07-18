@@ -1,4 +1,9 @@
-/* ── PAGE ── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .page {
   background: #f0f4ff;
   min-height: 100vh;
@@ -6,22 +11,23 @@
   color: #1a1a1a;
 }
 
-/* ── NAVBAR ── */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 48px;
+  padding: 14px 48px;
   background: #1e3a8a;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
 }
 
 .navLogo {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: #ffffff;
+  letter-spacing: -0.3px;
 }
 
 .navRight {
@@ -33,6 +39,9 @@
 .navElo {
   font-size: 13px;
   color: #93c5fd;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
 .navElo strong {
@@ -40,41 +49,106 @@
   font-weight: 700;
 }
 
+.settingsIcon {
+  background: transparent;
+  border: none;
+  color: #93c5fd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.settingsIcon:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .navAvatar {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: #3b5fc0;
   border: 2px solid #93c5fd;
   cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
-/* ── CONTENT ── */
+.navAvatar:hover {
+  transform: scale(1.05);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 4px;
+}
+
+.logoutButton {
+  background: transparent;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.logoutButton:hover {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+
 .content {
   max-width: 1000px;
   margin: 0 auto;
   padding: 48px 32px;
 }
 
+.systemMessage {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
 .greeting {
   font-size: 13px;
+  font-weight: 600;
   color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-bottom: 6px;
 }
 
 .title {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   color: #0f172a;
   letter-spacing: -0.5px;
   margin-bottom: 32px;
 }
 
-/* ── MODE CARDS ── */
+
 .modeGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 18px;
   margin-bottom: 32px;
 }
 
@@ -84,12 +158,15 @@
   border-radius: 16px;
   padding: 28px 24px;
   cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 
 .modeCard:hover {
   border-color: #1d4ed8;
-  box-shadow: 0 4px 20px rgba(29, 78, 216, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.08);
 }
 
 .modeCardFilled {
@@ -100,59 +177,64 @@
 .modeCardFilled:hover {
   background: #1e40af;
   border-color: #1e40af;
-  box-shadow: 0 4px 24px rgba(29, 78, 216, 0.3);
+  box-shadow: 0 6px 24px rgba(29, 78, 216, 0.25);
 }
 
 .modeIcon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 10px;
-  background: #dbeafe;
-  margin-bottom: 16px;
+  background: #eff6ff;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modeIconFilled {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modeTitle {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: #0f172a;
   margin-bottom: 8px;
 }
 
 .modeTitleWhite {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 8px;
 }
 
 .modeDesc {
-  font-size: 13px;
+  font-size: 13.5px;
   color: #64748b;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .modeDescWhite {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.6;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
 }
 
-/* ── BOTTOM GRID ── */
+
 .bottomGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 18px;
 }
 
-/* ── PANEL ── */
 .panel {
   background: #ffffff;
   border: 1.5px solid #dbeafe;
@@ -169,7 +251,6 @@
   margin-bottom: 20px;
 }
 
-/* ── GAME ROWS ── */
 .gameRow {
   display: flex;
   justify-content: space-between;
@@ -197,7 +278,7 @@
 }
 
 .gameName {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #0f172a;
   margin-bottom: 2px;
@@ -208,7 +289,7 @@
   color: #94a3b8;
 }
 
-/* ── ELO BADGES ── */
+
 .eloBadgeBlue {
   font-size: 12px;
   font-weight: 600;
@@ -240,7 +321,6 @@
   white-space: nowrap;
 }
 
-/* ── STATS ── */
 .statsGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -248,8 +328,8 @@
 }
 
 .statCard {
-  background: #f0f4ff;
-  border: 1px solid #dbeafe;
+  background: #f8faff;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 16px;
 }
@@ -270,10 +350,11 @@
   letter-spacing: -0.5px;
 }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .navbar      { padding: 14px 20px; }
-  .content     { padding: 32px 20px; }
-  .modeGrid    { grid-template-columns: 1fr; }
-  .bottomGrid  { grid-template-columns: 1fr; }
+  .navbar { padding: 12px 20px; }
+  .content { padding: 32px 16px; }
+  .modeGrid { grid-template-columns: 1fr; gap: 14px; }
+  .bottomGrid { grid-template-columns: 1fr; gap: 14px; }
+  .logoutButton span { display: none; }
+  .logoutButton { padding: 6px; }
 }

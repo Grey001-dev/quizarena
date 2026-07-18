@@ -23,13 +23,14 @@ export default function HostPage(){
     const [difficulty,setDifficulty]=useState('Easy');
     const [amount,setAmount]=useState(10);
     const user=JSON.parse(localStorage.getItem("user") || "{}")
+    const [elo,setElo]=useState(user?.elo)
     const [loading,setLoading]=useState(false);
-    const [roomCode,setRoomCode]=useState<string | null>(location.state.roomCode || null);
+    const [roomCode,setRoomCode]=useState<string | null>(location.state?.roomCode || null);
     const [players,setPlayers]=useState<Player[]>([]);
     const [isMixed,setIsMixed]=useState(false);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [creatingRoom,setCreatingRoom]=useState(!location.state?.roomCode)
-    const [avatar,setAvatar]=useState("")
+    const [avatar,setAvatar]=useState(user?.avatarSeed || "default")
     const isHost=location.state?.isHost ?? false;
 
     const DIFFICULTIES=[
@@ -97,6 +98,7 @@ export default function HostPage(){
   }
     const handleStartGame=async()=>{
         if(!isHost) return;
+        console.log("Emitting start-game",{roomCode,selectedCategories,difficulty,amount})
         setCreatingRoom(true);
         socket.emit("start-game",{
             roomCode,
@@ -248,7 +250,7 @@ export default function HostPage(){
                                         return(
                                             <div key={player.userId || index} className={styles.slotCardFilled}>
                                                 <div className={styles.avatarCircle}>
-                                                    <AvatarDisplay seed={player.avatar} size={44}/>
+                                                    <AvatarDisplay seed={avatar} size={44}/>
                                                     {player.isHost && <span className={styles.hostCrown}>👑</span>}
                                                 </div>
                                                 <div className={styles.playerInfo}>

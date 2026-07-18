@@ -48,7 +48,7 @@ export default function SettingsPage() {
             localStorage.setItem("user", JSON.stringify(updatedUser));
             triggerNotification('success', "Username updated successfully!");
         } catch (error: any) {
-            const errorMsg = error.response?.data?.message || "Failed to update username";
+            const errorMsg =  "Failed to update username";
             triggerNotification('error', errorMsg);
             setUsername(user.username || '');
         } finally {
@@ -87,7 +87,7 @@ export default function SettingsPage() {
             triggerNotification('success', "Password updated successfully!");
             setNewPassword("");
         } catch (error: any) {
-            const errorMsg = error.response?.data?.message || "Failed to alter password credentials";
+            const errorMsg ="Failed to alter password credentials";
             triggerNotification('error', errorMsg);
         } finally {
             setSavingPassword(false);
@@ -131,7 +131,7 @@ export default function SettingsPage() {
                         <AvatarDisplay seed={avatarSeed} size={64} />
                         <div>
                             <p className={styles.avatarName}>{username}</p>
-                            <p className={styles.avatarElo}>ELO {user.elo || 1000}</p>
+                            <p className={styles.avatarElo}>{user.elo || 1000} ELO</p>
                         </div>
                     </div>
 

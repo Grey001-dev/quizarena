@@ -2,10 +2,9 @@ import { activeGames } from "../lib/activeGames.js";
 import { activeLobbies } from "../lib/activeLobbies.js";
 import { fetchQuestions } from "../lib/questions.js";
 import prisma from "../lib/prisma.ts";
-
 export function socketHandlers(io,socket){
-    // this is done when the user wants to join a lobby sha 
-    socket.on("join-lobby",({roomCode,username,userId,isHost,avatar})=>{
+    // Made use of explicit events to properly grasps what they do beforehand
+    socket.on("join-lobby",({roomCode,username,userId,isHost,avatar,elo})=>{
         if(!roomCode){
             return
         }
@@ -15,6 +14,7 @@ export function socketHandlers(io,socket){
         socket.data.username=username;
         socket.data.userId=userId;
         socket.data.avatar=avatar;
+        socket.data.elo=elo;
 
 
         if(!activeLobbies.has(roomCode)){
@@ -29,73 +29,78 @@ export function socketHandlers(io,socket){
                 username,
                 userId,
                 isHost,
-                avatar:avatar || "default"
+                avatar:avatar || "default",
+                elo
             })
         }
         io.to(roomCode).emit("lobby-update",lobby.players);
     });
-    // messages sent between users in the same lobby
-
-    socket.on("chat-message",({roomCode,message,username})=>{
-        io.to(roomCode).emit("chat-message",{
-            username:username,
-            message:message,
-            timestamp:Date.now()
-        })
-    })
 
     // Created the start game event when the hosts wants to host a game
-    socket.on("start-game",async({roomCode,category,difficulty,amount,timeLimit})=>{
-        try {
-            const questions=await fetchQuestions(category,difficulty,amount);
-            activeGames.set(roomCode,{
-                questions,
-                currentIndex:0,
-                gameOver:false,
-                players:{},
-                answersThisRound:{},
-                timeLimit:10
-            })
-            const lobby=activeLobbies.get(roomCode)
-            if(lobby){
-                lobby.players.forEach(player=>{
-                    activeGames.get(roomCode).players[player.userId]={username:player.username,score:0}
-                })
-            };
-            await prisma.room.update({
-                where:{roomCode},
-                data:{
-                    status:"ACTIVE"
-                }
-            })
-            io.to(roomCode).emit("question-start");
+    socket.on("start-game", async ({ roomCode, category, difficulty, amount, timeLimit }) => {
+    try {
+        console.log("Fetching questions...");
+        const questions = await fetchQuestions(category, difficulty, amount);
+        console.log("Questions fetched:", questions.length);
 
-            DisplayEachQuestion(io,roomCode);
-        } catch (error) {
-            console.error("Failed to start game:",error);
-        }
-    })
-
-    function DisplayEachQuestion(io,roomCode){
-        const gameSession=activeGames.get(roomCode);
-        if(!gameSession){
-            console.log("Not a valid room")
-            return;
-        }
-        // Restart the answers per round
-        gameSession.answersThisRound={}
-        let currentIndex=gameSession.currentIndex;
-        const question=gameSession.questions[currentIndex];
-        io.to(roomCode).emit("question-start",{
-            question:question,
-            gameNumber:currentIndex,
-            timeLimit:gameSession.timeLimit,
+        // i fetch questions and keep them in my activeGames map
+        activeGames.set(roomCode, {
+            questions,
+            currentIndex: 0,
+            gameOver: false,
+            players: {},
+            answersThisRound: {},
+            timeLimit: 10
         });
-        gameSession.roundTimer=setTimeout(()=>{
-            endQuestion(io,roomCode);
-        },gameSession.timeLimit * 1000);
+        console.log("activeGames set");
 
+        const lobby = activeLobbies.get(roomCode);
+        if(!lobby){
+            return
+        }
+
+        if (lobby) {
+            lobby.players.forEach(player => {
+                activeGames.get(roomCode).players[player.userId] = { username: player.username, score: 0 };
+            });
+        }
+        await prisma.room.update({
+            where: { roomCode },
+            data: { status: "ACTIVE" }
+        });
+        console.log("room status updated to ACTIVE");
+
+        io.to(roomCode).emit("game-started");
+
+        DisplayEachQuestion(io, roomCode);
+    } catch (error) {
+        console.error("Failed to start game:", error);
     }
+});
+
+
+    function DisplayEachQuestion(io, roomCode) {
+    const gameSession = activeGames.get(roomCode);
+    if (!gameSession) {
+        console.log("Not a valid room");
+        return;
+    }
+    console.log("Sending question:", gameSession.questions[gameSession.currentIndex]);
+
+    gameSession.answersThisRound = {};
+    let currentIndex = gameSession.currentIndex;
+    const question = gameSession.questions[currentIndex];
+    io.to(roomCode).emit("question-start", {
+        question: question,
+        gameNumber: currentIndex,
+        timeLimit: gameSession.timeLimit,
+    });
+    console.log("question-start emitted with real data");
+
+    gameSession.roundTimer = setTimeout(() => {
+        endQuestion(io, roomCode);
+    }, gameSession.timeLimit * 1000);
+}
     socket.on("submit-answers",async({roomCode,userId,answer})=>{
         const gameSession=activeGames.get(roomCode)
         if(!gameSession){
@@ -155,6 +160,21 @@ export function socketHandlers(io,socket){
             }
         },3000)
     }
+    socket.on("play-again",({roomCode})=>{
+        const lobby=activeLobbies.get(roomCode)
+        if(!lobby){
+            return
+        }
+        prisma.room.update({
+            where:{roomCode:roomCode},
+            data:{
+                status:"WAITING"
+            }
+        })
+        activeGames.delete(roomCode);
+        io.to(roomCode).emit("lobby-updated",lobby.players)
+        io.to(roomCode).emit("returned-to-lobby");
+    })
 
     socket.on("disconnect",()=>{
         const {roomCode,userId}=socket.data;
@@ -162,7 +182,7 @@ export function socketHandlers(io,socket){
             return
         }
         const lobby=activeLobbies.get(roomCode)
-        if(!roomCode){
+        if(!lobby){
             return
         }
         const player=lobby.players.find(p=>p.userId===userId);
@@ -192,14 +212,23 @@ export function socketHandlers(io,socket){
         }
     }).sort((a,b)=>b.score-a.score)
 
+    const lobby=activeLobbies.get(roomCode)
+    if(!lobby){
+        return
+    }
     try {
         const room=await prisma.room.findUnique({where:{roomCode}});
+        const halfLobby=Math.ceil(finalResult.length/2)
         for (let i=0;i<finalResult.length;i++){
             const userRow=finalResult[i];
             const roundRank=i+1;
-            const halfLobby=Math.ceil(finalResult.length/2)
             const won=roundRank<=halfLobby;
-            const eloChange=won? 15 : -10
+            const eloChange=won? 10 : -8;
+            finalResult[i].eloChange=eloChange
+            const eachPlayers=lobby.players.map((p)=>p.userId===userRow.userId)
+            if(eachPlayers){
+                eachPlayers.elo+=eloChange
+            }
 
             await prisma.gameSession.create({
                 data:{
@@ -210,8 +239,19 @@ export function socketHandlers(io,socket){
                     userId:userRow.userId,
                     roomId:room.id,
                 }
-            })
+            });
+
+            if(userRow.userId){
+                await prisma.user.update({
+                    where:{id:userRow.userId},
+                    data:{elo:{increment:eloChange}}
+                })
+            }
         }
+        await prisma.room.update({
+            where:{roomCode},
+            data:{status:'FINISHED'}
+        })
     } catch (error) {
         console.log('Failed to save game results:',error.message)
     }

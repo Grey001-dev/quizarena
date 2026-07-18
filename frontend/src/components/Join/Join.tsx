@@ -33,7 +33,7 @@ export default function JoinRoom(){
                 state:{
                     roomCode:data.roomCode,
                     isHost:false,
-                    user
+                    user:data.user
                 }
             })
         } catch (error:any) {

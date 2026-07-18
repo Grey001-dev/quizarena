@@ -93,7 +93,7 @@ export const joinRoom=async(req,res)=>{
     }
 }
 
-// ALll solo rooms
+// All solo rooms
 export const startSoloSession=async (req,res)=>{
     try {
         let {category,difficulty,amount}=req.body;
