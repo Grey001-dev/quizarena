@@ -11,7 +11,8 @@ export const verifyToken=async(req,res,next)=>{
     }
     try {
         const decoded=jwt.verify(token,process.env.JWT_SECRET)
-        req.user=decoded
+        req.user=decoded;
+        req.userId=decoded.id
         next()
     } catch (error) {
         return res.status(500).json({message:"Error caught verifying user"})

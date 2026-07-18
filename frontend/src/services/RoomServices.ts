@@ -1,4 +1,4 @@
-const ROOM_URL='http://localhost:7000/api/rooms'
+const ROOM_URL='http://localhost:7000/api/room'
 const SOLO_API_URL="http://localhost:7000/api/room/solo"
 
 
@@ -10,17 +10,17 @@ interface soloDetails{
 export const handleRoomRequest={
     async joinRoom(roomCode:string) {
         const token=localStorage.getItem("token")
-        const res=await fetch(ROOM_URL,{
+        const res=await fetch(`${ROOM_URL}/join`,{
             method:"POST",
             headers:{
                 'Content-Type':'application/json',
                 'Authorization':`Bearer ${token}`
             },
-            body:JSON.stringify(roomCode)
+            body:JSON.stringify({roomCode})
         }) 
         if(!res.ok){
             const errorData=await res.json()
-            throw new errorData(errorData.message || "Something went wrong")
+            throw new Error(errorData.message || "Something went wrong")
         }
         return await res.json()
     },
@@ -38,7 +38,7 @@ export const handleRoomRequest={
 
         if(!res.ok){
             const errorData=await res.json()
-            throw new errorData(errorData.message || "Something went wrong")
+            throw new Error(errorData.message || "Something went wrong")
         }
         return await res.json()
     },

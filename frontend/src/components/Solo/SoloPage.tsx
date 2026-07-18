@@ -6,6 +6,10 @@ import { ArrowLeft, CheckIcon } from 'lucide-react';
 import { handleRoomRequest } from "../../services/RoomServices";
 import { loadQuestion,sendAnswer,getCategories} from "../../services/Load";
 
+interface feedback{
+  isCorrect:boolean;
+  correctAnswer:string;
+}
 
 export default function SoloPage() {
   const navigate = useNavigate();
@@ -22,8 +26,11 @@ export default function SoloPage() {
   const [answer,setAnswer]=useState<string |null>("")
   const [message, setMessage] = useState("");
   const [roomId,setRoomId]=useState<string>("");
-
-
+  const [feedback, setFeedback] = useState<feedback| null>(null);
+  const [currenIndex,setCurrentIndex]=useState(0)
+  const [totalQuestion,setTotalQuestion]=useState(amount)
+  const [gameOver,setGameOver]=useState(false);
+  const [finalScore,setFinalScore]=useState(0);
   const Difficulties = [
     { label: "Easy", sub: "Warm Up", id: 1 },
     { label: "Medium", sub: "Standard", id: 2 },
@@ -35,32 +42,44 @@ export default function SoloPage() {
   useEffect(()=>{
     const fetchCategories=async ()=>{
         setCategory(await getCategories())
+        let result=await getCategories()
+        console.log(result)
+
     }
     fetchCategories()
   },[])
 
   const handleChoiceSubmit= async (option:string)=>{
-    if(!roomId) return
+    if(!roomId || feedback) return
     try {
       setAnswer(option);
       console.log(option);
       const data=await sendAnswer(option,roomId);
       console.log(data)
-      if(data.gameOver){
-        alert(data.score)
-        setScore(data.score)
-        setMessage(`Game Session is over`);
-        setGameStarted(false)
-        console.log(score)
-        return;
+      setFeedback({
+        isCorrect:data.isCorrect,
+        correctAnswer:data.correctAnswer
+      })
+      setTimeout(async()=>{
+         if(data.gameOver){
+          setFinalScore(data.score)
+          setGameOver(true)
+          setScore(data.score)
+          setMessage(`Game Session is over`);
+          setGameStarted(false)
+          console.log(score)
+          return;
       }
       await loadQuestionSha(roomId)
       setAnswer(null)
+      setFeedback(null)
+      },2000)
+
     } catch (error) {
      setMessage("Failed to send answer to backend"); 
     }
   }
-
+  
   const handleSoloStart=async()=>{
     try{
         const data=await handleRoomRequest.soloRequest({
@@ -69,9 +88,10 @@ export default function SoloPage() {
         amount:amount
       });
       if(data && data.roomId){
+        await loadQuestionSha(data.roomId)
         setRoomId(data.roomId)
         console.log(roomId)
-        await loadQuestionSha(data.roomId)
+        setFeedback(null)
         setGameStarted(true)
       }else{
         setMessage("Failed to retreuev a valid room ID from the server");
@@ -92,6 +112,8 @@ export default function SoloPage() {
       }
       const data=await loadQuestion(targetRoomId);
       setQuestion(data.question)
+      setTotalQuestion(data.totalQuestions)
+      setCurrentIndex(parseInt(data.currentIndex))
       console.log(data.question)
     }catch (error) {
      console.log("Error loading question:",error) 
@@ -106,7 +128,7 @@ export default function SoloPage() {
 
   function handleToggleCategory(value: string) {
     if (!isMixed) {
-      setSelectedCategories([value]);
+      setSelectedCategories([]);
       return;
     }
     if (selectedCategories.includes(value)) {
@@ -119,8 +141,64 @@ export default function SoloPage() {
 
   return (
     <div className={styles.page}>
-      {!gameStarted ? (
-        /* SETUP MODE VIEW */
+      {gameOver ? (
+        <>
+          <nav className={styles.navbar}>
+            <span className={styles.navLogo}>
+              ⚡ QuizArena
+            </span>
+            <button className={styles.backButton} onClick={()=>navigate("/dashboard")}>
+                <ArrowLeft size={14}/> Dashboard
+            </button>
+          </nav>
+
+          <div className={styles.resultsContent}>
+            <div className={styles.resultsCard}>
+                <p className={styles.resultsEmoji}>
+                  {finalScore>= totalQuestion * 0.7 ? "🏆" : finalScore>=totalQuestion * 0.4 ? "🎯" : "📚"}
+                </p>
+                <p className={styles.resultsLabel}>Game Complete</p>
+                <p className={styles.resultsScore}>{finalScore} <span className={styles.resultsOutOf}>/{totalQuestion}</span></p>
+                <p className={styles.resultsSub}>
+                  {finalScore ===totalQuestion ?
+                  "Perfect score! Incredible"
+                  : finalScore>=totalQuestion *0.7
+                  ? "Great job,you crushed it"
+                  : finalScore>= totalQuestion *0.4
+                  ? "Solid effort,keep practicing,"
+                  :"Keep going,you'll get better"
+                  }
+                </p>
+
+                <div className={styles.resultsStats}>
+                  <div className={styles.resultsStatDiv}>
+                      <p className={styles.resultsStatValue}>{finalScore}</p>
+                      <p className={styles.resultsStatLabel}>Correct</p>
+                  </div>
+                  <div className={styles.resultsStatDiv}>
+                      <p className={styles.resultsStatValue}>{totalQuestion-finalScore}</p>
+                      <p className={styles.resultsStatLabel}>Wrong</p>
+                  </div>
+                  <div className={styles.resultStatDiv}>
+                    <p className={styles.resultsStatValue}>
+                      {Math.round((finalScore/totalQuestion ) *100)}%
+                    </p>
+                    <p className={styles.resultsStatsLabel}>Accuracy</p>
+                  </div>
+                </div>
+                <div className={styles.resultsButton}>
+                    <button 
+                    className={styles.resultsButton}
+                    onClick={()=>{setGameOver(false); setCurrentIndex(0); setScore(0)}}
+                    >
+                      Play again
+                    </button>
+                </div>
+            </div>
+          </div>
+        </>
+      ):
+      !gameStarted ? (
         <>
           <nav className={styles.navbar}>
             <span className={styles.navLogo}>⚡ QuizArena</span>
@@ -131,9 +209,7 @@ export default function SoloPage() {
 
           <div className={styles.content}>
             <h1 className={styles.title}>Solo play</h1>
-            <p className={styles.subTitle}>Pick your settings and go. Just you against the clock</p>
-            {message && <p className={styles.messageText}>{message}</p>}
-
+            <p className={styles.subTitle}>Pick your settings and go. Just you against yourself</p>
             <p className={styles.sectionLabel}>Game Mode & Categories</p>
             <div className={styles.mixedToggle}>
               <button
@@ -225,7 +301,6 @@ export default function SoloPage() {
           </div>
         </>
       ) : (
-        /* LIVE GAME ARENA VIEW (Matches Your Mockup Image) */
         <>
           <nav className={styles.navbar}>
             <span className={styles.navLogo}>
@@ -238,7 +313,7 @@ export default function SoloPage() {
           <div className={styles.gameContainer}>
             <div className={styles.gameHeader}>
                 <span className={styles.progressText}>
-                    Question 4 of 10
+                    {`Question ${currenIndex +1} of ${totalQuestion}`}
                 </span>
                 <div className={styles.progressBarBg}>
                     <div className={styles.progressBarFill}/>    
@@ -254,17 +329,31 @@ export default function SoloPage() {
             </div>
 
             <div className={styles.questionCard}>
-                <p className={styles.questionCategory}>{currentQuestion.category}</p>
-                <h2 className={styles.questionText}>{currentQuestion.text}</h2>
+                <p className={styles.questionCategory}>{currentQuestion?.category}</p>
+                <h2 className={styles.questionText}>{currentQuestion?.text}</h2>
             </div>
             <div className={styles.optionsGrid}>
               {currentQuestion?.options?.map((option :string,index:number)=>{
               const optionLetter=String.fromCharCode(65+index)
               const isSelected=answer===option
+              let buttonClass=styles.optionButton
+              if(answer===option && !feedback){
+                buttonClass=styles.optionButtonActive;
+              }
+              if(feedback){
+                if(option===feedback.correctAnswer){
+                  buttonClass=styles.optionButtonCorrect;
+                }else if(answer===option && !feedback.isCorrect){
+                  buttonClass=styles.optionButtonWrong;
+                }else{
+                  buttonClass=styles.optionButtonDisabled;
+                }
+              }
               return(
-                  <button className={isSelected ?styles.optionButtonActive :styles.optionButton} 
+                  <button className={buttonClass} 
                   key={index} 
-                  onClick={()=>handleChoiceSubmit(option)} >
+                  onClick={()=>handleChoiceSubmit(option)}
+                  disabled={feedback !==null} >
                       <div className={styles.optionLetter}>
                           {optionLetter}
                       </div>

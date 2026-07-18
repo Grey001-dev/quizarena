@@ -19,6 +19,7 @@ export default function AuthPage({setToken}: AuthPageProps){
     const [registerPassword,setResgisterPassword]=useState<string>("")
     const [loading,setLoading]=useState<boolean>(false);
     const [error,setError]=useState<string>("");
+    const [user,setUsers]=useState({})
 
     function handleSwitch(change:AuthMode){
         setError("")
@@ -36,12 +37,14 @@ export default function AuthPage({setToken}: AuthPageProps){
             if(data.token){
                 localStorage.setItem("token",data.token);
                 setToken(data.token)
+                localStorage.setItem("user",JSON.stringify(data.user));
+
                 navigate("/dashboard")
             }else{
                 setError(data.message || "Authentication failed.");
             }
             
-            console.log(data.message)   
+            console.log(data)   
         } catch (err:any) {
             setError(err.message|| "Something went wrong.")
             console.error('Error handling login form',err)
@@ -61,7 +64,9 @@ export default function AuthPage({setToken}: AuthPageProps){
             const data=await AuthServices.submit(fields)
             if(data.token){
                 localStorage.setItem("token",data.token)
+                localStorage.setItem("user",JSON.stringify(data.user))
                 setToken(data.token);
+                console.log(data)
                 navigate("/dashboard");
             }
             else{

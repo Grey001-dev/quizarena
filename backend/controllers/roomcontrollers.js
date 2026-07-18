@@ -4,6 +4,7 @@ import { activeGames } from '../lib/activeGames.js';
 
 export const generateRandomCode=async(req,res)=>{
     try {
+        const userId=req.user.id
         const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let code='';
         for (let i=0;i<6;i++){
@@ -21,19 +22,33 @@ export const generateRandomCode=async(req,res)=>{
                 where:{roomCode:code,status:'WAITING'}
             })
         };
+        const newRoom=await prisma.room.create({
+            data:{
+                roomCode:code,
+                status:'WAITING',
+                solo:false,
+                hostId:userId,
+            }
+        })
+        const user=await prisma.user.findUnique({
+            where:{id:userId}
+        })
         return res.status(200).json({
             message:'Room code created',
-            roomCode:code
+            user,
+            roomCode:code,
+            roomId:newRoom.id
         });
         
     } catch (error) {
-        console.error("Error generating code:",error);
+        console.error("Error generating code:",error.message);
         return res.status(500).json({message:'Internal server error generating room code'})
     }
 }
 
 export const joinRoom=async(req,res)=>{
     try {
+        const userId=req.userId
         const {roomCode}=req.body;
 
         if (!roomCode){
@@ -42,22 +57,32 @@ export const joinRoom=async(req,res)=>{
         const cleanCode=roomCode.toUpperCase().trim()
 
         const activeRoom=await prisma.room.findUnique({
-            where:{code:cleanCode}
+            where:{roomCode:cleanCode}
         })
 
-        if(!aciveRoom || activeRoom.status !=='WAITING'){
+        if(!activeRoom){
             return res.status(400).json({
                 message:'Room does not exist'
             })
-        }else if(activeRoom==="INGAME"){
+        }
+        if(activeRoom.status !=='WAITING'){
+            return res.status(400).json({
+                message: "Players are already in-game. Please wait for the next round."
+            });
+        }
+        if(activeRoom==="INGAME"){
             return res.status(400).json({
                 message:"Players ingame, wait for the next round"
             })
         }
+        const user=await prisma.user.findUnique({
+            where:{id:userId}
+        })
         return res.status(200).json({
-            message:'Room verified siccessfully.Ready to join session.',
+            message:'Room verified successfully.Ready to join session.',
             roomId:activeRoom.id,
-            roomCode:activeRoom.code,
+            user:{id:user.id,username:user.username,email:user.email,avatar:user.avatarSeed ||"default",elo:user.elo},
+            roomCode:activeRoom.roomCode,
             category:activeRoom.category,
             difficulty:activeRoom.difficulty
 
@@ -68,7 +93,7 @@ export const joinRoom=async(req,res)=>{
     }
 }
 
-
+// ALll solo rooms
 export const startSoloSession=async (req,res)=>{
     try {
         let {category,difficulty,amount}=req.body;
@@ -132,6 +157,7 @@ export const getGameQuestion=async (req,res)=>{
         return res.status(500).json({message:'Internal server error fetching question'})
     }
 }
+// Solo room btw
 export async function submitAnswer(req,res){
     try {
         const {roomId}=req.params;
@@ -156,10 +182,11 @@ export async function submitAnswer(req,res){
         return res.status(200).json({
             message:"Answer processed",
             isCorrect,
-            correctAnswer:currentQuestion.correct_answer,
+            correctAnswer:currentQuestion.correctAnswer,
             nextIndex:gameSession.currentIndex,
             score:gameSession.score,
-            gameOver:gameSession.currentIndex>=questions.length
+            gameOver:gameSession.currentIndex>=questions.length,
+            totalQuestions:gameSession.questions.length
         })
     } catch (error) {
         console.error("Error submitting answer:",error)

@@ -1,15 +1,9 @@
 const API_URL = "http://localhost:7000/api/auth"
-const SOLO_API_URL="http://localhost:7000/api/solo"
 interface UserDetails {
   mode: "login" | "register"
   username?: string
   email: string
   password: string
-}
-interface soloDetails{
-    category: String
-    questions:Number
-    difficulty:String
 }
 
 export const AuthServices = {

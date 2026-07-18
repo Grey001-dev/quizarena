@@ -23,8 +23,8 @@ model User {
 model Room {
   id         String     @id @default(uuid())
   roomCode   String?    @unique
-  category   String
-  difficulty String
+  category   String?
+  difficulty String?
   solo       Boolean    @default(false)
   status     RoomStatus @default(WAITING)
   createdAt  DateTime   @default(now())

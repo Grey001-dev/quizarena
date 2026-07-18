@@ -1,21 +1,47 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./Join.module.css"
 import { ArrowLeft } from "lucide-react";
+import { socket } from "../../services/socket";
+import { handleRoomRequest } from "../../services/RoomServices";
 export default function JoinRoom(){
     const navigate=useNavigate();
+    const user=JSON.parse(localStorage.getItem("user")||"{}")
+    let isHost=false
     const [loading,setLoading]=useState(false);
     const [roomCode,setRoomCode]=useState<string>("");
     const [codeError,setCodeError]=useState<string>("");
-    const handleJoin=(e:React.FormEvent)=>{
-        e.preventDefault()
-        if(roomCode.length!==6){
-            return;
-        }
-        setLoading(true)
-        console.log("Joining room:",roomCode)
+    const [errMessage,setErrMessage]=useState("")
+    const [players,setPlayers]=useState<Player []>([]);
+    interface Player{
+        userId:string;
+        username:string;
+        isHost:boolean
     }
     const isFormvalid=roomCode.length===6 ? true : false
+    async function handleJoin(e:React.FormEvent){
+        e.preventDefault()
+        if(!isFormvalid){
+            return
+        }
+        setLoading(true)
+        setErrMessage("")
+
+        try {
+            const data=await handleRoomRequest.joinRoom(roomCode);
+            navigate("/host",{
+                state:{
+                    roomCode:data.roomCode,
+                    isHost:false,
+                    user
+                }
+            })
+        } catch (error:any) {
+            setErrMessage(error.message || "Failed to join room")
+        } finally{
+            setLoading(false)
+        }
+    }
     return(
         <div className={styles.page}>
             <nav className={styles.navbar}>
@@ -31,7 +57,9 @@ export default function JoinRoom(){
                 <h1 className={styles.title}>Join a game</h1>
                 <p className={styles.subTitle}>Enter the room code your host shared with you </p>
 
-                <form className={styles.joinForm}>
+                {errMessage && <p className={styles.errorMessage}>{errMessage}</p>}
+
+                <form className={styles.joinForm} onSubmit={handleJoin}>
                     <div className={styles.codeRow}>
                        <input 
                        type="text" 
@@ -48,6 +76,7 @@ export default function JoinRoom(){
                     className={styles.primaryButton}
                     disabled={ !isFormvalid|| loading}
                     >
+                        {loading ? "Joining..." : "Join Room"}
                     </button>
                     <p className={styles.footerNote}></p>
                 </form>

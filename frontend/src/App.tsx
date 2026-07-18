@@ -9,6 +9,7 @@ import SoloPage from './components/Solo/SoloPage.tsx';
 import HostPage from './components/Host/CreateRoom.tsx'
 import JoinRoom from './components/Join/Join.tsx'
 import SettingsPage from './pages/Settings/SettingsPage.tsx'
+import GamePage from './pages/Game/GamePage.tsx'
 function App() {
   const [token,setToken]=useState(localStorage.getItem("token"));
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route element={<HostPage/>} path='/host'/>
             <Route element={<JoinRoom/>} path='/join'/>
             <Route element={<SettingsPage/>} path='/settings'/>
+            <Route element={<GamePage/>}path="/game/:roomCode"></Route>
         </Route>
       </Routes>
     </BrowserRouter>

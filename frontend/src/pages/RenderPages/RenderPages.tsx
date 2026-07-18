@@ -15,8 +15,6 @@ interface soloDetails{
     questions:number
 }
 
-
-
 interface hostRoom{
     category:string
     difficulty:string
@@ -55,10 +53,6 @@ export default function RenderPages(){
             
         }
     }
-
-
-
-
     // all the js how data is moved would be here
     return(
         <main>
@@ -74,3 +68,11 @@ export default function RenderPages(){
         </main>
     )
 }
+
+
+
+
+
+
+
+

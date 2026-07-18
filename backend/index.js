@@ -7,12 +7,15 @@ import authRouter from './routes/authroutes.js'
 import { settingsRouter } from './routes/settingsroutes.js'
 import { roomRouter } from './routes/roomroutes.js'
 import { codeGetRouter } from './routes/roomCodeRoutes.js'
+import { socketHandlers } from './socket/socketHandler.js'
 dotenv.config()
 const app=express();
 const httpServer=http.createServer(app)
 
 const io=new Server(httpServer,{
-    cors:{origin :'http://localhost:5174'},
+    cors:{origin :'http://localhost:5173'},
+    methods:["GET","POST"],
+    credentials:true
 })
 
 app.use(cors())
@@ -29,7 +32,7 @@ app.get("/test",(req,res)=>{
 
 io.on('connection',(socket)=>{
     console.log('Client connected:',socket.id);
-    socket.on('disconnect',()=>console.log('Client left:',socket.id))
+    socketHandlers(io,socket);
 })
 
 httpServer.listen(7000,()=>{

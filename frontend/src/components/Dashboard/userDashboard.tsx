@@ -16,22 +16,29 @@ export default function Dashboard() {
     if (hour >= 17) return "Good evening";
     return "Good afternoon";
   }
+
   function logout(){
     localStorage.removeItem("token")
     navigate("/login")
   }
+
   const handleCodeGen=async ()=>{
     setMessage("")
     try {
       const data=await generateCode();
       console.log(data)
       if(data.roomCode){
-        navigate("/host",{state:data.roomCode})
+        navigate("/host",{state:{
+          roomCode:data.roomCode,
+          user:data.user,
+          isHost:true
+        }})
         setMessage(data.message)
       }
       else{
         setMessage("Couldnt generate roomcode")
         console.log("Couldnt generate roomcode")
+        return
       }
     } catch (err:any) {
       setMessage(err.message)

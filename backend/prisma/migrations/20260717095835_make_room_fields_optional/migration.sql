@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Room" ALTER COLUMN "difficulty" DROP NOT NULL,
+ALTER COLUMN "category" DROP NOT NULL;

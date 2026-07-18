@@ -1,94 +1,65 @@
-import prisma from "../lib/prisma.ts";
 import bcrypt from "bcryptjs";
-export const handleSettings=async(req,res)=>{
-    
-    try {
-        const {username,email,currentPassword,newPassword,savingEmail,savingUsername,savingAvatar,avatarSeed}=req.body
-        const userId=req.user.id;
-        if(savingUsername){
-            if(!username || username.trim==""){
-                return res.status(400).json({message:'Username cannot be empty'})
-            }
-            const existingUsername=await prisma.user.findUnique({
-                where:{username:username}
-            })
-            if(existingUsername && existingUsername.id !==userId){
-                return res.status(400).json({message:'username already exists'})
-            }
-            const updatedUser=await prisma.user.update({
-                where:{
-                    id:userId,
-                },
-                data:{
-                    username:username,
-                }
-            })
-            return res.status(200).json({
-                message:'Successful',
-                username:username
-            })
-        }
-        if(savingEmail){
-            if(!email||!currentPassword || !newPassword){
-                return res.status(400).json({message:'Inlcude all credentials'})
-            }
-            let currentUser=await prisma.user.findUnique({
-                where:{id:userId}
-            })
-            if(!currentUser){
-                return res.status(404).json({message:'User not found'})
-            }
-            let correctPassword=await bcrypt.compare(currentPassword,currentUser.password)
-            if(!correctPassword){
-                return res.status(400).json({message:'Incorect CurrentPassword'})
-            }
-            let changedPassword=await bcrypt.hash(newPassword,10)
-            const updatedUser=await prisma.user.update({
-                where:{
-                    userId:userId
-                },
-                data:{
-                    password:changedPassword,
-                    active:true                    
-                }
-            })
-        }
-        
-        // avatar....
-        if(savingAvatar){
-            if(!avatarSeed){
-                return res.status(400).json({mesage:'No avatar style selected'})
-            }
-            const updatedUser=await prisma.user.update({
-                where:{id:userId},
-                data:{
-                    avatarSeed:avatarSeed
-                }
-            });
-            return res.status(200).json({
-                message:'Avatar updated',
-                user:updatedUser
-            })
-        }
-        return req.status(400).json({message:'Invalid action'})
-        
-    } catch (err) {
-        console.log('Setting processing error',err)
-        return res.status(500).json({message:'Something went wrong'})
-    }
+import prisma from "../lib/prisma.ts";
 
-}
-export const getUser=async()=>{
+export async function settings(req, res) {
     try {
-        const userId=req.user.id;
-        const User=await prisma.user.findUnique({
-            where:{id:userId}
-        })
-        if(user.rows.length==0){
-            return res.status(404).json({message:'User not found'})
+        const data = req.body;
+        const userId = req.user.id; 
+        if (data.change === "username") {
+            const username = data.username;
+            if (!username) {
+                return res.status(400).json({ message: "Username is required" });
+            }
+
+            const userExist = await prisma.user.findUnique({
+                where: { username: username }
+            });
+            if (userExist) {
+                return res.status(409).json({ message: 'Username already exists' });
+            }
+            const updatedUser = await prisma.user.update({
+                where: { id: userId }, 
+                data: { username: username }
+            });
+
+            return res.status(200).json({ message: "Username updated successfully", user: updatedUser });
         }
-        return res.status(200).json(User)
+        if (data.change === "avatar") {
+            const avatar = data.avatar;
+            if (!avatar) {
+                return res.status(400).json({ message: "Avatar data is required" });
+            }
+
+            const updatedUser = await prisma.user.update({
+                where: { id: userId }, 
+                data: { avatarSeed: avatar }
+            });
+
+            return res.status(200).json({ message: "Avatar updated successfully", user: updatedUser });
+        }
+        if (data.change === 'password') {
+            const password = data.password;
+            if (!password) {
+                return res.status(400).json({ message: "Password credentials needed" });
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+            
+            await prisma.user.update({
+                where: { id: userId },
+                data: { password: hashedPassword }
+            });
+            const user=await prisma.user.findUnique({
+            where:{id:userId}
+            })
+
+
+            return res.status(200).json({ message: "Password updated successfully" ,user:user});
+        }
+    
+
     } catch (error) {
-        return res.status(500).json({message:'Error fetching user details'})
+        console.error("Settings Update Error:", error.message);
+        return res.status(500).json({ message: "Internal server error" });
     }
 }

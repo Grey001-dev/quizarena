@@ -412,3 +412,126 @@
     font-weight: 800;
     color: #1d4ed8;
 }
+.optionButtonCorrect {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background-color: #ecfdf5; 
+  border: 2px solid #10b981;  
+  border-radius: 12px;
+  transform: scale(1.02);
+}
+.optionButtonCorrect .optionLetter {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+
+.optionButtonWrong {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background-color: #fef2f2; 
+  border: 2px solid #ef4444;
+  border-radius: 12px;
+}
+.optionButtonWrong .optionLetter {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.optionButtonDisabled {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  background-color: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.optionButtonCorrect {
+  background-color: #ecfdf5;
+  border: 2px solid #10b981;
+}
+.resultsContent{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+.resultsCard{
+    background: #fff;
+    border-radius: 24px;
+    padding: 48px 32px;
+    text-align: center;
+    border: 1.5px solid #dbeafe;
+}
+.resultsEmoji{
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+.resultsLabel{
+    font-weight: 12px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.resultsScore{
+    font-size: 40px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 12px 0;
+}
+.resultsOutOf{
+    font-size: 20px;
+    color: #94a3b8;
+}
+.resultsSub{
+    font-size: 14px;
+    color: #475569;
+    margin-bottom: 32px;
+}
+resultsStats{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+}
+.resultsStatDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.resultsStatValue{
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+.resultsStatLabel{
+    font-size: 12px;
+    color: #64748b;
+    margin: 4px 0 0 0;
+}
+.resultsButton{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.resultsButton button{
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+}
