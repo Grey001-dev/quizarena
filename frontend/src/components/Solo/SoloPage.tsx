@@ -237,7 +237,7 @@ export default function SoloPage() {
                       onClick={() => handleToggleCategory(c.id)}
                     >
                       {isActive && <span><CheckIcon size={14} /></span>}
-                      {c.id}
+                      {c.name}
                     </button>
                   );
                 })}
@@ -253,7 +253,7 @@ export default function SoloPage() {
                       onClick={() => setSelectedCategories([c.id])}
                     >
                       {isActive && <span><CheckIcon size={14} /></span>}
-                      {c.id}
+                      {c.name}
                     </button>
                   );
                 })}
@@ -315,17 +315,6 @@ export default function SoloPage() {
                 <span className={styles.progressText}>
                     {`Question ${currenIndex +1} of ${totalQuestion}`}
                 </span>
-                <div className={styles.progressBarBg}>
-                    <div className={styles.progressBarFill}/>    
-                </div>
-                <div className={styles.timerBadge}>
-                    <span className={styles.timerNumber}>
-                        7
-                    </span>
-                    <span className={styles.timerLabel}>
-                        seconds
-                    </span>
-                </div>
             </div>
 
             <div className={styles.questionCard}>

@@ -33,7 +33,7 @@ export default function GamePage() {
 
   const [question, setQuestion] = useState<Question | null>(null);
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [totalQuestions, setTotalQuestions] = useState(10);
+  const [totalQuestions, setTotalQuestions] = useState<number>(location.state?.totalQuestions);
   const [timeLimit, setTimeLimit] = useState(10);
   const [timeLeft, setTimeLeft] = useState(10);
 
@@ -49,6 +49,10 @@ export default function GamePage() {
 
   function handlePlayAgain(){
     socket.emit("play-again",{roomCode})
+  }
+  function leaveLobby(){
+    socket.emit("leave-lobby",{roomCode,userId: user.id})
+    navigate("/dashboard");
   }
 
   useEffect(() => {
@@ -90,23 +94,23 @@ export default function GamePage() {
             localStorage.setItem("user",JSON.stringify(updatedUser));
         }
     });
+    socket.on("returned-to-lobby",(data)=>{
+        const isHost=data.hostId===user.id;
+        navigate("/host",{
+            state:{roomCode,isHost,user}
+        })
+    })
 
     return () => {
       socket.off("question-start");
       socket.off("player-answered");
       socket.off("question-end");
       socket.off("game-over");
+      socket.off("returned-to-lobby")
+      socket.off("game-started")
     };
   }, []);
 
-  useEffect(()=>{
-    socket.on("returned-to-lobby",()=>{
-        navigate("/host",{
-            state:{roomCode,isHost:location.state?.isHost,user}
-        });
-    });
-    return ()=>{socket.off("returned-to-lobby")}
-  })
   useEffect(() => {
     if (showResults || gameOver || !question) return;
     if (timeLeft <= 0) return;
@@ -210,7 +214,7 @@ export default function GamePage() {
             <div className={styles.ctaPrimary} onClick={handlePlayAgain}>
                 Play Again
             </div>
-            <button className={styles.ctaSecondary} onClick={() => navigate("/dashboard")}>
+            <button className={styles.ctaSecondary} onClick={leaveLobby}>
               Dashboard
             </button>
           </div>

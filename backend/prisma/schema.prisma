@@ -39,7 +39,7 @@ model GameSession {
   id        String   @id @default(uuid())
   username  String
   score     Int      @default(0)
-  eloChange Int      @default(0)
+  eloChange Int?      @default(0)
   rank      Int?
   isHost    Boolean  @default(false)
   joinedAt  DateTime @default(now())

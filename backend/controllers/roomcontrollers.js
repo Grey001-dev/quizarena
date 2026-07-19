@@ -160,6 +160,7 @@ export const getGameQuestion=async (req,res)=>{
 // Solo room btw
 export async function submitAnswer(req,res){
     try {
+        const userId=req.user.id
         const {roomId}=req.params;
         const {answer}=req.body;
 
@@ -167,10 +168,12 @@ export async function submitAnswer(req,res){
         if(!gameSession){
             return res.status(404).json({message:'Game session not found or expired'});
         }
+
         const {questions,currentIndex}=gameSession;
         if(currentIndex>=questions.length){
             return res.status(400).json({message:"Game already finished"});
         }
+
         const currentQuestion=questions[currentIndex];
         const isCorrect=currentQuestion.correctAnswer===answer;
 
@@ -179,6 +182,12 @@ export async function submitAnswer(req,res){
         }
         gameSession.currentIndex +=1;
         activeGames.set(roomId,gameSession);
+
+        const gameOver=gameSession.currentIndex>= questions.length;
+        if(gameOver){
+        activeGames.delete(roomId);
+        }
+
         return res.status(200).json({
             message:"Answer processed",
             isCorrect,

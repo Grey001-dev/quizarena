@@ -33,6 +33,7 @@ export function socketHandlers(io,socket){
                 elo
             })
         }
+        console.log(lobby.players)
         io.to(roomCode).emit("lobby-update",lobby.players);
     });
 
@@ -66,17 +67,41 @@ export function socketHandlers(io,socket){
         }
         await prisma.room.update({
             where: { roomCode },
-            data: { status: "ACTIVE" }
+            data: { 
+                status: "ACTIVE" ,
+                category:Array.isArray(category) ? category.join(",") : category,
+                difficulty:difficulty
+            }
         });
         console.log("room status updated to ACTIVE");
 
-        io.to(roomCode).emit("game-started");
-
-        DisplayEachQuestion(io, roomCode);
+        io.to(roomCode).emit("game-started",{totalQuestions:activeGames.get(roomCode)?.questions.length});
+        
+        setTimeout(()=>{
+            DisplayEachQuestion(io, roomCode);
+        },2000)
     } catch (error) {
         console.error("Failed to start game:", error);
     }
 });
+    socket.on("leave-lobby",({roomCode,userId})=>{
+        const lobby=activeLobbies.get(roomCode);
+        if(!lobby){
+            return
+        }
+        const player=lobby.players.find(p=>p.userId===userId)
+
+        if(player?.isHost){
+            io.to(roomCode).emit("host-left");
+            activeGames.delete(roomCode);
+            activeLobbies.delete(roomCode)
+        }
+        else{
+            lobby.players=lobby.players.filter(p=>p.userId !==userId);
+            io.to(roomCode).emit("lobby-update",lobby.players);
+        }
+        socket.leave(roomCode)
+    })
 
 
     function DisplayEachQuestion(io, roomCode) {
@@ -172,20 +197,23 @@ export function socketHandlers(io,socket){
             }
         })
         activeGames.delete(roomCode);
-        io.to(roomCode).emit("lobby-updated",lobby.players)
-        io.to(roomCode).emit("returned-to-lobby");
+        io.to(roomCode).emit("returned-to-lobby",{hostId:lobby.hostId});
     })
 
     socket.on("disconnect",()=>{
+        console.log("disconnect fired for socket;",socket.id,"data:",socket.dat)
         const {roomCode,userId}=socket.data;
         if(!roomCode){
+            console.log("no roomCode in socket.data, exiting early");
             return
         }
         const lobby=activeLobbies.get(roomCode)
         if(!lobby){
+            console.log("no lobby found for roomCode:", roomCode);
             return
         }
         const player=lobby.players.find(p=>p.userId===userId);
+        console.log("player found on disconnect:", player);
         if (player?.isHost){
             io.to(roomCode).emit("host-left")
             activeGames.delete(roomCode)
@@ -193,6 +221,7 @@ export function socketHandlers(io,socket){
         }else{
             // Filter out the player in the lobby
             lobby.players=lobby.players.filter(p=>p.userId !==userId);
+            console.log("updated players after removal:", lobby.players);
             io.to(roomCode).emit("lobby-update",lobby.players);
         }
     })
@@ -219,15 +248,16 @@ export function socketHandlers(io,socket){
     try {
         const room=await prisma.room.findUnique({where:{roomCode}});
         const halfLobby=Math.ceil(finalResult.length/2)
+        const boundaryScore=finalResult[halfLobby-1]?.score
         for (let i=0;i<finalResult.length;i++){
             const userRow=finalResult[i];
             const roundRank=i+1;
-            const won=roundRank<=halfLobby;
+            const won=roundRank<=halfLobby || userRow.score===boundaryScore;
             const eloChange=won? 10 : -8;
             finalResult[i].eloChange=eloChange
-            const eachPlayers=lobby.players.map((p)=>p.userId===userRow.userId)
+            const eachPlayers=lobby.players.find((p)=>p.userId===userRow.userId)
             if(eachPlayers){
-                eachPlayers.elo+=eloChange
+                eachPlayers.elo=(eachPlayers.elo || 1000) + eloChange;
             }
 
             await prisma.gameSession.create({

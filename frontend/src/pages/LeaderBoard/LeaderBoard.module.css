@@ -1,0 +1,76 @@
+.page {
+  background: #f0f4ff;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+.navbar{
+    background: #1e3a8a;
+    padding: 14px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navLogo{
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+}
+.backButton{
+    background: transparent;
+    border: none;
+    color: #93c5fd;
+    font-size: 13px;
+    cursor: pointer;
+}
+.content{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 32px;
+}
+.title{
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+.subtitle{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 28px;
+}
+.list{
+    background: #fff;
+    border: 1.5px solid #dbeafe;
+    border-radius: 14px;
+    padding: 8px 20px;
+}
+.row,.rowActive{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f4ff;
+}
+.rowActive{
+    background: #eff6ff;
+    margin: 0 -20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+.rank { 
+    font-size: 14px;
+    font-weight: 700; 
+    color: #94a3b8; 
+    width: 32px; 
+}
+.username { 
+    flex: 1; 
+    font-size: 14px; 
+    font-weight: 600; 
+    color: #0f172a; 
+}
+.elo { 
+    font-size: 13px; 
+    font-weight: 700; 
+    color: #1d4ed8; 
+}

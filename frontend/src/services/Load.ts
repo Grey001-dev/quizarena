@@ -41,9 +41,11 @@ export async function getCategories(){
             'Authorization':`Bearer ${token}`
         }
     })
+    
     if(!res.ok){
         const errorData=await res.json()
         throw new Error(errorData.message || "Something went wrong fetching categories")
     }
-    return await res.json();
+    const data=await res.json();
+    return data.map((c:any) => ({ id: c.id, name: c.name }))
 }

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserCog, LogOut } from "lucide-react";
+import { UserCog, LogOut,Trophy } from "lucide-react";
 import { generateCode } from "../../services/RoomCode.ts";
 import { handleRoomRequest } from "../../services/RoomServices.ts";
 import styles from "./userDashboard.module.css";
@@ -12,6 +12,12 @@ export default function Dashboard() {
   const [elo,setElo]=useState(user?.elo)
   const [message, setMessage] = useState("");
   const [avatar,setAvatar]=useState(user?.avatarSeed)
+  const [stats, setStats] = useState({
+    gamesPlayed: 0,
+    winRate: 0,
+    bestRank: null,
+    recentGames: [],
+  });
   const navigate = useNavigate();
 
   function greetings() {
@@ -20,6 +26,21 @@ export default function Dashboard() {
     if (hour >= 17) return "Good evening";
     return "Good afternoon";
   }
+
+  useEffect(()=>{
+    const fetchUserStats=async()=>{
+      const token=localStorage.getItem("token")
+      const res=await fetch("http://localhost:7000/api/user/stats",{
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":`Bearer ${token}`
+        }
+      });
+      const data=await res.json();
+      setStats(data)
+    }
+    fetchUserStats()
+  },[])
 
   function logout() {
     localStorage.removeItem("token");
@@ -64,10 +85,12 @@ export default function Dashboard() {
           >
             <UserCog size={18} />
           </button>
-          <div className={styles.navAvatar} onClick={() => navigate("/settings")} >
-              <AvatarDisplay seed={avatar || "default"} size={34}/>
-          </div>
-          <div className={styles.divider} />
+         <button className={styles.leaderboardButton} onClick={() => navigate("/leaderboard")}>
+            <Trophy size={14} strokeWidth={2.5} />
+            <span>Leaderboard</span>
+          </button>
+
+          <div className={styles.divider}></div>
           <button className={styles.logoutButton} onClick={logout} title="Sign Out">
             <LogOut size={16} />
             <span>Logout</span>
@@ -124,39 +147,33 @@ export default function Dashboard() {
           <div className={styles.panel}>
             <p className={styles.panelLabel}>Recent games</p>
 
-            <div className={styles.gameRow}>
-              <div className={styles.gameLeft}>
-                <span className={styles.gameDot} />
-                <div>
-                  <p className={styles.gameName}>Science · Medium</p>
-                  <p className={styles.gameMeta}>3 players · 2h ago</p>
+            {stats.recentGames.length === 0 ? (
+              <p className={styles.emptyText}>No games played yet</p>
+            ) : (
+              stats.recentGames.map((game, i) => (
+                <div key={i} className={styles.gameRow}>
+                  <div className={styles.gameLeft}>
+                    <span className={styles.gameDot} />
+                    <div>
+                      <p className={styles.gameName}>
+                        {game.category} · {game.difficulty}
+                      </p>
+                      <p className={styles.gameMeta}>
+                        {game.solo ? "Solo" : "Multiplayer"} · {new Date(game.playedAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                  {game.solo ? (
+                    <span className={styles.eloBadgeGray}>Solo</span>
+                  ) : (
+                    <span className={game.eloChange >= 0 ? styles.eloBadgeBlue : styles.eloBadgeRed}>
+                      {game.eloChange >= 0 ? `+${game.eloChange}` : game.eloChange} ELO
+                    </span>
+                  )}
                 </div>
-              </div>
-              <span className={styles.eloBadgeBlue}>+18 ELO</span>
-            </div>
-
-            <div className={styles.gameRow}>
-              <div className={styles.gameLeft}>
-                <span className={styles.gameDot} />
-                <div>
-                  <p className={styles.gameName}>History · Easy</p>
-                  <p className={styles.gameMeta}>Solo · yesterday</p>
-                </div>
-              </div>
-              <span className={styles.eloBadgeGray}>Solo</span>
-            </div>
-
-            <div className={styles.gameRow}>
-              <div className={styles.gameLeft}>
-                <span className={styles.gameDot} />
-                <div>
-                  <p className={styles.gameName}>Geography · Hard</p>
-                  <p className={styles.gameMeta}>5 players · 2d ago</p>
-                </div>
-              </div>
-              <span className={styles.eloBadgeRed}>-12 ELO</span>
-            </div>
-          </div>
+              ))
+            )}
+          </div> {/* <--- FIX: This closes the Recent Games panel cleanly */}
 
           <div className={styles.panel}>
             <p className={styles.panelLabel}>Your stats</p>
@@ -168,21 +185,21 @@ export default function Dashboard() {
 
               <div className={styles.statCard}>
                 <p className={styles.statLabel}>Games played</p>
-                <p className={styles.statNumber}>34</p>
+                <p className={styles.statNumber}>{stats.gamesPlayed}</p>
               </div>
 
               <div className={styles.statCard}>
                 <p className={styles.statLabel}>Win rate</p>
-                <p className={styles.statNumber}>57%</p>
+                <p className={styles.statNumber}>{stats.winRate}</p>
               </div>
 
               <div className={styles.statCard}>
                 <p className={styles.statLabel}>Best rank</p>
-                <p className={styles.statNumber}>#1</p>
+                <p className={styles.statNumber}>#{stats.bestRank}</p>
               </div>
             </div>
-          </div>
-        </div>
+          </div> 
+        </div> 
       </div>
     </div>
   );

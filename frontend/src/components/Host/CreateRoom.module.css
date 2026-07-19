@@ -1,11 +1,12 @@
-.page{
+.page {
     background: #f0f4ff;
     min-height: 100vh;
-    font-family: 'Inter','Segoe UI',sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
 }
-.navbar{
+
+.navbar {
     background: #1e3a8a;
-    padding: 140x 48px;
+    padding: 14px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,12 +15,13 @@
     z-index: 100;
 }
 
-.navLogo{
+.navLogo {
     font-size: 16px;
     font-weight: 700;
     color: #fff;
 }
-.backButton{
+
+.backButton {
     background: transparent;
     border: none;
     color: #93c5fd;
@@ -28,44 +30,94 @@
     font-family: inherit;
     transition: color 0.15s;
 }
-.backButton:hover{
+
+.backButton:hover {
     color: #fff;
 }
-.content{
+
+.toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.15);
+    animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toastMessage {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.success {
+    background: #f0fdf4;
+    border: 1.5px solid #bbf7d0;
+    color: #166534;
+}
+
+.error {
+    background: #fef2f2;
+    border: 1.5px solid #fecaca;
+    color: #991b1b;
+}
+
+.info {
+    background: #f0f9ff;
+    border: 1.5px solid #bae6fd;
+    color: #075985;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.content {
     max-width: 1000px;
     margin: 0 auto;
     padding: 48px 32px;
 }
-.title{
+
+.title {
     font-size: 26px;
     font-weight: 800;
     color: #0f172a;
     letter-spacing: -0.5px;
-    margin-bottom:6px;
+    margin-bottom: 6px;
 }
-.subTitle{
+
+.subTitle {
     font-size: 14px;
     color: #64748b;
-    margin-bottom:64px ;
+    margin-bottom: 36px;
 }
-.twoCol{
+
+.twoCol {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
     align-items: start;
 }
-.settingsPanel{
+
+.settingsPanel {
     display: flex;
     flex-direction: column;
 }
-.mixedToggle{
+
+.mixedToggle {
     display: flex;
     background: #e2e8f0;
     padding: 4px;
     border-radius: 8px;
     margin-bottom: 16px;
 }
-.mixedActive{
+
+.mixedActive {
     flex: 1;
     background: #ffffff;
     border: none;
@@ -77,12 +129,12 @@
     font-family: inherit;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-.mixedInactive{
+
+.mixedInactive {
     flex: 1;
     background: transparent;
     border: none;
-    padding: 8x 12px;
-    font-size: 13px;
+    padding: 8px 12px;
     font-size: 13px;
     color: #64748b;
     cursor: pointer;
@@ -90,11 +142,12 @@
     font-family: inherit;
     transition: all 0.15s ease;
 }
-.mixedInactive{
+
+.mixedInactive:hover {
     color: #0f172a;
 }
 
-.sectionLabel{
+.sectionLabel {
     font-size: 11px;
     font-weight: 700;
     color: #1d4ed8;
@@ -102,13 +155,15 @@
     letter-spacing: 0.08em;
     margin-bottom: 12px;
 }
-.pillRow{
+
+.pillRow {
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 24px;
 }
-.pill{
+
+.pill {
     padding: 7px 14px;
     border-radius: 999px;
     border: 1.5px solid #dbeafe;
@@ -117,17 +172,23 @@
     color: #475569;
     cursor: pointer;
     font-family: inherit;
-    transition: all 0.15s ;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
-.pill:hover{
+
+.pill:hover {
     border-color: #1d4ed8;
     color: #1d4ed8;
 }
-.pill:disabled{
+
+.pill:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
-.pillActive{
+
+.pillActive {
     padding: 7px 14px;
     border-radius: 999px;
     border: 1.5px solid #1d4ed8;
@@ -137,14 +198,19 @@
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
-.diffRow{
+
+.diffRow {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     margin-bottom: 24px;
 }
-.diffCard{
+
+.diffCard {
     background: #fff;
     border: 1.5px solid #dbeafe;
     border-radius: 12px;
@@ -153,44 +219,52 @@
     cursor: pointer;
     transition: all 0.15s;
 }
-.diffCard:hover{
+
+.diffCard:hover {
     border-color: #1d4ed8;
 }
-.diffCardActive{
+
+.diffCardActive {
     background: #1d4ed8;
     border: 1.5px solid #1d4ed8;
-    border-radius:12px;
+    border-radius: 12px;
     padding: 14px;
     text-align: center;
     cursor: pointer;
 }
-.diffTitle{
+
+.diffTitle {
     font-size: 13px;
     font-weight: 600;
     color: #0f172a;
     margin-bottom: 2px;
 }
-.diffTitleActive{
+
+.diffTitleActive {
     font-size: 13px;
     font-weight: 600;
     color: #fff;
     margin-bottom: 2px;
 }
-.diffSub{
+
+.diffSub {
     font-size: 11px;
     color: #94a3b8;
 }
-.diffSubActive{
+
+.diffSubActive {
     font-size: 11px;
     color: rgba(255,255,255,0.7);
 }
-.amountRow{
+
+.amountRow {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     margin-bottom: 28px;
 }
-.amount{
+
+.amount {
     background: #fff;
     border: 1.5px solid #dbeafe;
     border-radius: 10px;
@@ -202,11 +276,13 @@
     cursor: pointer;
     transition: all 0.15s;
 }
-.amount:hover{
+
+.amount:hover {
     border-color: #1d4ed8;
-    color: #1d43d8;
+    color: #1d4ed8;
 }
-.amountActive{
+
+.amountActive {
     background: #1d4ed8;
     border: 1.5px solid #1d4ed8;
     border-radius: 10px;
@@ -217,7 +293,12 @@
     color: #fff;
     cursor: pointer;
 }
-.primaryButton{
+
+.actionWrapper {
+    margin-top: 8px;
+}
+
+.primaryButton {
     width: 100%;
     background: #1d4ed8;
     color: #fff;
@@ -230,51 +311,69 @@
     font-family: inherit;
     transition: background 0.15s;
 }
-.primaryButton:hover{
+
+.primaryButton:hover {
     background: #1e40af;
 }
-.primaryButton:disabled{
+
+.primaryButton:disabled {
     background: #93c5fd;
     cursor: not-allowed;
 }
-.rightPanel{
+
+.rightPanel {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.codeBox{
+.codeBox {
     background: #fff;
     border: 1.5px solid #dbeafe;
     border-radius: 14px;
     padding: 28px;
     text-align: center;
 }
-.codeValue{
+
+.codeLabel {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+}
+
+.codeValue {
     font-size: 38px;
     font-weight: 800;
     color: #0f172a;
     letter-spacing: 6px;
     margin-bottom: 6px;
+    text-indent: 6px;
 }
-.codeSub{
+
+.codeSub {
     font-size: 12px;
     color: #94a3b8;
+    margin: 0;
 }
-.lobbyPanel{
+
+.lobbyPanel {
     background: #fff;
     border: 1.5px solid #dbeafe;
     border-radius: 14px;
     padding: 20px 24px;
-
 }
-.slotsGrid{
+
+.slotsGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-top: 12px;
 }
-.slotCardFilled{
+
+.slotCardFilled {
     background: #f8fafc;
     border: 2px solid #cbd5e1;
     border-radius: 12px;
@@ -284,7 +383,8 @@
     gap: 12px;
     position: relative;
 }
-.slotCardEmpty{
+
+.slotCardEmpty {
     background: #ffffff;
     border: 2px dashed #e2e8f0;
     border-radius: 12px;
@@ -294,21 +394,26 @@
     gap: 12px;
     color: #94a3b8;
 }
-.avatarCicle{
-    width: 40px;
-    height: 40px;
-    background: #1d4ed8;
-    color: #fff;
-    border-radius: 50%;
+
+
+.avatarCircle {
+    width: 44px;
+    height: 44px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 16px;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(29,78,216,0.2);
 }
-.emptyCircle{
+
+.hostCrown {
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    font-size: 14px;
+    transform: rotate(15deg);
+}
+
+.emptyCircle {
     width: 40px;
     height: 40px;
     border: 2px dashed #cbd5e1;
@@ -319,40 +424,46 @@
     font-size: 18px;
     font-weight: bold;
 }
-.playerInfo{
+
+.playerInfo {
     display: flex;
     flex-direction: column;
 }
-.playerName{
+
+.playerName {
     font-size: 13px;
     font-weight: 700;
     color: #0f172a;
     margin: 0;
 }
-.playerElo{
+
+.playerElo {
     font-size: 11px;
     color: #16a34a;
     font-weight: 600;
     margin: 0;
 }
-.emptyText{
+
+.emptyText {
     font-size: 12px;
     font-weight: 500;
     margin: 0;
 }
-@media (max-width:480px){
-    .slotsGrid{
+
+@media (max-width:480px) {
+    .slotsGrid {
         grid-template-columns: 1fr;
     }
 }
+
 @media (max-width:768px) {
-    .navbar{
+    .navbar {
         padding: 14px 20px;
     }
-    .content{
+    .content {
         padding: 32px 20px;
     }
-    .twoCol{
+    .twoCol {
         grid-template-columns: 1fr;
     }
 }

@@ -28,7 +28,7 @@ export const handleauth=async(req,res)=>{
             return res.status(200).json({
                 message:"Login Successful",
                 token,
-                user:{id:user.id,username:user.username,email:user.email,elo:user.elo}
+                user:{id:user.id,username:user.username,email:user.email,elo:user.elo,avatarSeed:user.avatarSeed}
             })
         } catch (error) {
             return res.status(500).json({message:'Authentication error',error})
@@ -63,7 +63,7 @@ export const handleauth=async(req,res)=>{
             return res.status(200).json({
                 message:'Succesfully registered user',
                 token,
-                user:{id:user.id,username:user.username,email:user.email,elo:user.elo}
+                user:{id:user.id,username:user.username,email:user.email,elo:user.elo,avatarSeed:user.avatarSeed}
             })
         } catch (error) {
             console.error("Registration Controller error:",error)
