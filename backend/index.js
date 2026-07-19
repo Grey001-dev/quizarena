@@ -10,6 +10,7 @@ import { socketHandlers } from './socket/socketHandler.js'
 import { userRouter } from './routes/userroutes.js'
 dotenv.config()
 const app=express();
+const PORT=process.env.PORT || 7000
 const httpServer=http.createServer(app)
 
 const io=new Server(httpServer,{
@@ -34,6 +35,6 @@ io.on('connection',(socket)=>{
     socketHandlers(io,socket);
 })
 
-httpServer.listen(7000,()=>{
+httpServer.listen(PORT,()=>{
     console.log('Server on port 7000')
 })
