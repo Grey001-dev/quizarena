@@ -6,13 +6,31 @@ import { handleRoomRequest } from "../../services/RoomServices.ts";
 import styles from "./userDashboard.module.css";
 import AvatarDisplay from "../AvatarDisplay/AvatarDisplay.tsx";
 
+interface RecentGame {
+  category: string;
+  difficulty: string;
+  solo: boolean;
+  score: number;
+  eloChange: number;
+  rank: number | null;
+  playedAt: string;
+}
+
+interface Stats {
+  gamesPlayed: number;
+  winRate: number;
+  bestRank: number | null;
+  recentGames: RecentGame[];
+}
+
+
 export default function Dashboard() {
   
   const user=JSON.parse(localStorage.getItem("user")|| "{}");
   const [elo,setElo]=useState(user?.elo)
   const [message, setMessage] = useState("");
   const [avatar,setAvatar]=useState(user?.avatarSeed)
-  const [stats, setStats] = useState({
+  const [stats, setStats] = useState<Stats>({
     gamesPlayed: 0,
     winRate: 0,
     bestRank: null,

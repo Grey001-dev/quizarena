@@ -13,7 +13,7 @@ interface feedback{
 
 export default function SoloPage() {
   const navigate = useNavigate();
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState<{id: string, name: string}[]>([]);
   const [difficulty, setDifficulty] = useState("medium");
   const [amount, setAmount] = useState(10);
   const [datas,setDatas]=useState<any>()
