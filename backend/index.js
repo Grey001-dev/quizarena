@@ -13,13 +13,21 @@ const app=express();
 const PORT=process.env.PORT || 7000
 const httpServer=http.createServer(app)
 
-const io=new Server(httpServer,{
-    cors:{origin :'http://localhost:5173'},
-    methods:["GET","POST"],
-    credentials:true
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://quizarena001.netlify.app'
+];
+const io = new Server(httpServer, {
+    cors: { origin: allowedOrigins },
+    methods: ["GET", "POST"],
+    credentials: true
 })
 
-app.use(cors())
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true
+}))
 app.use(express.json())
 
 app.use("/api/auth",authRouter)
