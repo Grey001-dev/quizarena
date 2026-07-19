@@ -88,3 +88,46 @@
     border-color: #1e40af;
     box-shadow: 0 0 0 4px rgba(29,78,216,0.15);
 }
+.primaryButton {
+    background: #1d4ed8;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    width: 280px; 
+    padding: 14px 0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+}
+
+.primaryButton:hover:not(:disabled) {
+    background: #1e40af;
+    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.25);
+    transform: translateY(-1px);
+}
+
+.primaryButton:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.primaryButton:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.errorMessage {
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #fca5a5;
+    margin-bottom: 24px;
+    display: inline-block;
+}

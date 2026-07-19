@@ -41,7 +41,6 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Stats Section */}
             <section className={styles.statsSection}>
                 <div className={styles.statItem}>
                     <span className={styles.statNumber}>6</span>
@@ -61,7 +60,7 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Features Section */}
+
             <section className={styles.featureSection}>
                 <p className={styles.featureSectionLabel}>How it works</p>
                 <div className={styles.featuresGrid}>
@@ -73,16 +72,6 @@ export default function LandingPage() {
                             Admins create a room in seconds. Kids join safely with a simple 6-character code—no accounts needed to start playing.
                         </p>
                     </div>
-
-                    <div className={styles.featureCard}>
-                        <div className={styles.cardGlow} aria-hidden="true" />
-                        <span className={styles.featureIcon}>🧠</span>
-                        <h3 className={styles.featureTitle}>Speed-bonus scoring</h3>
-                        <p className={styles.featureDescription}>
-                            Answer fast, score higher! Every question features an intense countdown timer. The quicker you think, the more points you earn.
-                        </p>
-                    </div>
-
                     <div className={styles.featureCard}>
                         <div className={styles.cardGlow} aria-hidden="true" />
                         <span className={styles.featureIcon}>📈</span>
@@ -91,19 +80,9 @@ export default function LandingPage() {
                             Win dynamic battles and scale the global leaderboard. Every player earns a competitive rating that adapts to who they beat.
                         </p>
                     </div>
-
-                    <div className={styles.featureCard}>
-                        <div className={styles.cardGlow} aria-hidden="true" />
-                        <span className={styles.featureIcon}>🎨</span>
-                        <h3 className={styles.featureTitle}>Custom quiz creation</h3>
-                        <p className={styles.featureDescription}>
-                            Build personalized question banks or pull directly from thousands of ready-made challenges across science, history, and more.
-                        </p>
-                    </div>
                 </div>
             </section>
             
-            {/* Bottom CTA Section */}
             <section className={styles.bottomSection}>
                 <h2 className={styles.bottomTitle}>Ready for battle?</h2>
                 <p className={styles.bottomSubtitle}>
@@ -114,7 +93,6 @@ export default function LandingPage() {
                 </button>
             </section>
 
-            {/* Footer Section */}
             <footer className={styles.footer}>
                 <span className={styles.footerLogo}>⚡ QuizArena</span>
                 <span className={styles.footerTagline}>

@@ -166,6 +166,7 @@ export default function AuthPage({ setToken }: AuthPageProps) {
                                     type="password" 
                                     value={loginPassword}
                                     placeholder="******"
+                                    minLength={6}
                                     onChange={(e) => setLoginPassword(e.target.value)}
                                 />
                             </div>
