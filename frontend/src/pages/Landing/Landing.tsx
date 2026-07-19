@@ -69,7 +69,7 @@ export default function LandingPage() {
                         <span className={styles.featureIcon}>⚔️</span>
                         <h3 className={styles.featureTitle}>Live battle rooms</h3>
                         <p className={styles.featureDescription}>
-                            Admins create a room in seconds. Kids join safely with a simple 6-character code—no accounts needed to start playing.
+                            Admins create a room in seconds. Kids join safely with a simple 6-character code
                         </p>
                     </div>
                     <div className={styles.featureCard}>

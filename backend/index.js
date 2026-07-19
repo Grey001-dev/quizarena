@@ -16,7 +16,8 @@ const httpServer=http.createServer(app)
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://quizarena001.netlify.app'
+  'https://quizarena001.netlify.app',
+  "https://quizarena-eta.vercel.app"
 ];
 const io = new Server(httpServer, {
     cors: { origin: allowedOrigins },
