@@ -224,14 +224,24 @@ export default function GamePage() {
   }
 
   if (!question) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.loadingWrap}>
-          <p>Waiting for the first question...</p>
-        </div>
+  return (
+    <div className={styles.page}>
+      <div className={styles.loadingWrap}>
+        <div className={styles.spinner} />
+        <h2 className={styles.loadingTitle}>Preparing Question</h2>
+        <p className={styles.loadingSubtitle}>
+          Waiting for the host to start or the next question to drop...
+        </p>
+
+        {roomCode && (
+          <div className={styles.roomCodeBadge}>
+            Room Code: <span>{roomCode}</span>
+          </div>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   return (
     <div className={styles.page}>
