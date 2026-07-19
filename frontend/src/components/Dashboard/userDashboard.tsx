@@ -30,7 +30,7 @@ export default function Dashboard() {
   useEffect(()=>{
     const fetchUserStats=async()=>{
       const token=localStorage.getItem("token")
-      const res=await fetch("http://localhost:7000/api/user/stats",{
+      const res=await fetch("https://quizarena-br8y.onrender.com/api/user/stats",{
         headers:{
           "Content-Type":"application/json",
           "Authorization":`Bearer ${token}`

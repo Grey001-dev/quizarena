@@ -20,7 +20,7 @@ export default function LeaderboardPage(){
         const fetchLeaderboard=async()=>{
             const token=localStorage.getItem("token")
             try {
-                const res=await fetch("http://localhost:7000/api/user/leaderboard",{
+                const res=await fetch("https://quizarena-br8y.onrender.com/api/user/leaderboard",{
                     headers:{
                         'Content-Type':'application/json',
                         'Authorization':`Bearer ${token}`

@@ -1,4 +1,4 @@
-const API_URL="http://localhost:7000/api/room";
+const API_URL="https://quizarena-br8y.onrender.com/api/room";
 
 export async function loadQuestion(roomId:string){
     const token=localStorage.getItem("token")

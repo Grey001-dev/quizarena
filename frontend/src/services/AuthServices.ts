@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:7000/api/auth"
+const API_URL = "https://quizarena-br8y.onrender.com/api/auth"
 interface UserDetails {
   mode: "login" | "register"
   username?: string
