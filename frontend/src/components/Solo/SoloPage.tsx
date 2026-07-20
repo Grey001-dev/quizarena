@@ -2,7 +2,7 @@ import React from "react";
 import { useState ,useEffect, type ReactEventHandler} from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SoloPage.module.css";
-import { ArrowLeft, CheckIcon } from 'lucide-react';
+import { ArrowLeft, CheckIcon, Brain } from 'lucide-react';
 import { handleRoomRequest } from "../../services/RoomServices";
 import { loadQuestion,sendAnswer,getCategories} from "../../services/Load";
 
@@ -144,9 +144,10 @@ export default function SoloPage() {
       {gameOver ? (
         <>
           <nav className={styles.navbar}>
-            <span className={styles.navLogo}>
-              ⚡ QuizArena
-            </span>
+            <div className={styles.navLogo}>
+              <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+              <span>QuizArena</span>
+            </div>
             <button className={styles.backButton} onClick={()=>navigate("/dashboard")}>
                 <ArrowLeft size={14}/> Dashboard
             </button>
@@ -166,7 +167,7 @@ export default function SoloPage() {
                   ? "Great job,you crushed it"
                   : finalScore>= totalQuestion *0.4
                   ? "Solid effort,keep practicing,"
-                  :"Keep going,you'll get better"
+                  : "Keep going,you'll get better"
                   }
                 </p>
 
@@ -179,11 +180,11 @@ export default function SoloPage() {
                       <p className={styles.resultsStatValue}>{totalQuestion-finalScore}</p>
                       <p className={styles.resultsStatLabel}>Wrong</p>
                   </div>
-                  <div className={styles.resultStatDiv}>
+                  <div className={styles.resultsStatDiv}>
                     <p className={styles.resultsStatValue}>
                       {Math.round((finalScore/totalQuestion ) *100)}%
                     </p>
-                    <p className={styles.resultsStatsLabel}>Accuracy</p>
+                    <p className={styles.resultsStatLabel}>Accuracy</p>
                   </div>
                 </div>
                 <div className={styles.resultsButton}>
@@ -201,7 +202,10 @@ export default function SoloPage() {
       !gameStarted ? (
         <>
           <nav className={styles.navbar}>
-            <span className={styles.navLogo}>⚡ QuizArena</span>
+            <div className={styles.navLogo}>
+              <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+              <span>QuizArena</span>
+            </div>
             <button className={styles.backButton} onClick={() => navigate("/dashboard")}>
               <ArrowLeft size={14} /> Dashboard
             </button>
@@ -303,9 +307,10 @@ export default function SoloPage() {
       ) : (
         <>
           <nav className={styles.navbar}>
-            <span className={styles.navLogo}>
-                ⚡ QuizArena
-            </span>
+            <div className={styles.navLogo}>
+              <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+              <span>QuizArena</span>
+            </div>
             <button className={styles.backButton} onClick={()=>setGameStarted(false)}>
                 <ArrowLeft size={14}/>Quit Game
             </button>

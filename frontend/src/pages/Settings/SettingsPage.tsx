@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SettingsPage.module.css';
-import { ArrowLeft, Shuffle, Eye, EyeOff, AlertTriangle, CheckCircle, Loader2 } from 'lucide-react';
+import { ArrowLeft, Shuffle, Eye, EyeOff, AlertTriangle, CheckCircle, Loader2, Brain, User, ShieldCheck, KeyRound, LogOut } from 'lucide-react';
 import AvatarDisplay from '../../components/AvatarDisplay/AvatarDisplay';
 import { settingsPatch } from '../../services/Settings';
 
@@ -48,8 +48,7 @@ export default function SettingsPage() {
             localStorage.setItem("user", JSON.stringify(updatedUser));
             triggerNotification('success', "Username updated successfully!");
         } catch (error: any) {
-            const errorMsg =  "Failed to update username";
-            triggerNotification('error', errorMsg);
+            triggerNotification('error', "Failed to update username");
             setUsername(user.username || '');
         } finally {
             setSavingUsername(false);
@@ -87,8 +86,7 @@ export default function SettingsPage() {
             triggerNotification('success', "Password updated successfully!");
             setNewPassword("");
         } catch (error: any) {
-            const errorMsg ="Failed to alter password credentials";
-            triggerNotification('error', errorMsg);
+            triggerNotification('error', "Failed to alter password credentials");
         } finally {
             setSavingPassword(false);
         }
@@ -106,7 +104,6 @@ export default function SettingsPage() {
 
     return (
         <div className={styles.page}>
-
             {status.type && (
                 <div className={`${styles.toast} ${status.type === 'success' ? styles.toastSuccess : styles.toastError}`}>
                     {status.type === 'success' ? <CheckCircle size={14} /> : <AlertTriangle size={14} />}
@@ -115,23 +112,31 @@ export default function SettingsPage() {
             )}
 
             <nav className={styles.navbar}>
-                <span className={styles.navLogo}>⚡ QuizArena</span>
+                <div className={styles.navLogo}>
+                    <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+                    <span>QuizArena</span>
+                </div>
                 <button className={styles.backButton} onClick={() => navigate("/dashboard")}>
-                    <ArrowLeft size={12} /> Dashboard
+                    <ArrowLeft size={14} /> <span>Dashboard</span>
                 </button>
             </nav>
 
             <div className={styles.content}>
-                <h1 className={styles.title}>Settings</h1>
-                <p className={styles.subTitle}>Manage your account and profile</p>
+                <p className={styles.categoryLabel}>Settings</p>
+                <h1 className={styles.title}>Manage your profile</h1>
+                <p className={styles.subTitle}>Customize your avatar, credentials, and session preferences</p>
 
                 <div className={styles.panel}>
-                    <p className={styles.panelLabel}>Your Avatar</p>
+                    <div className={styles.panelHeader}>
+                        <User size={18} className={styles.panelIcon} />
+                        <p className={styles.panelLabel}>Your Avatar</p>
+                    </div>
+
                     <div className={styles.avatarSha}>
-                        <AvatarDisplay seed={avatarSeed} size={64} />
+                        <AvatarDisplay seed={avatarSeed} size={60} />
                         <div>
-                            <p className={styles.avatarName}>{username}</p>
-                            <p className={styles.avatarElo}>{user.elo || 1000} ELO</p>
+                            <p className={styles.avatarName}>{username || 'Player'}</p>
+                            <p className={styles.avatarElo}>ELO Rating: <span>{user.elo || 1000}</span></p>
                         </div>
                     </div>
 
@@ -142,25 +147,31 @@ export default function SettingsPage() {
                                 onClick={() => handleAvatarSelect(seed)}
                                 className={avatarSeed === seed ? styles.avatarOptionActive : styles.avatarOption}
                             >
-                                <AvatarDisplay seed={seed} size={44} />
+                                <AvatarDisplay seed={seed} size={42} />
                             </div>
                         ))}
                     </div>
+
                     <button className={styles.shuffleButton} onClick={shuffleAvatars}>
-                        <Shuffle size={12} /> Shuffle Avatars
+                        <Shuffle size={13} /> Shuffle Avatars
                     </button>
                 </div>
 
                 <div className={styles.panel}>
-                    <p className={styles.panelLabel}>Edit Username</p>
+                    <div className={styles.panelHeader}>
+                        <ShieldCheck size={18} className={styles.panelIcon} />
+                        <p className={styles.panelLabel}>Edit Username</p>
+                    </div>
+
                     <div className={styles.field}>
-                        <label className={styles.fieldLabel}>Username</label>
+                        <label className={styles.fieldLabel}>Display Name</label>
                         <input
                             type="text"
                             className={styles.fieldInput}
                             value={username}
                             maxLength={8}
                             onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Enter username"
                         />
                     </div>
 
@@ -174,10 +185,13 @@ export default function SettingsPage() {
                 </div>
 
                 <div className={styles.panel}>
-                    <p className={styles.panelLabel}>Change Password</p>
+                    <div className={styles.panelHeader}>
+                        <KeyRound size={18} className={styles.panelIcon} />
+                        <p className={styles.panelLabel}>Security & Password</p>
+                    </div>
 
                     <div className={styles.field}>
-                        <label className={styles.fieldLabel}>Email</label>
+                        <label className={styles.fieldLabel}>Account Email</label>
                         <input
                             type="email"
                             className={`${styles.fieldInput} ${styles.inputDisabled}`}
@@ -187,7 +201,7 @@ export default function SettingsPage() {
                     </div>
 
                     <div className={styles.field}>
-                        <label className={styles.fieldLabel}>New password</label>
+                        <label className={styles.fieldLabel}>New Password</label>
                         <div className={styles.passwordWrapper}>
                             <input
                                 type={showPassword ? "text" : "password"}
@@ -216,9 +230,12 @@ export default function SettingsPage() {
                 </div>
 
                 <div className={`${styles.panel} ${styles.dangerPanel}`}>
-                    <p className={styles.dangerLabel}>Account</p>
+                    <div className={styles.dangerHeader}>
+                        <LogOut size={18} color="#dc2626" />
+                        <p className={styles.dangerLabel}>Session</p>
+                    </div>
                     <div className={styles.dangerContent}>
-                        <p className={styles.dangerText}>Log out of your account on this device</p>
+                        <p className={styles.dangerText}>Log out of your QuizArena session on this browser</p>
                         <button className={styles.logOutButton} onClick={handleLogout}>
                             Log Out
                         </button>

@@ -1,10 +1,8 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserCog, LogOut,Trophy } from "lucide-react";
-import { generateCode } from "../../services/RoomCode.ts";
+import { UserCog, LogOut, Trophy, Target, Radio, LogIn, Brain } from "lucide-react";
 import { handleRoomRequest } from "../../services/RoomServices.ts";
 import styles from "./userDashboard.module.css";
-import AvatarDisplay from "../AvatarDisplay/AvatarDisplay.tsx";
 
 interface RecentGame {
   category: string;
@@ -23,13 +21,10 @@ interface Stats {
   recentGames: RecentGame[];
 }
 
-
 export default function Dashboard() {
-  
-  const user=JSON.parse(localStorage.getItem("user")|| "{}");
-  const [elo,setElo]=useState(user?.elo)
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const [elo, setElo] = useState<number>(user?.elo || 1000);
   const [message, setMessage] = useState("");
-  const [avatar,setAvatar]=useState(user?.avatarSeed)
   const [stats, setStats] = useState<Stats>({
     gamesPlayed: 0,
     winRate: 0,
@@ -45,20 +40,27 @@ export default function Dashboard() {
     return "Good afternoon";
   }
 
-  useEffect(()=>{
-    const fetchUserStats=async()=>{
-      const token=localStorage.getItem("token")
-      const res=await fetch("https://quizarena-br8y.onrender.com/api/user/stats",{
-        headers:{
-          "Content-Type":"application/json",
-          "Authorization":`Bearer ${token}`
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("https://quizarena-br8y.onrender.com/api/user/stats", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setStats(data);
+          if (data.elo) setElo(data.elo);
         }
-      });
-      const data=await res.json();
-      setStats(data)
-    }
-    fetchUserStats()
-  },[])
+      } catch (err) {
+        console.error("Failed to load user stats", err);
+      }
+    };
+    fetchUserStats();
+  }, []);
 
   function logout() {
     localStorage.removeItem("token");
@@ -69,7 +71,6 @@ export default function Dashboard() {
     setMessage("");
     try {
       const data = await handleRoomRequest.createRoom();
-      console.log(data);
       if (data.roomCode) {
         navigate("/host", {
           state: {
@@ -80,18 +81,19 @@ export default function Dashboard() {
         });
       } else {
         setMessage("Couldn't generate room code");
-        console.log("Couldn't generate room code");
       }
     } catch (err: any) {
-      setMessage(err.message);
-      console.log(err);
+      setMessage(err.message || "Failed to create room");
     }
   };
 
   return (
     <div className={styles.page}>
       <nav className={styles.navbar}>
-        <span className={styles.navLogo}>⚡ QuizArena</span>
+        <div className={styles.navLogo}>
+          <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+          <span>QuizArena</span>
+        </div>
         <div className={styles.navRight}>
           <span className={styles.navElo}>
             ELO <strong>{elo}</strong>
@@ -103,7 +105,7 @@ export default function Dashboard() {
           >
             <UserCog size={18} />
           </button>
-         <button className={styles.leaderboardButton} onClick={() => navigate("/leaderboard")}>
+          <button className={styles.leaderboardButton} onClick={() => navigate("/leaderboard")}>
             <Trophy size={14} strokeWidth={2.5} />
             <span>Leaderboard</span>
           </button>
@@ -124,11 +126,8 @@ export default function Dashboard() {
         <div className={styles.modeGrid}>
           <div className={styles.modeCard} onClick={() => navigate("/solo")}>
             <div className={styles.modeIcon}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="6" />
-                <circle cx="12" cy="12" r="2" />
-              </svg>
+        <Target size={20} strokeWidth={2.5} color="#1d4ed8" /> 
+      
             </div>
             <h2 className={styles.modeTitle}>Solo play</h2>
             <p className={styles.modeDesc}>Play alone. Pick a category and sharpen your skills.</p>
@@ -136,28 +135,20 @@ export default function Dashboard() {
 
           <div className={`${styles.modeCard} ${styles.modeCardFilled}`} onClick={handleCodeGen}>
             <div className={styles.modeIconFilled}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z" />
-                <path d="M5 20h14a1 1 0 0 0 1-1v-1H4v1a1 1 0 0 0 1 1z" />
-              </svg>
+          <Radio size={20} strokeWidth={2.5} color="#ffffff" />
             </div>
             <h2 className={styles.modeTitleWhite}>Host a game</h2>
             <p className={styles.modeDescWhite}>
-              Create a live room, share a code, and control the match.
+          Create a live room, share a code, and control the match.
             </p>
           </div>
 
           <div className={styles.modeCard} onClick={() => navigate("/join")}>
             <div className={styles.modeIcon}>
-              {/* I added an icon for each game mode btw...this long strings */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                <polyline points="10 17 15 12 10 7" />
-                <line x1="15" y1="12" x2="3" y2="12" />
-              </svg>
+              <LogIn size={20} strokeWidth={2.5} color="#1d4ed8" />
             </div>
-            <h2 className={styles.modeTitle}>Join a game</h2>
-            <p className={styles.modeDesc}>Got an arena invite code? Hop directly into the action.</p>
+                <h2 className={styles.modeTitle}>Join a game</h2>
+              <p className={styles.modeDesc}>Got an arena invite code? Hop directly into the action.</p>
           </div>
         </div>
 
@@ -174,7 +165,7 @@ export default function Dashboard() {
                     <span className={styles.gameDot} />
                     <div>
                       <p className={styles.gameName}>
-                        {game.category} · {game.difficulty}
+                          {game.category} · {game.difficulty}
                       </p>
                       <p className={styles.gameMeta}>
                         {game.solo ? "Solo" : "Multiplayer"} · {new Date(game.playedAt).toLocaleDateString()}
@@ -191,7 +182,7 @@ export default function Dashboard() {
                 </div>
               ))
             )}
-          </div> {/* <--- FIX: This closes the Recent Games panel cleanly */}
+          </div>
 
           <div className={styles.panel}>
             <p className={styles.panelLabel}>Your stats</p>
@@ -208,12 +199,12 @@ export default function Dashboard() {
 
               <div className={styles.statCard}>
                 <p className={styles.statLabel}>Win rate</p>
-                <p className={styles.statNumber}>{stats.winRate}</p>
+                <p className={styles.statNumber}>{stats.winRate}%</p>
               </div>
 
               <div className={styles.statCard}>
                 <p className={styles.statLabel}>Best rank</p>
-                <p className={styles.statNumber}>#{stats.bestRank}</p>
+                <p className={styles.statNumber}>{stats.bestRank ? `#${stats.bestRank}` : "--"}</p>
               </div>
             </div>
           </div> 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreateRoom.module.css";
 import { socket } from "../../services/socket";
-import { ArrowLeft, CheckIcon, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Brain, ArrowLeft, CheckIcon, AlertTriangle, CheckCircle2} from "lucide-react";
 import { useLocation } from "react-router-dom";
 import AvatarDisplay from "../AvatarDisplay/AvatarDisplay";
 import { getCategories } from "../../services/Load";
@@ -25,7 +25,7 @@ interface ToastState {
 export default function HostPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState<{id: string, name: string}[]>([]);
     const [difficulty, setDifficulty] = useState('Easy');
     const [amount, setAmount] = useState(10);
     const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -35,13 +35,14 @@ export default function HostPage() {
     const [isMixed, setIsMixed] = useState(false);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [creatingRoom, setCreatingRoom] = useState(!location.state?.roomCode);
-    const isHost = location.state?.isHost ?? false;
-
+    const [isHost] = useState<boolean>(location.state?.isHost ?? false);
+    
     const [toast, setToast] = useState<ToastState>({ show: false, type: 'info', message: '' });
     const showNotification = (type: 'success' | 'error' | 'info', message: string) => {
         setToast({ show: true, type, message });
         setTimeout(() => setToast({ show: false, type: 'info', message: '' }), 4000);
     };
+    console.log("location.state on this render:", location.state);
 
     const DIFFICULTIES = [
         { label: 'Easy', sub: 'Warm up', id: 1 },
@@ -66,6 +67,7 @@ export default function HostPage() {
     }
 
     useEffect(() => {
+        console.log("HostPage mounted/effect ran, roomCode:", roomCode, "isHost:", isHost);
         if (!roomCode) return;
         
         setCreatingRoom(false);
@@ -84,8 +86,8 @@ export default function HostPage() {
         });
 
         socket.on("game-started", (data: { totalQuestions: number }) => {
-            navigate(`/game/${roomCode}`, { state: { totalQuestions: data.totalQuestions } });
-        })
+        navigate(`/game/${roomCode}`, { state: { totalQuestions: data.totalQuestions } });
+    })
         socket.on("host-left", () => {
             showNotification('error', "The host has left the lobby. Redirecting to Dashboard...");
             setTimeout(() => navigate("/dashboard"), 2500);
@@ -144,7 +146,10 @@ export default function HostPage() {
             )}
 
             <nav className={styles.navbar}>
-                <span className={styles.navLogo}>⚡ QuizArena</span>
+                <div className={styles.navLogo}>
+                    <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+                    <span>QuizArena</span>
+                </div>
                 <button className={styles.backButton} onClick={leaveLobby}>
                     <ArrowLeft size={14} /> Dashboard
                 </button>

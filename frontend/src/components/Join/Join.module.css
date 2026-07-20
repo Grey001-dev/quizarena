@@ -1,133 +1,157 @@
-
-.page{
-    background: #f0f4ff;
+.page {
+    background: #f8fafc;
     min-height: 100vh;
-    font-family: 'Inter','Segeo UI',sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    width: 100%;
 }
-.navbar{
-    background: #1e3a8a;
+.navbar {
+    background: #0f172a;
+    border-bottom: 1px solid #1e293b;
     padding: 14px 48px;
     display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 110;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top:0;
-    z-index:100;
-    border-radius: 0 0 16px 16px;
-    margin: 0 24px;
 }
-
-.navLogo{
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
+.navLogo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
 }
-.backButton{
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 8px;
-    padding: 8px 16px;
+.backButton {
+    background: #1e293b;
+    border: 1px solid #334155;
     color: #93c5fd;
     font-size: 13px;
-    cursor:pointer;
-    font-family: inherit;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
     display: flex;
-    align-items:center;
-    gap:8px;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
 }
-.contentContainer{
-    max-width:600px;
-    margin:0 auto;
-    padding:64px 24px;
+
+.backButton:hover {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+.contentContainer {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 64px 24px;
     text-align: center;
 }
-.title{
+
+.title {
     font-size: 28px;
-    font-weight: 800;
+    font-weight: 850;
     color: #0f172a;
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
 }
-.subTitle{
+
+.subTitle {
     font-size: 14px;
     color: #64748b;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
-.joinForm{
+.joinForm {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-
-.codeRow{
+.codeRow {
     display: flex;
     justify-content: center;
-    margin-bottom: 36px;
-    width:100%;
+    margin-bottom: 24px;
+    width: 100%;
 }
-.codeInput{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 34px;
+.codeInput {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 32px;
     font-weight: 800;
     color: #0f172a;
-    width: 280px;
+    width: 100%;
+    max-width: 320px;
     text-align: center;
-    padding: 14px 0;
+    padding: 16px 0;
     text-transform: uppercase;
     outline: none;
     background: #ffffff;
-    border: 2px solid #1d4ed8;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(29,78,216,0.05);
-    letter-spacing: 12px;
-    padding-left: 12px;
-    transition: border-color 0.15s ease;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    letter-spacing: 8px;
+    text-indent: 8px; 
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
-.codeInput:focus{
-    border-color: #1e40af;
-    box-shadow: 0 0 0 4px rgba(29,78,216,0.15);
+.codeInput::placeholder {
+    color: #cbd5e1;
+    letter-spacing: 6px;
+    text-indent: 6px;
+}
+.codeInput:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 .primaryButton {
-    background: #1d4ed8;
+    background: #2563eb;
     color: #ffffff;
     font-size: 15px;
     font-weight: 700;
-    width: 280px; 
+    width: 100%;
+    max-width: 320px;
     padding: 14px 0;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     font-family: inherit;
-    transition: all 0.15s ease;
-    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
+    transition: background 0.15s ease;
 }
-
 .primaryButton:hover:not(:disabled) {
-    background: #1e40af;
-    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.25);
-    transform: translateY(-1px);
+    background: #1d4ed8;
 }
-
-.primaryButton:active:not(:disabled) {
-    transform: translateY(0);
-}
-
 .primaryButton:disabled {
-    background: #cbd5e1;
+    background: #e2e8f0;
     color: #94a3b8;
     cursor: not-allowed;
-    box-shadow: none;
 }
-
 .errorMessage {
-    background: #fee2e2;
+    background: #fef2f2;
     color: #dc2626;
     font-size: 13px;
     font-weight: 600;
     padding: 10px 16px;
-    border-radius: 8px;
-    border: 1px solid #fca5a5;
+    border-radius: 10px;
+    border: 1px solid #fecaca;
     margin-bottom: 24px;
-    display: inline-block;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+}
+@media (max-width: 640px) {
+    .navbar {
+        padding: 14px 20px;
+    }
+
+    .contentContainer {
+        padding: 40px 20px;
+    }
+
+    .codeInput,
+    .primaryButton,
+    .errorMessage {
+        max-width: 100%;
+    }
 }

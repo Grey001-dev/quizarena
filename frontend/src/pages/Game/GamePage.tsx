@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { socket } from "../../services/socket";
-import { Trophy, Medal, Award } from "lucide-react";
+import { Trophy, Medal, Award,Brain } from "lucide-react";
 import styles from "./GamePage.module.css";
 
 interface Question {
@@ -245,64 +245,72 @@ export default function GamePage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.top}>
-        <div className={styles.progress}>
-          <span className={styles.progressText}>
-            Question {questionNumber} of {totalQuestions}
-          </span>
-          <span className={styles.answeredBadge}>
-            {answeredCount.answered}/{answeredCount.total} answered
-          </span>
+      <nav className={styles.navbar}>
+        <div className={styles.navLogo}>
+          <Brain size={22} color="#60a5fa" strokeWidth={2.2} />
+          <span>QuizArena</span>
         </div>
-        <div className={styles.timer}>
-          <span className={styles.timerNum}>{timeLeft}</span>
-          <span className={styles.timerLabel}>sec</span>
+      </nav>
+
+      <div className={styles.gameBody}>
+        <div className={styles.top}>
+          <div className={styles.progress}>
+            <span className={styles.progressText}>
+              Question {questionNumber} of {totalQuestions}
+            </span>
+            <span className={styles.answeredBadge}>
+              {answeredCount.answered}/{answeredCount.total} answered
+            </span>
+          </div>
+          <div className={styles.timer}>
+            <span className={styles.timerNum}>{timeLeft}</span>
+            <span className={styles.timerLabel}>sec</span>
+          </div>
         </div>
-      </div>
 
-      <div className={styles.qcard}>
-        <p className={styles.qcat}>{question.category}</p>
-        <h2 className={styles.qtext}>{question.text}</h2>
-      </div>
-
-      <div className={styles.answers}>
-        {question.options.map((option, index) => {
-          let className = styles.ans;
-        //   Logic for the colours so if its correct i show green if its wrong i show red
-          if (showResults) {
-            if (option === correctAnswer) className = `${styles.ans} ${styles.ansCorrect}`;
-            else if (option === selectedAnswer) className = `${styles.ans} ${styles.ansWrong}`;
-            else className = `${styles.ans} ${styles.ansDisabled}`;
-          } else if (option === selectedAnswer) {
-            className = `${styles.ans} ${styles.ansSelected}`;
-          }
-
-          return (
-            <button
-              key={index}
-              className={className}
-              onClick={() => handleAnswer(option)}
-              disabled={!!selectedAnswer || showResults}
-            >
-              {option}
-            </button>
-          );
-        })}
-      </div>
-
-      {showResults && (
-        <div className={styles.standingsPanel}>
-          <p className={styles.standingsLabel}>Live standings</p>
-          {standings.map((s, i) => (
-            <div key={s.userId} className={styles.standingRow}>
-              <span>
-                #{i + 1} {s.userId === user.id ? "You" : s.username}
-              </span>
-              <span className={styles.standingScore}>{s.score}</span>
-            </div>
-          ))}
+        <div className={styles.qcard}>
+          <p className={styles.qcat}>{question.category}</p>
+          <h2 className={styles.qtext}>{question.text}</h2>
         </div>
-      )}
+
+        <div className={styles.answers}>
+          {question.options.map((option, index) => {
+            let className = styles.ans;
+            if (showResults) {
+              if (option === correctAnswer) className = `${styles.ans} ${styles.ansCorrect}`;
+              else if (option === selectedAnswer) className = `${styles.ans} ${styles.ansWrong}`;
+              else className = `${styles.ans} ${styles.ansDisabled}`;
+            } else if (option === selectedAnswer) {
+              className = `${styles.ans} ${styles.ansSelected}`;
+            }
+
+            return (
+              <button
+                key={index}
+                className={className}
+                onClick={() => handleAnswer(option)}
+                disabled={!!selectedAnswer || showResults}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+
+        {showResults && (
+          <div className={styles.standingsPanel}>
+            <p className={styles.standingsLabel}>Live standings</p>
+            {standings.map((s, i) => (
+              <div key={s.userId} className={styles.standingRow}>
+                <span>
+                  #{i + 1} {s.userId === user.id ? "You" : s.username}
+                </span>
+                <span className={styles.standingScore}>{s.score}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

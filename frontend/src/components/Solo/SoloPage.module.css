@@ -1,12 +1,12 @@
 .page{
-    background: #f0f4ff;
+    background: #f8fafc;
     min-height: 100vh;
-    font-family: 'Inter','Segeo UI', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     width: 100%;
 }
-
 .navbar{
-    background: #1e3a8a;
+    background: #0f172a;
+    border-bottom: 1px solid #1e293b;
     padding: 14px 48px;
     display: flex;
     position: sticky;
@@ -15,196 +15,215 @@
     justify-content: space-between;
     align-items: center;
 }
-
 .navLogo{
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
 }
 
 .backButton{
-    background: transparent;
-    border: none;
+    background: #1e293b;
+    border: 1px solid #334155;
     color: #93c5fd;
     font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
     cursor: pointer;
-    font-family: inherit;
-    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
 }
 .backButton:hover{
-    color: #fff;
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #3b82f6;
 }
 .content{
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 48px 64px;
+    padding: 48px 24px;
 }
 .title{
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 28px;
+    font-weight: 850;
     color: #0f172a;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
     margin-bottom: 6px;
     text-align: left;
 }
 .subTitle{
     font-size: 14px;
     color: #64748b;
-    margin-bottom:40px;
+    margin-bottom: 36px;
     text-align: left;
 }
 .sectionLabel{
     font-size: 11px;
     font-weight: 700;
-    color: #1d4ed8;
+    color: #2563eb;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 12px;
     text-align: left;
 }
+
 .pillRow{
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 28px;
 }
+
 .pill{
-    padding: 7px 16px;
+    padding: 8px 16px;
     border-radius: 999px;
-    border: 1.5px solid #dbeafe;
-    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    background: #ffffff;
     font-size: 13px;
+    font-weight: 600;
     color: #475569;
     cursor: pointer;
     font-family: inherit;
-    transition: all 0.5s;
+    transition: all 0.15s ease;
 }
+
 .pill:hover{
-    border-color:#1d4ed8;
-    color: #1d4e48;
+    border-color: #2563eb;
+    color: #2563eb;
 }
+
 .pillActive{
-    padding: 7px 16px;
-    border-radius: 90px;
-    border: 1.5px solid #1d43d8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1.5px solid #2563eb;
     font-size: 13px;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    background-color: #1d43d8;
+    background-color: #2563eb;
 }
+
 .diffRow{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 28px;
 }
+
 .diffCard{
-    background: #fff;
-    border: 1.5px solid #dbeafe;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
     border-radius: 12px;
     padding: 16px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.5s;
+    transition: all 0.15s ease;
 }
+
 .diffCard:hover{
-    border-color: #1d43d8;
-    color: #1d43d8;
+    border-color: #2563eb;
 }
+
 .diffCardActive{
-    background: #1d4ed8;
-    border: 1.5px solid #1d4ed8;
+    background: #2563eb;
+    border: 1.5px solid #2563eb;
     border-radius: 12px;
     padding: 16px;
     text-align: center;
     cursor: pointer;
 }
+
 .diffTitle{
-    padding: 7px 16px;
-    border-radius: 999px;
     color: #0f172a;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;    
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 3px 0;
 }
+
 .diffTitleActive{
     font-size: 14px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 3px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 3px 0;
 }
-.diffCard{
-    background: #fff;
-    border: 1.5px solid #dbeafe;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.15s;
-}
+
 .diffSub{
     font-size: 12px;
-    color: #94a3b8;
+    color: #64748b;
+    margin: 0;
 }
+
 .diffSubActive{
     font-size: 12px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
 }
 
 .amountRow{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     margin-bottom: 36px;
-    grid-template-columns: repeat(4,1fr);
 }
+
 .amount{
-    background: #fff;
-    border: 1.5px solid #dbeafe;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
     border-radius: 10px;
     padding: 12px;
     text-align: center;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     color: #0f172a;
     cursor: pointer;
+    transition: all 0.15s ease;
 }
+
 .amount:hover{
-    border-color: #1d4ed8;
-    color: #1d4ed8;
+    border-color: #2563eb;
+    color: #2563eb;
 }
 
 .amountActive{
-    background: #1d4ed8;
-    border: 1.5px solid #1d4ed8;
+    background: #2563eb;
+    border: 1.5px solid #2563eb;
     border-radius: 10px;
     padding: 12px;
     text-align: center;
     font-size: 15px;
-    font-weight: 600;
-    color: #fff;
+    font-weight: 700;
+    color: #ffffff;
     cursor: pointer;
 }
+
 .startButton{
     width: 100%;
-    background: #1d4ed8;
-    color: #fff;
+    background: #2563eb;
+    color: #ffffff;
     border: none;
     padding: 14px;
     border-radius: 10px;
-    font-size:15px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s;
+    transition: background 0.15s ease;
 }
 
 .startButton:hover {
-  background: #1e40af;
+    background: #1d4ed8;
 }
+
 .startButton:disabled{
     background: #93c5fd;
     cursor: not-allowed;
@@ -214,52 +233,40 @@
     display: flex;
     background: #e2e8f0;
     padding: 4px;
-    border-radius: 8px;
-    margin-bottom: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
+
 .mixedActive{
     flex: 1;
     background: #ffffff;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-size: 13px;
     font-weight: 700;
-    color: #1d4ed8;
-    border-radius: 6px;
+    color: #2563eb;
+    border-radius: 8px;
     font-family: inherit;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
+
 .mixedInactive{
     flex: 1;
     background: transparent;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-size: 13px;
     font-weight: 600;
     color: #64748b;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 8px;
     font-family: inherit;
     transition: all 0.15s ease;
 }
-.mixedInactive{
-    color: #0f172a;
-}
-@media (max-width:768px) {
-    .navbar{
-        padding: 14px 20px;
-    }
-    .content{
-        padding: 32px 20px;
-    }
-    .diffRow{
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
 .gameContainer{
-    max-width: 900px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 48px 64px;
+    padding: 48px 24px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -271,14 +278,14 @@
     gap: 24px;
 }
 .progressText{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
-    color: #1e3a8a;
+    color: #2563eb;
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
-.progressBarFill{
-    width: 40%;
-}
+
 .progressBarBg{
     flex: 1;
     height: 8px;
@@ -288,73 +295,88 @@
 }
 .progressBarFill{
     height: 100%;
-    background: #1d4ed8;
+    background: #2563eb;
 }
 .timerBadge{
-    background: #fff;
+    background: #ffffff;
     border-radius: 99px;
     padding: 6px 20px;
     display: flex;
     align-items: baseline;
     gap: 6px;
-    border: 1.5px solid #dbeafe;
+    border: 1.5px solid #e2e8f0;
 }
+
 .timerNumber{
     font-size: 22px;
-    font-weight: 900;
-    color: #1d4ed8;
+    font-weight: 800;
+    color: #2563eb;
 }
+
 .timerLabel{
     font-size: 12px;
-    color: #94a3b8;
+    color: #64748b;
 }
+
 .questionCard{
-    background: #fff;
-    border-radius: 24px;
-    padding: 48px 24px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 24px;
     text-align: center;
-    border: 1.5px solid #dbeafe;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
+
 .questionCategory{
     font-size: 12px;
     font-weight: 800;
-    color: #1d4ed8;
+    color: #2563eb;
     letter-spacing: 0.08em;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
 }
 .questionText{
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 800;
     color: #0f172a;
+    line-height: 1.35;
+    margin: 0;
 }
 .optionsGrid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
+
 .optionButton{
-    background: #fff;
-    border: 1.5px solid #dbeafe;
-    border-radius: 16px;
-    padding: 24px;
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
     display: flex;
     align-items: center;
     gap: 16px;
     cursor: pointer;
+    transition: all 0.15s ease;
 }
+
+.optionButton:hover{
+    border-color: #2563eb;
+}
+
 .optionButtonActive{
     background: #2563eb;
     border: 1.5px solid #2563eb;
-    border-radius: 16px;
-    padding: 24px;
+    border-radius: 14px;
+    padding: 20px;
     display: flex;
     align-items: center;
     gap: 16px;
     cursor: pointer;
 }
 .optionLetter{
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: #eff6ff;
+    color: #2563eb;
     width: 36px;
     height: 36px;
     border-radius: 8px;
@@ -362,37 +384,72 @@
     align-items: center;
     justify-content: center;
     font-weight: 800;
+    flex-shrink: 0;
 }
-.optionLeterActuve{
-    background: rgba(255,255,255,0.2);
-    color: #fff;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
+.optionButtonActive .optionLetter {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 .optionValue{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #1e293b;
+    text-align: left;
 }
 .optionButtonActive .optionValue{
-    color: #fff;
+    color: #ffffff;
+}
+.optionButtonCorrect {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+    background-color: #ecfdf5; 
+    border: 1.5px solid #10b981;  
+    border-radius: 14px;
+}
+.optionButtonCorrect .optionLetter {
+    background-color: #10b981;
+    color: #ffffff;
+}
+.optionButtonWrong {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fef2f2; 
+    border: 1.5px solid #ef4444;
+    border-radius: 14px;
+}
+.optionButtonWrong .optionLetter {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+.optionButtonDisabled {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+    background-color: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 .standingsCard{
-    background: #fff;
-    border-radius: 24px;
-    padding: 28px;
-    border: 1.5px solid #dbeafe;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1.5px solid #e2e8f0;
     margin-top: 12px;
 }
 .standingsLabel{
     font-size: 11px;
     font-weight: 800;
-    color: #1d4ed8;
+    color: #2563eb;
     letter-spacing: 0.08em;
     margin-bottom: 16px;
 }
@@ -405,133 +462,125 @@
     color: #475569;
 }
 .standingsUserActive{
-    color: #1d43d8;
+    color: #2563eb;
     font-weight: 700;
 }
 .standingsScore{
     font-weight: 800;
-    color: #1d4ed8;
-}
-.optionButtonCorrect {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 16px;
-  background-color: #ecfdf5; 
-  border: 2px solid #10b981;  
-  border-radius: 12px;
-  transform: scale(1.02);
-}
-.optionButtonCorrect .optionLetter {
-  background-color: #10b981;
-  color: #ffffff;
-}
-
-
-.optionButtonWrong {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 16px;
-  background-color: #fef2f2; 
-  border: 2px solid #ef4444;
-  border-radius: 12px;
-}
-.optionButtonWrong .optionLetter {
-  background-color: #ef4444;
-  color: #ffffff;
-}
-
-.optionButtonDisabled {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 16px;
-  background-color: #f8fafc;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.optionButtonCorrect {
-  background-color: #ecfdf5;
-  border: 2px solid #10b981;
+    color: #2563eb;
 }
 .resultsContent{
-    max-width: 600px;
+    max-width: 520px;
     margin: 0 auto;
     padding: 48px 24px;
 }
+
 .resultsCard{
-    background: #fff;
-    border-radius: 24px;
-    padding: 48px 32px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 28px;
     text-align: center;
-    border: 1.5px solid #dbeafe;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
+
 .resultsEmoji{
     font-size: 48px;
     margin-bottom: 12px;
 }
+
 .resultsLabel{
-    font-weight: 12px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 800;
     color: #64748b;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin-bottom: 4px;
 }
+
 .resultsScore{
     font-size: 40px;
-    font-weight: 800;
+    font-weight: 850;
     color: #0f172a;
-    margin: 0 0 12px 0;
+    margin: 0 0 8px 0;
 }
+
 .resultsOutOf{
     font-size: 20px;
     color: #94a3b8;
 }
+
 .resultsSub{
     font-size: 14px;
     color: #475569;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
-resultsStats{
+
+.resultsStats{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
     background: #f8fafc;
+    border: 1px solid #f1f5f9;
     padding: 16px;
-    border-radius: 16px;
-    margin-bottom: 32px;
+    border-radius: 14px;
+    margin-bottom: 28px;
 }
+
 .resultsStatDiv{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .resultsStatValue{
     font-size: 20px;
     font-weight: 800;
     color: #0f172a;
     margin: 0;
 }
+
 .resultsStatLabel{
     font-size: 12px;
     color: #64748b;
     margin: 4px 0 0 0;
 }
+
 .resultsButton{
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
 .resultsButton button{
     width: 100%;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
     padding: 14px;
     border-radius: 10px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     font-family: inherit;
+    transition: background 0.15s ease;
+}
+
+.resultsButton button:hover{
+    background: #1d4ed8;
+}
+
+@media (max-width:768px) {
+    .navbar{
+        padding: 14px 20px;
+    }
+    .content{
+        padding: 32px 16px;
+    }
+    .gameContainer{
+        padding: 32px 16px;
+    }
+    .optionsGrid{
+        grid-template-columns: 1fr;
+    }
 }

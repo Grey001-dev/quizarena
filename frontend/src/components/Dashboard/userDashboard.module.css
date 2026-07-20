@@ -5,10 +5,10 @@
 }
 
 .page {
-  background: #f0f4ff;
+  background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: #1a1a1a;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0f172a;
 }
 
 .navbar {
@@ -16,87 +16,98 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px 48px;
-  background: #1e3a8a;
+  background: #0f172a;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  border-bottom: 1px solid #1e293b;
 }
 
 .navLogo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
   color: #ffffff;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.5px;
 }
 
 .navRight {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .navElo {
   font-size: 13px;
-  color: #93c5fd;
-  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  background: #1e293b;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid #334155;
 }
 
 .navElo strong {
-  color: #ffffff;
+  color: #60a5fa;
   font-weight: 700;
 }
 
 .settingsIcon {
   background: transparent;
   border: none;
-  color: #93c5fd;
+  color: #94a3b8;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
-  border-radius: 6px;
+  padding: 8px;
+  border-radius: 8px;
   transition: all 0.15s ease;
 }
 
 .settingsIcon:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  background: #1e293b;
 }
 
-.navAvatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #3b5fc0;
-  border: 2px solid #93c5fd;
+.leaderboardButton {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #93c5fd;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
 }
 
-.navAvatar:hover {
-  transform: scale(1.05);
+.leaderboardButton:hover {
+  background: #334155;
+  color: #ffffff;
 }
 
 .divider {
   width: 1px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.15);
+  background: #334155;
   margin: 0 4px;
 }
 
 .logoutButton {
   background: transparent;
-  border: 1px solid rgba(239, 68, 68, 0.4);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   color: #fca5a5;
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -110,7 +121,6 @@
   border-color: #ef4444;
 }
 
-
 .content {
   max-width: 1000px;
   margin: 0 auto;
@@ -118,21 +128,21 @@
 }
 
 .systemMessage {
-  background: #fee2e2;
+  background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
   padding: 10px 16px;
   border-radius: 8px;
-  font-size: 14px;
-  margin-bottom: 20px;
+  font-size: 13px;
+  margin-bottom: 24px;
 }
 
 .greeting {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   color: #64748b;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-bottom: 6px;
 }
 
@@ -140,10 +150,9 @@
   font-size: 28px;
   font-weight: 800;
   color: #0f172a;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.8px;
   margin-bottom: 32px;
 }
-
 
 .modeGrid {
   display: grid;
@@ -154,19 +163,19 @@
 
 .modeCard {
   background: #ffffff;
-  border: 1.5px solid #dbeafe;
-  border-radius: 16px;
-  padding: 28px 24px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  transition: all 0.15s ease;
 }
 
 .modeCard:hover {
   border-color: #1d4ed8;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
 .modeCardFilled {
@@ -177,57 +186,56 @@
 .modeCardFilled:hover {
   background: #1e40af;
   border-color: #1e40af;
-  box-shadow: 0 6px 24px rgba(29, 78, 216, 0.25);
+  box-shadow: 0 8px 24px rgba(29, 78, 216, 0.2);
 }
 
 .modeIcon {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   background: #eff6ff;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .modeIconFilled {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.15);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .modeTitle {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .modeTitleWhite {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .modeDesc {
-  font-size: 13.5px;
+  font-size: 13px;
   color: #64748b;
   line-height: 1.5;
 }
 
 .modeDescWhite {
-  font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  color: #bfdbfe;
   line-height: 1.5;
 }
-
 
 .bottomGrid {
   display: grid;
@@ -237,9 +245,9 @@
 
 .panel {
   background: #ffffff;
-  border: 1.5px solid #dbeafe;
-  border-radius: 16px;
-  padding: 24px 28px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
 }
 
 .panelLabel {
@@ -247,16 +255,22 @@
   font-weight: 700;
   color: #1d4ed8;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+}
+
+.emptyText {
+  font-size: 13px;
+  color: #94a3b8;
+  padding: 12px 0;
 }
 
 .gameRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f4ff;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .gameRow:last-child {
@@ -266,57 +280,56 @@
 .gameLeft {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .gameDot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #bfdbfe;
+  background: #3b82f6;
   flex-shrink: 0;
 }
 
 .gameName {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
   color: #0f172a;
   margin-bottom: 2px;
 }
 
 .gameMeta {
-  font-size: 12px;
+  font-size: 11.5px;
   color: #94a3b8;
 }
 
-
 .eloBadgeBlue {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: #1d4ed8;
-  background: #dbeafe;
-  padding: 4px 12px;
+  background: #eff6ff;
+  padding: 3px 10px;
   border-radius: 999px;
   white-space: nowrap;
 }
 
 .eloBadgeRed {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: #dc2626;
-  background: #fee2e2;
-  padding: 4px 12px;
+  background: #fef2f2;
+  padding: 3px 10px;
   border-radius: 999px;
   white-space: nowrap;
 }
 
 .eloBadgeGray {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
   color: #64748b;
-  background: #f1f5f9;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -328,23 +341,23 @@
 }
 
 .statCard {
-  background: #f8faff;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 10px;
+  padding: 14px;
 }
 
 .statLabel {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
 }
 
 .statNumber {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
   color: #0f172a;
   letter-spacing: -0.5px;
@@ -352,45 +365,9 @@
 
 @media (max-width: 768px) {
   .navbar { padding: 12px 20px; }
-  .content { padding: 32px 16px; }
-  .modeGrid { grid-template-columns: 1fr; gap: 14px; }
-  .bottomGrid { grid-template-columns: 1fr; gap: 14px; }
-  .logoutButton span { display: none; }
-  .logoutButton { padding: 6px; }
-}
-.leaderboardButton {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #93c5fd;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.15s ease;
-}
-
-.leaderboardButton:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
-}
-
-.leaderboardButton:active {
-  transform: translateY(0);
-}
-
-
-@media (max-width: 768px) {
-  .leaderboardButton span {
-    display: none;
-  }
-  .leaderboardButton {
-    padding: 6px;
-  }
+  .content { padding: 24px 16px; }
+  .modeGrid { grid-template-columns: 1fr; gap: 12px; }
+  .bottomGrid { grid-template-columns: 1fr; gap: 12px; }
+  .logoutButton span, .leaderboardButton span { display: none; }
+  .logoutButton, .leaderboardButton { padding: 6px; }
 }

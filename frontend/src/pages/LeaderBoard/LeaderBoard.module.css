@@ -1,76 +1,164 @@
 .page {
-  background: #f0f4ff;
+  background: #f8fafc;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
+  color: #0f172a;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
-.navbar{
-    background: #1e3a8a;
-    padding: 14px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.navbar {
+  background: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  padding: 14px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.navLogo{
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
 }
-.backButton{
-    background: transparent;
-    border: none;
-    color: #93c5fd;
-    font-size: 13px;
-    cursor: pointer;
+
+.backButton {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #93c5fd;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
 }
-.content{
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 48px 32px;
+
+.backButton:hover {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #3b82f6;
 }
-.title{
-    font-size: 26px;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 6px;
+
+/* Page Layout */
+.content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 64px 24px;
 }
-.subtitle{
-    font-size: 14px;
-    color: #64748b;
-    margin-bottom: 28px;
+
+.headerGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
 }
-.list{
-    background: #fff;
-    border: 1.5px solid #dbeafe;
-    border-radius: 14px;
-    padding: 8px 20px;
+
+.categoryLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2563eb;
+  margin-bottom: 6px;
 }
-.row,.rowActive{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f4ff;
+
+.title {
+  font-size: 28px;
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin: 0;
 }
-.rowActive{
-    background: #eff6ff;
-    margin: 0 -20px;
-    padding: 12px 20px;
-    border-radius: 8px;
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 6px 0 0 0;
 }
-.rank { 
-    font-size: 14px;
-    font-weight: 700; 
-    color: #94a3b8; 
-    width: 32px; 
+.trophyIconWrapper {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 12px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.username { 
-    flex: 1; 
-    font-size: 14px; 
-    font-weight: 600; 
-    color: #0f172a; 
+.list {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 8px 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
 }
-.elo { 
-    font-size: 13px; 
-    font-weight: 700; 
-    color: #1d4ed8; 
+.row, .rowActive {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+.row:last-child, .rowActive:last-child {
+  border-bottom: none;
+}
+.row:hover {
+  background: #f8fafc;
+}
+.rowActive {
+  background: #eff6ff;
+  border-bottom-color: transparent;
+}
+
+.rank {
+  font-size: 15px;
+  font-weight: 800;
+  color: #64748b;
+  width: 32px;
+  text-align: center;
+}
+
+.userInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.username {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+.youBadge {
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.elo {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1d4ed8;
+}
+.eloLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+}
+@media (max-width: 640px) {
+  .navbar { padding: 14px 16px; }
+  .content { padding: 32px 16px; }
+  .trophyIconWrapper { display: none; }
 }

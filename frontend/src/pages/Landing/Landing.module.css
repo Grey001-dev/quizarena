@@ -1,368 +1,330 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .page {
-    background: #ffffff;
-    color: #0f172a;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 48px;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 48px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navLogoGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brainIcon {
+  color: #1d4ed8;
 }
 
 .navLogo {
-    font-size: 20px;
-    font-weight: 800;
-    color: #1e3a8a;
-    letter-spacing: -0.5px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: -0.5px;
 }
 
 .navButtons {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    background: #f1f5f9;
-    padding: 4px;
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .signInButton {
-    background: transparent;
-    border: none;
-    color: #475569;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 8px 18px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: all 0.15s ease;
 }
 
 .signInButton:hover {
-    color: #1d4ed8;
-    background: #ffffff;
-}
-
-.getStartedButton {
-    background: #1d4ed8;
-    color: #ffffff;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.getStartedButton:hover {
-    background: #1e40af;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(29, 78, 216, 0.25);
+  color: #1d4ed8;
+  border-color: #1d4ed8;
+  background: #eff6ff;
 }
 
 .topSection {
-    background: radial-gradient(100% 100% at 50% 0%, #eff6ff 0%, #ffffff 80%);
-    padding: 100px 24px;
-    text-align: center;
-    position: relative;
-}
-
-.glowEffect {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(29, 78, 216, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
+  background: #ffffff;
+  padding: 90px 24px 110px 24px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .topText {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .badgeContainer {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .toptop {
-    font-size: 12px;
-    font-weight: 700;
-    color: #1d4ed8;
-    background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
-    padding: 8px 18px;
-    border-radius: 999px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border: 1px solid rgba(29, 78, 216, 0.15);
-    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.05);
-    display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d4ed8;
+  background: #eff6ff;
+  padding: 6px 16px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid #bfdbfe;
+  display: inline-block;
 }
 
 .topTitle {
-    font-size: 42px; 
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.3; 
-    letter-spacing: -1px;
-    margin-bottom: 24px;
-    text-align: center;
-    width: 100%;
+  font-size: 44px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .toptitleAccent {
-    font-style: normal;
-    display: block; 
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 4px;
+  color: #1d4ed8;
+  font-style: normal;
 }
 
 .topSubtitle {
-    font-size: 16px;
-    color: #475569;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    font-weight: 400;
-    max-width: 600px;
-    text-align: center;
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  font-weight: 400;
+  max-width: 600px;
+  text-align: center;
 }
 
 .topButtons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .createQuizButton {
-    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-    color: #ffffff;
-    border: none;
-    padding: 16px 36px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 8px 24px rgba(29, 78, 216, 0.2);
-    transition: all 0.2s ease;
+  background: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
 }
 
 .createQuizButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(29, 78, 216, 0.3);
+  background: #1e40af;
 }
 
 .joinRoomButton {
-    background: #ffffff;
-    color: #1d4ed8;
-    border: 2px solid #bfdbfe;
-    padding: 16px 36px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  background: #ffffff;
+  color: #1d4ed8;
+  border: 1.5px solid #bfdbfe;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .joinRoomButton:hover {
-    border-color: #1d4ed8;
-    background: #f8fafc;
-    transform: translateY(-2px);
+  border-color: #1d4ed8;
+  background: #eff6ff;
 }
 
 .statsSection {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 32px;
-    padding: 56px 48px;
-    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
-    border-radius: 24px;
-    max-width: 1100px;
-    margin: -40px auto 60px auto;
-    position: relative;
-    z-index: 10;
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 40px 32px;
+  background: #0f172a;
+  border-radius: 16px;
+  max-width: 1050px;
+  margin: -40px auto 60px auto;
+  position: relative;
+  z-index: 10;
+  border: 1px solid #1e293b;
 }
 
 .statItem {
-    text-align: center;
-    min-width: 160px;
-    flex: 1 1 200px;
+  text-align: center;
+  min-width: 160px;
+  flex: 1 1 200px;
 }
 
 .statNumber {
-    display: block;
-    font-size: 44px;
-    font-weight: 900;
-    margin-bottom: 6px;
-    letter-spacing: -1px;
-    background: linear-gradient(180deg, #ffffff 0%, #93c5fd 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  display: block;
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -1px;
+  color: #ffffff;
 }
 
 .statLabel {
-    font-size: 14px;
-    color: #93c5fd;
-    font-weight: 500;
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 .featureSection {
-    padding: 80px 48px;
-    max-width: 1200px;
-    margin: 0 auto;
+  padding: 40px 48px 80px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .featureSectionLabel {
-    font-size: 13px;
-    font-weight: 800;
-    color: #1d4ed8;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 48px;
-    letter-spacing: 0.15em;
+  font-size: 12px;
+  font-weight: 800;
+  color: #1d4ed8;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 36px;
+  letter-spacing: 0.12em;
 }
 
 .featuresGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 .featureCard {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 40px 32px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 32px;
+  transition: border-color 0.15s ease;
 }
 
 .featureCard:hover {
-    transform: translateY(-4px);
-    border-color: #93c5fd;
-    box-shadow: 0 16px 32px rgba(29, 78, 216, 0.06);
+  border-color: #93c5fd;
 }
 
-.cardGlow {
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle, rgba(29, 78, 216, 0.05) 0%, transparent 70%);
-    transform: rotate(45deg);
-    pointer-events: none;
+.featureIconWrap {
+  width: 40px;
+  height: 40px;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.featureIcon {
-    font-size: 36px;
-    display: block;
-    margin-bottom: 20px;
+.cardBrainIcon {
+  color: #1d4ed8;
+}
+
+.textIcon {
+  font-size: 12px;
+  font-weight: 800;
+  color: #1d4ed8;
 }
 
 .featureTitle {
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
 }
 
 .featureDescription {
-    font-size: 14px;
-    color: #475569;
-    line-height: 1.6;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
 }
 
 .bottomSection {
-    background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
-    padding: 100px 24px;
-    text-align: center;
-    border-top: 1px solid rgba(219, 234, 254, 0.5);
+  background: #ffffff;
+  padding: 80px 24px;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .bottomTitle {
-    font-size: 40px;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 16px;
-    letter-spacing: -0.5px;
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
 }
 
 .bottomSubtitle {
-    font-size: 16px;
-    color: #475569;
-    margin-bottom: 36px;
+  font-size: 15px;
+  color: #475569;
+  margin-bottom: 28px;
 }
 
-
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 32px 48px;
-    border-top: 1px solid #e2e8f0;
-    flex-wrap: wrap;
-    gap: 16px;
-    background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #ffffff;
 }
 
 .footerLogo {
-    font-weight: 800;
-    color: #1e3a8a;
-    font-size: 16px;
+  font-weight: 800;
+  color: #1e3a8a;
+  font-size: 16px;
 }
 
 .footerTagline {
-    font-size: 13px;
-    color: #64748b;
+  font-size: 13px;
+  color: #64748b;
 }
 
-
 @media (max-width: 768px) {
-    .navbar {
-        padding: 16px 24px;
-    }
-    .topTitle {
-        font-size: 32px;
-    }
-    .statsSection {
-        margin: 0 20px 40px 20px;
-        padding: 32px 20px;
-    }
-    .featureSection {
-        padding: 64px 24px;
-    }
+  .navbar {
+    padding: 16px 24px;
+  }
+  .topTitle {
+    font-size: 32px;
+  }
+  .statsSection {
+    margin: 0 20px 40px 20px;
+    padding: 28px 16px;
+  }
+  .featureSection {
+    padding: 32px 24px 64px 24px;
+  }
 }

@@ -1,38 +1,52 @@
 .page {
-    background: #f0f4ff;
+    background: #f8fafc;
     min-height: 100vh;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    width: 100%;
 }
 
 .navbar {
-    background: #1e3a8a;
+    background: #0f172a;
+    border-bottom: 1px solid #1e293b;
     padding: 14px 48px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 110;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navLogo {
-    font-size: 16px;
-    font-weight: 700;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
 }
 
 .backButton {
-    background: transparent;
-    border: none;
+    background: #1e293b;
+    border: 1px solid #334155;
     color: #93c5fd;
     font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
     font-family: inherit;
-    transition: color 0.15s;
 }
 
 .backButton:hover {
-    color: #fff;
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #3b82f6;
 }
 
 .toast {
@@ -55,20 +69,20 @@
 }
 
 .success {
-    background: #f0fdf4;
-    border: 1.5px solid #bbf7d0;
+    background: #ecfdf5;
+    border: 1.5px solid #10b981;
     color: #166534;
 }
 
 .error {
     background: #fef2f2;
-    border: 1.5px solid #fecaca;
+    border: 1.5px solid #ef4444;
     color: #991b1b;
 }
 
 .info {
-    background: #f0f9ff;
-    border: 1.5px solid #bae6fd;
+    background: #eff6ff;
+    border: 1.5px solid #2563eb;
     color: #075985;
 }
 
@@ -80,21 +94,23 @@
 .content {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 48px 32px;
+    padding: 48px 24px;
 }
 
 .title {
-    font-size: 26px;
-    font-weight: 800;
+    font-size: 28px;
+    font-weight: 850;
     color: #0f172a;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
     margin-bottom: 6px;
+    text-align: left;
 }
 
 .subTitle {
     font-size: 14px;
     color: #64748b;
     margin-bottom: 36px;
+    text-align: left;
 }
 
 .twoCol {
@@ -113,32 +129,33 @@
     display: flex;
     background: #e2e8f0;
     padding: 4px;
-    border-radius: 8px;
-    margin-bottom: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .mixedActive {
     flex: 1;
     background: #ffffff;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-size: 13px;
     font-weight: 700;
-    color: #1d4ed8;
-    border-radius: 6px;
+    color: #2563eb;
+    border-radius: 8px;
     font-family: inherit;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .mixedInactive {
     flex: 1;
     background: transparent;
     border: none;
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-size: 13px;
+    font-weight: 600;
     color: #64748b;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 8px;
     font-family: inherit;
     transition: all 0.15s ease;
 }
@@ -150,37 +167,39 @@
 .sectionLabel {
     font-size: 11px;
     font-weight: 700;
-    color: #1d4ed8;
+    color: #2563eb;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 12px;
+    text-align: left;
 }
 
 .pillRow {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .pill {
-    padding: 7px 14px;
+    padding: 8px 16px;
     border-radius: 999px;
-    border: 1.5px solid #dbeafe;
+    border: 1.5px solid #e2e8f0;
     background: #fff;
     font-size: 13px;
+    font-weight: 600;
     color: #475569;
     cursor: pointer;
     font-family: inherit;
-    transition: all 0.15s;
+    transition: all 0.15s ease;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
 .pill:hover {
-    border-color: #1d4ed8;
-    color: #1d4ed8;
+    border-color: #2563eb;
+    color: #2563eb;
 }
 
 .pill:disabled {
@@ -189,107 +208,109 @@
 }
 
 .pillActive {
-    padding: 7px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
     border-radius: 999px;
-    border: 1.5px solid #1d4ed8;
-    background: #1d4ed8;
+    border: 1.5px solid #2563eb;
     font-size: 13px;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    background-color: #2563eb;
 }
 
 .diffRow {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
 }
 
 .diffCard {
     background: #fff;
-    border: 1.5px solid #dbeafe;
+    border: 1.5px solid #e2e8f0;
     border-radius: 12px;
-    padding: 14px;
+    padding: 16px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: all 0.15s ease;
 }
 
 .diffCard:hover {
-    border-color: #1d4ed8;
+    border-color: #2563eb;
 }
 
 .diffCardActive {
-    background: #1d4ed8;
-    border: 1.5px solid #1d4ed8;
+    background: #2563eb;
+    border: 1.5px solid #2563eb;
     border-radius: 12px;
-    padding: 14px;
+    padding: 16px;
     text-align: center;
     cursor: pointer;
 }
 
 .diffTitle {
-    font-size: 13px;
-    font-weight: 600;
     color: #0f172a;
-    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 3px 0;
 }
 
 .diffTitleActive {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     color: #fff;
-    margin-bottom: 2px;
+    margin: 0 0 3px 0;
 }
 
 .diffSub {
-    font-size: 11px;
-    color: #94a3b8;
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
 }
 
 .diffSubActive {
-    font-size: 11px;
-    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    margin: 0;
 }
 
 .amountRow {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 28px;
+    gap: 10px;
+    margin-bottom: 36px;
 }
 
 .amount {
     background: #fff;
-    border: 1.5px solid #dbeafe;
+    border: 1.5px solid #e2e8f0;
     border-radius: 10px;
     padding: 12px;
     text-align: center;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     color: #0f172a;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: all 0.15s ease;
 }
 
 .amount:hover {
-    border-color: #1d4ed8;
-    color: #1d4ed8;
+    border-color: #2563eb;
+    color: #2563eb;
 }
 
 .amountActive {
-    background: #1d4ed8;
-    border: 1.5px solid #1d4ed8;
+    background: #2563eb;
+    border: 1.5px solid #2563eb;
     border-radius: 10px;
     padding: 12px;
     text-align: center;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 15px;
     color: #fff;
     cursor: pointer;
 }
@@ -300,20 +321,20 @@
 
 .primaryButton {
     width: 100%;
-    background: #1d4ed8;
+    background: #2563eb;
     color: #fff;
     border: none;
     padding: 14px;
     border-radius: 10px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s;
+    transition: background 0.15s ease;
 }
 
 .primaryButton:hover {
-    background: #1e40af;
+    background: #1d4ed8;
 }
 
 .primaryButton:disabled {
@@ -329,10 +350,11 @@
 
 .codeBox {
     background: #fff;
-    border: 1.5px solid #dbeafe;
-    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
     padding: 28px;
     text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
 .codeLabel {
@@ -346,7 +368,7 @@
 
 .codeValue {
     font-size: 38px;
-    font-weight: 800;
+    font-weight: 850;
     color: #0f172a;
     letter-spacing: 6px;
     margin-bottom: 6px;
@@ -361,9 +383,10 @@
 
 .lobbyPanel {
     background: #fff;
-    border: 1.5px solid #dbeafe;
-    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
     padding: 20px 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
 .slotsGrid {
@@ -376,7 +399,7 @@
 .slotCardFilled {
     background: #f8fafc;
     border: 2px solid #cbd5e1;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 12px;
     display: flex;
     align-items: center;
@@ -387,14 +410,13 @@
 .slotCardEmpty {
     background: #ffffff;
     border: 2px dashed #e2e8f0;
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
     color: #94a3b8;
 }
-
 
 .avatarCircle {
     width: 44px;
@@ -461,7 +483,7 @@
         padding: 14px 20px;
     }
     .content {
-        padding: 32px 20px;
+        padding: 32px 16px;
     }
     .twoCol {
         grid-template-columns: 1fr;

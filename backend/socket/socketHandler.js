@@ -9,7 +9,7 @@ export function socketHandlers(io,socket){
             return
         }
         socket.join(roomCode);
-        console.log("join-lobby received:",{roomCode,username,userId,isHost})
+         console.log("join-lobby received (post play-again check):", {roomCode, userId, isHost});
         socket.data.roomCode=roomCode;
         socket.data.username=username;
         socket.data.userId=userId;
@@ -33,6 +33,7 @@ export function socketHandlers(io,socket){
                 elo
             })
         }
+        console.log("Room found on join attempt:", activeRoom?.roomCode, "status:", activeRoom?.status);
         console.log(lobby.players)
         io.to(roomCode).emit("lobby-update",lobby.players);
     });
@@ -185,17 +186,19 @@ export function socketHandlers(io,socket){
             }
         },3000)
     }
-    socket.on("play-again",({roomCode})=>{
+    socket.on("play-again",async({roomCode})=>{
         const lobby=activeLobbies.get(roomCode)
+        console.log("PLAY-AGAIN EVENT RECEIVED, roomCode:", roomCode);
         if(!lobby){
             return
         }
-        prisma.room.update({
+        await prisma.room.update({
             where:{roomCode:roomCode},
             data:{
                 status:"WAITING"
             }
         })
+         console.log("Room status after play-again update:", updated.status);
         activeGames.delete(roomCode);
         io.to(roomCode).emit("returned-to-lobby",{hostId:lobby.hostId});
     })
