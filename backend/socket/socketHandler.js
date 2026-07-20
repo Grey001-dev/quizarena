@@ -5,18 +5,35 @@ import prisma from "../lib/prisma.ts";
 export function socketHandlers(io,socket){
     // Made use of explicit events to properly grasps what they do beforehand
     socket.on("join-lobby",({roomCode,username,userId,isHost,avatar,elo})=>{
-        if(!roomCode){
-            return
-        }
-        socket.join(roomCode);
-         console.log("join-lobby received (post play-again check):", {roomCode, userId, isHost});
-        socket.data.roomCode=roomCode;
-        socket.data.username=username;
-        socket.data.userId=userId;
-        socket.data.avatar=avatar;
-        console.log(lobby.players)
-        io.to(roomCode).emit("lobby-update",lobby.players);
-    });
+    if(!roomCode){
+        return
+    }
+    socket.join(roomCode);
+    console.log("join-lobby received:", {roomCode, userId, isHost});
+    socket.data.roomCode=roomCode;
+    socket.data.username=username;
+    socket.data.userId=userId;
+    socket.data.avatar=avatar;
+    socket.data.elo=elo;
+
+    if(!activeLobbies.has(roomCode)){
+        activeLobbies.set(roomCode,{players:[],hostId:isHost ? userId:null})
+    }
+    const lobby=activeLobbies.get(roomCode)
+
+    const alreadyIn=lobby.players.find(p=>p.userId===userId);
+    if(!alreadyIn){
+        lobby.players.push({
+            socketId:socket.id,
+            username,
+            userId,
+            isHost,
+            avatar:avatar || "default",
+            elo
+        })
+    }
+    io.to(roomCode).emit("lobby-update",lobby.players);
+});
 
     // Created the start game event when the hosts wants to host a game
     socket.on("start-game", async ({ roomCode, category, difficulty, amount, timeLimit }) => {
