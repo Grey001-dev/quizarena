@@ -14,26 +14,7 @@ export function socketHandlers(io,socket){
         socket.data.username=username;
         socket.data.userId=userId;
         socket.data.avatar=avatar;
-        socket.data.elo=elo;
-
-
-        if(!activeLobbies.has(roomCode)){
-            activeLobbies.set(roomCode,{players:[],hostId:isHost ? userId:null})
-        }
-        const lobby=activeLobbies.get(roomCode)
-
-        const alreadyIn=lobby.players.find(p=>p.userId===userId);
-        if(!alreadyIn){
-            lobby.players.push({
-                socketId:socket.id,
-                username,
-                userId,
-                isHost,
-                avatar:avatar || "default",
-                elo
-            })
-        }
-        console.log("Room found on join attempt:", activeRoom?.roomCode, "status:", activeRoom?.status);
+        sock
         console.log(lobby.players)
         io.to(roomCode).emit("lobby-update",lobby.players);
     });
@@ -186,22 +167,21 @@ export function socketHandlers(io,socket){
             }
         },3000)
     }
-    socket.on("play-again",async({roomCode})=>{
-        const lobby=activeLobbies.get(roomCode)
-        console.log("PLAY-AGAIN EVENT RECEIVED, roomCode:", roomCode);
-        if(!lobby){
-            return
-        }
-        await prisma.room.update({
-            where:{roomCode:roomCode},
-            data:{
-                status:"WAITING"
-            }
-        })
-         console.log("Room status after play-again update:", updated.status);
-        activeGames.delete(roomCode);
-        io.to(roomCode).emit("returned-to-lobby",{hostId:lobby.hostId});
-    })
+    socket.on("play-again", async ({roomCode}) => {
+    const lobby = activeLobbies.get(roomCode);
+    console.log("PLAY-AGAIN EVENT RECEIVED, roomCode:", roomCode);
+    if (!lobby) {
+        return;
+    }
+    const updated = await prisma.room.update({
+        where: { roomCode: roomCode },
+        data: { status: "WAITING" }
+    });
+    console.log("Room status after play-again update:", updated.status);
+    activeGames.delete(roomCode);
+    io.to(roomCode).emit("returned-to-lobby", { hostId: lobby.hostId });
+    
+});
 
     socket.on("disconnect",()=>{
         console.log("disconnect fired for socket;",socket.id,"data:",socket.dat)
