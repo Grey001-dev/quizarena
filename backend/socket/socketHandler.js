@@ -14,7 +14,6 @@ export function socketHandlers(io,socket){
         socket.data.username=username;
         socket.data.userId=userId;
         socket.data.avatar=avatar;
-        sock
         console.log(lobby.players)
         io.to(roomCode).emit("lobby-update",lobby.players);
     });
@@ -180,7 +179,6 @@ export function socketHandlers(io,socket){
     console.log("Room status after play-again update:", updated.status);
     activeGames.delete(roomCode);
     io.to(roomCode).emit("returned-to-lobby", { hostId: lobby.hostId });
-    
 });
 
     socket.on("disconnect",()=>{
