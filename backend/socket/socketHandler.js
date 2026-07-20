@@ -2,6 +2,8 @@ import { activeGames } from "../lib/activeGames.js";
 import { activeLobbies } from "../lib/activeLobbies.js";
 import { fetchQuestions } from "../lib/questions.js";
 import prisma from "../lib/prisma.ts";
+
+// Stressssss😭😭😭😭😭😭
 export function socketHandlers(io,socket){
     // Made use of explicit events to properly grasps what they do beforehand
     socket.on("join-lobby",({roomCode,username,userId,isHost,avatar,elo})=>{
@@ -217,7 +219,7 @@ export function socketHandlers(io,socket){
             activeGames.delete(roomCode)
             activeLobbies.delete(roomCode)
         }else{
-            // Filter out the player in the lobby
+            //  I Filter out the player in the lobby if they arent the hos and emit a lobby-updatw tith the current lobby players to the frontend
             lobby.players=lobby.players.filter(p=>p.userId !==userId);
             console.log("updated players after removal:", lobby.players);
             io.to(roomCode).emit("lobby-update",lobby.players);
@@ -244,36 +246,36 @@ export function socketHandlers(io,socket){
         return
     }
     try {
-        const room=await prisma.room.findUnique({where:{roomCode}});
-        const halfLobby=Math.ceil(finalResult.length/2)
-        const boundaryScore=finalResult[halfLobby-1]?.score
-        for (let i=0;i<finalResult.length;i++){
-            const userRow=finalResult[i];
-            const roundRank=i+1;
-            const won=roundRank<=halfLobby || userRow.score===boundaryScore;
-            const eloChange=won? 10 : -8;
-            finalResult[i].eloChange=eloChange
-            const eachPlayers=lobby.players.find((p)=>p.userId===userRow.userId)
-            if(eachPlayers){
-                eachPlayers.elo=(eachPlayers.elo || 1000) + eloChange;
-            }
+        const room = await prisma.room.findUnique({ where: { roomCode } });
+        const totalScore = finalResult.reduce((sum, p) => sum + p.score, 0);
+        const averageScore = totalScore / finalResult.length;
+// I dont know maths that much....but this is the calculation behind the elo spliting 😭😭
+        for (let i = 0; i < finalResult.length; i++) {
+            const userRow = finalResult[i];
+            const roundRank = i + 1;
+            const won = userRow.score >= averageScore;
+            const eloChange = won ? 10 : -8;
 
+            finalResult[i].eloChange = eloChange;
+            const eachPlayers = lobby.players.find((p) => p.userId === userRow.userId);
+            if (eachPlayers) {
+                eachPlayers.elo = (eachPlayers.elo || 1000) + eloChange;
+            }
             await prisma.gameSession.create({
-                data:{
-                    username:userRow.username,
-                    score:userRow.score,
-                    eloChange:eloChange,
-                    rank:roundRank,
-                    userId:userRow.userId,
-                    roomId:room.id,
+                data: {
+                    username: userRow.username,
+                    score: userRow.score,
+                    eloChange: eloChange,
+                    rank: roundRank,
+                    userId: userRow.userId,
+                    roomId: room.id,
                 }
             });
-
-            if(userRow.userId){
+            if (userRow.userId) {
                 await prisma.user.update({
-                    where:{id:userRow.userId},
-                    data:{elo:{increment:eloChange}}
-                })
+                    where: { id: userRow.userId },
+                    data: { elo: { increment: eloChange } }
+                });
             }
         }
         await prisma.room.update({
