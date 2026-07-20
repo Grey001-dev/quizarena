@@ -183,20 +183,20 @@ export function socketHandlers(io,socket){
             }
         },3000)
     }
-    socket.on("play-again", async ({roomCode}) => {
-    const lobby = activeLobbies.get(roomCode);
-    console.log("PLAY-AGAIN EVENT RECEIVED, roomCode:", roomCode);
-    if (!lobby) {
-        return;
-    }
-    const updated = await prisma.room.update({
-        where: { roomCode: roomCode },
-        data: { status: "WAITING" }
+        socket.on("play-again", async ({roomCode}) => {
+        const lobby = activeLobbies.get(roomCode);
+        console.log("PLAY-AGAIN EVENT RECEIVED, roomCode:", roomCode);
+        if (!lobby) {
+            return;
+        }
+        const updated = await prisma.room.update({
+            where: { roomCode: roomCode },
+            data: { status: "WAITING" }
+        });
+        console.log("Room status after play-again update:", updated.status);
+        activeGames.delete(roomCode);
+        io.to(roomCode).emit("returned-to-lobby", { hostId: lobby.hostId });
     });
-    console.log("Room status after play-again update:", updated.status);
-    activeGames.delete(roomCode);
-    io.to(roomCode).emit("returned-to-lobby", { hostId: lobby.hostId });
-});
 
     socket.on("disconnect",()=>{
         console.log("disconnect fired for socket;",socket.id,"data:",socket.dat)
