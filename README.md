@@ -4,6 +4,8 @@ A real-time multiplayer quiz battle app built for kids aged 1–16.
 Players join live rooms, answer questions against the clock, and
 climb a global ELO leaderboard.
 
+**Live Demo:** quizarena-eta.vercel.app
+
 ## What it does
 
 - **Solo play** ,pick a category and play alone, your score and ELO still update
@@ -30,3 +32,8 @@ climb a global ELO leaderboard.
 - JWT authentication
 - bcrypt password hashing
 
+Follow these steps to set up QuizArena locally on your machine.
+### Installation & Setup
+**Clone the repository**
+   ```bash
+   git clone https://github.com/Grey001-dev/quizarena.git
