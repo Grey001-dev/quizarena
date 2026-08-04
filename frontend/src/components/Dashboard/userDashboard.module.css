@@ -173,19 +173,13 @@
 }
 
 .modeCard:hover {
-  border-color: #1d4ed8;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
-
 .modeCardFilled {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  background: #1e293b;
 }
-
 .modeCardFilled:hover {
-  background: #1e40af;
-  border-color: #1e40af;
   box-shadow: 0 8px 24px rgba(29, 78, 216, 0.2);
 }
 
@@ -199,7 +193,6 @@
   align-items: center;
   justify-content: center;
 }
-
 .modeIconFilled {
   width: 40px;
   height: 40px;

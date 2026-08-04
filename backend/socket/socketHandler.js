@@ -38,7 +38,7 @@ export function socketHandlers(io,socket){
 });
 
     // Created the start game event when the hosts wants to host a game
-    socket.on("start-game", async ({ roomCode, category, difficulty, amount, timeLimit }) => {
+    socket.on("start-game", async ({ roomCode, category, difficulty, amount, timeLimit ,isMixed}) => {
     try {
         console.log("Fetching questions...");
         const questions = await fetchQuestions(category, difficulty, amount);
@@ -75,7 +75,7 @@ export function socketHandlers(io,socket){
         });
         console.log("room status updated to ACTIVE");
 
-        io.to(roomCode).emit("game-started",{totalQuestions:activeGames.get(roomCode)?.questions.length});
+        io.to(roomCode).emit("game-started",{totalQuestions:activeGames.get(roomCode)?.questions.length,isMixed:isMixed,category:category});
         
         setTimeout(()=>{
             DisplayEachQuestion(io, roomCode);

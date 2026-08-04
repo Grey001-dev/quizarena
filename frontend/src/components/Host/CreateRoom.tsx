@@ -22,6 +22,11 @@ interface ToastState {
     message: string;
 }
 
+interface categoryState{
+    isMixed:boolean;
+    category:string[]
+}
+
 export default function HostPage() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -36,13 +41,13 @@ export default function HostPage() {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [creatingRoom, setCreatingRoom] = useState(!location.state?.roomCode);
     const [isHost] = useState<boolean>(location.state?.isHost ?? false);
-    
+
     const [toast, setToast] = useState<ToastState>({ show: false, type: 'info', message: '' });
     const showNotification = (type: 'success' | 'error' | 'info', message: string) => {
         setToast({ show: true, type, message });
         setTimeout(() => setToast({ show: false, type: 'info', message: '' }), 4000);
     };
-    console.log("location.state on this render:", location.state);
+    
 
     const DIFFICULTIES = [
         { label: 'Easy', sub: 'Warm up', id: 1 },
@@ -85,8 +90,9 @@ export default function HostPage() {
             setPlayers(updatedPlayers);
         });
 
-        socket.on("game-started", (data: { totalQuestions: number }) => {
-        navigate(`/game/${roomCode}`, { state: { totalQuestions: data.totalQuestions } });
+        socket.on("game-started", (data: { totalQuestions: number ; isMixed:boolean; category:string[] }) => {
+        console.log(isMixed,category)
+        navigate(`/game/${roomCode}`, { state: { totalQuestions: data.totalQuestions,isMixed:data.isMixed,category:data.category}});
     })
         socket.on("host-left", () => {
             showNotification('error', "The host has left the lobby. Redirecting to Dashboard...");
@@ -98,7 +104,7 @@ export default function HostPage() {
             socket.off("game-started");
             socket.off("host-left");
         };
-    }, [roomCode, user?.username, user?.id, isHost, navigate]);
+    }, [roomCode, user?.username, user?.id, isHost, navigate,isMixed, selectedCategories]);
 
     function toggleMixed() {
         if (!isHost) return;
@@ -132,6 +138,7 @@ export default function HostPage() {
             category: selectedCategories,
             difficulty: difficulty.toLowerCase(),
             amount,
+            isMixed,
             timeLimit: 10
         });
     };
@@ -156,12 +163,12 @@ export default function HostPage() {
             </nav>
 
             <div className={styles.content}>
-                <h1 className={styles.title}>Host a game</h1>
+                <h1 className={styles.title}>{isHost ? "Host a game": "Only host can edit games"}</h1>
                 <p className={styles.subTitle}>
-                    Set up your room. Others join with your code and you all play together.
+                    {isHost?"Set up your room. Others join with your code and you all play together.":"Share room code to your friends to play"}
                 </p>
-                
                 <div className={styles.twoCol}>
+                    {isHost&&(
                     <div className={styles.settingsPanel}>
                         <p className={styles.sectionLabel}>Game Mode & Categories</p>
                         <div className={styles.mixedToggle}>
@@ -233,12 +240,13 @@ export default function HostPage() {
                             <button 
                                 className={styles.primaryButton}
                                 onClick={handleStartGame}
-                                disabled={players.length < 2 || creatingRoom}
+                                disabled={creatingRoom}
                             >
                                 {creatingRoom ? "Setting up room..." : "Start Game"}
                             </button>
                         </div>
                     </div>
+                    )}
 
                     <div className={styles.rightPanel}>
                         <div className={styles.codeBox}>

@@ -235,7 +235,7 @@ export default function SettingsPage() {
                         <p className={styles.dangerLabel}>Session</p>
                     </div>
                     <div className={styles.dangerContent}>
-                        <p className={styles.dangerText}>Log out of your QuizArena session on this browser</p>
+                        <p className={styles.dangerText}>Log out of your QuizArena acoount</p>
                         <button className={styles.logOutButton} onClick={handleLogout}>
                             Log Out
                         </button>

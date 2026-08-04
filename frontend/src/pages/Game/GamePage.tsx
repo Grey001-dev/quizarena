@@ -45,7 +45,10 @@ export default function GamePage() {
   const [showResults, setShowResults] = useState(false);
 
   const [gameOver, setGameOver] = useState(false);
-  const [finalResults, setFinalResults] = useState<FinalResult[]>([]);
+  const [finalResults, setFinalResults] = useState<FinalResult[] >([]);
+  const [isMixed]=useState(location.state?.isMixed)
+  const [category]=useState(location.state?.category)
+  console.log("location.state on this render:", location.state);
 
   function handlePlayAgain(){
     socket.emit("play-again",{roomCode})
@@ -89,7 +92,7 @@ export default function GamePage() {
         if(userCurrently){
             const updatedUser={
                 ...user,
-                elo:user.elo + userCurrently.eloChange
+                elo:user.elo + (userCurrently.eloChange ?? 0)
             };
             localStorage.setItem("user",JSON.stringify(updatedUser));
         }
@@ -107,7 +110,6 @@ export default function GamePage() {
       socket.off("question-end");
       socket.off("game-over");
       socket.off("returned-to-lobby")
-      socket.off("game-started")
     };
   }, []);
 
@@ -238,6 +240,13 @@ export default function GamePage() {
             Room Code: <span>{roomCode}</span>
           </div>
         )}
+        <div className="styles.Categories">
+          <h2>Mode: {isMixed? "Mixed":"Single"}</h2>
+          <p>Questions: {category}</p>
+        </div>
+        <div>
+
+        </div>
       </div>
     </div>
   );
