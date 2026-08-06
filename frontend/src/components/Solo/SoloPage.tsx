@@ -357,27 +357,7 @@ export default function SoloPage() {
                   </button>
               )
             })}
-                {/* <div className={styles.stadingsCard}>
-                    <p className={styles.standingsLabel}>
-                        LIVE STANDING
-                    </p>
-                    <div className={styles.standingsRow}>
-                        <span>1 &nbsp; &nbsp; Grey</span>
-                        <span className={styles.standingsScore}>2840</span>
-                    </div>
-
-                    <div className={`${styles.standingsRow} ${styles.standingsUserActive}`}>
-                        <span>2 &nbsp; &nbsp; You</span>
-                        <span className={styles.standingsScore}>2610</span>
-                    </div>
-                    <div className={styles.standingsRow}>
-                        <span> 3 &nbsp; &nbsp;TurboAce</span>
-                        <span className={styles.standingsScore}>2100</span>
-                    </div>
-
-                </div> */}
             </div>
-
           </div>
         </>
       )}

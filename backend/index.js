@@ -13,7 +13,6 @@ const app=express();
 const PORT=process.env.PORT || 7000
 const httpServer=http.createServer(app)
 
-
 const allowedOrigins = [
   'http://localhost:5173',
   'https://quizarena001.netlify.app',

@@ -61,8 +61,7 @@
 
 .signInButton:hover {
   color: #1d4ed8;
-  border-color: #1d4ed8;
-  background: #eff6ff;
+  
 }
 
 .topSection {
@@ -231,9 +230,7 @@
   transition: border-color 0.15s ease;
 }
 
-.featureCard:hover {
-  border-color: #93c5fd;
-}
+
 
 .featureIconWrap {
   width: 40px;

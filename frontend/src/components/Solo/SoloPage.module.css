@@ -40,9 +40,7 @@
     transition: all 0.15s ease;
 }
 .backButton:hover{
-    background: #2563eb;
     color: #ffffff;
-    border-color: #3b82f6;
 }
 .content{
     max-width: 800px;
@@ -72,14 +70,12 @@
     margin-bottom: 12px;
     text-align: left;
 }
-
 .pillRow{
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 28px;
 }
-
 .pill{
     padding: 8px 16px;
     border-radius: 999px;
@@ -92,12 +88,10 @@
     font-family: inherit;
     transition: all 0.15s ease;
 }
-
 .pill:hover{
     border-color: #2563eb;
     color: #2563eb;
 }
-
 .pillActive{
     display: flex;
     align-items: center;
@@ -112,14 +106,12 @@
     font-family: inherit;
     background-color: #2563eb;
 }
-
 .diffRow{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 28px;
 }
-
 .diffCard{
     background: #ffffff;
     border: 1.5px solid #e2e8f0;
@@ -129,11 +121,9 @@
     cursor: pointer;
     transition: all 0.15s ease;
 }
-
 .diffCard:hover{
-    border-color: #2563eb;
+    transform: translateY(-4px);
 }
-
 .diffCardActive{
     background: #2563eb;
     border: 1.5px solid #2563eb;
@@ -142,40 +132,34 @@
     text-align: center;
     cursor: pointer;
 }
-
 .diffTitle{
     color: #0f172a;
     font-size: 14px;
     font-weight: 700;
     margin: 0 0 3px 0;
 }
-
 .diffTitleActive{
     font-size: 14px;
     font-weight: 700;
     color: #ffffff;
     margin: 0 0 3px 0;
 }
-
 .diffSub{
     font-size: 12px;
     color: #64748b;
     margin: 0;
 }
-
 .diffSubActive{
     font-size: 12px;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
-
 .amountRow{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     margin-bottom: 36px;
 }
-
 .amount{
     background: #ffffff;
     border: 1.5px solid #e2e8f0;
@@ -188,12 +172,9 @@
     cursor: pointer;
     transition: all 0.15s ease;
 }
-
 .amount:hover{
-    border-color: #2563eb;
-    color: #2563eb;
+    transform: translateY(-4px);
 }
-
 .amountActive{
     background: #2563eb;
     border: 1.5px solid #2563eb;
@@ -205,7 +186,6 @@
     color: #ffffff;
     cursor: pointer;
 }
-
 .startButton{
     width: 100%;
     background: #2563eb;
@@ -219,16 +199,13 @@
     font-family: inherit;
     transition: background 0.15s ease;
 }
-
 .startButton:hover {
     background: #1d4ed8;
 }
-
 .startButton:disabled{
     background: #93c5fd;
     cursor: not-allowed;
 }
-
 .mixedToggle{
     display: flex;
     background: #e2e8f0;
@@ -236,7 +213,6 @@
     border-radius: 10px;
     margin-bottom: 20px;
 }
-
 .mixedActive{
     flex: 1;
     background: #ffffff;
@@ -249,7 +225,6 @@
     font-family: inherit;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
-
 .mixedInactive{
     flex: 1;
     background: transparent;
@@ -285,7 +260,6 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
-
 .progressBarBg{
     flex: 1;
     height: 8px;
@@ -306,18 +280,15 @@
     gap: 6px;
     border: 1.5px solid #e2e8f0;
 }
-
 .timerNumber{
     font-size: 22px;
     font-weight: 800;
     color: #2563eb;
 }
-
 .timerLabel{
     font-size: 12px;
     color: #64748b;
 }
-
 .questionCard{
     background: #ffffff;
     border-radius: 20px;
@@ -326,7 +297,6 @@
     border: 1px solid #e2e8f0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
-
 .questionCategory{
     font-size: 12px;
     font-weight: 800;
@@ -347,7 +317,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 16px;
 }
-
 .optionButton{
     background: #ffffff;
     border: 1.5px solid #e2e8f0;
@@ -359,11 +328,9 @@
     cursor: pointer;
     transition: all 0.15s ease;
 }
-
 .optionButton:hover{
     border-color: #2563eb;
 }
-
 .optionButtonActive{
     background: #2563eb;
     border: 1.5px solid #2563eb;
@@ -474,7 +441,6 @@
     margin: 0 auto;
     padding: 48px 24px;
 }
-
 .resultsCard{
     background: #ffffff;
     border-radius: 20px;
@@ -483,12 +449,10 @@
     border: 1px solid #e2e8f0;
     box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
-
 .resultsEmoji{
     font-size: 48px;
     margin-bottom: 12px;
 }
-
 .resultsLabel{
     font-size: 12px;
     font-weight: 800;
@@ -497,25 +461,21 @@
     letter-spacing: 0.05em;
     margin-bottom: 4px;
 }
-
 .resultsScore{
     font-size: 40px;
     font-weight: 850;
     color: #0f172a;
     margin: 0 0 8px 0;
 }
-
 .resultsOutOf{
     font-size: 20px;
     color: #94a3b8;
 }
-
 .resultsSub{
     font-size: 14px;
     color: #475569;
     margin-bottom: 28px;
 }
-
 .resultsStats{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -526,32 +486,27 @@
     border-radius: 14px;
     margin-bottom: 28px;
 }
-
 .resultsStatDiv{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
 .resultsStatValue{
     font-size: 20px;
     font-weight: 800;
     color: #0f172a;
     margin: 0;
 }
-
 .resultsStatLabel{
     font-size: 12px;
     color: #64748b;
     margin: 4px 0 0 0;
 }
-
 .resultsButton{
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-
 .resultsButton button{
     width: 100%;
     background: #2563eb;
@@ -565,11 +520,9 @@
     font-family: inherit;
     transition: background 0.15s ease;
 }
-
 .resultsButton button:hover{
     background: #1d4ed8;
 }
-
 @media (max-width:768px) {
     .navbar{
         padding: 14px 20px;

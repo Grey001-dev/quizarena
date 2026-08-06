@@ -44,9 +44,7 @@
 }
 
 .backButton:hover {
-    background: #2563eb;
     color: #ffffff;
-    border-color: #3b82f6;
 }
 
 .toast {
@@ -236,11 +234,12 @@
     padding: 16px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: transform 0.3s ease;
 }
 
 .diffCard:hover {
-    border-color: #2563eb;
+   transform:translateY(-4px);
+   color: #2563eb;
 }
 
 .diffCardActive {
@@ -299,8 +298,7 @@
 }
 
 .amount:hover {
-    border-color: #2563eb;
-    color: #2563eb;
+    transform: translateY(-4px);
 }
 
 .amountActive {

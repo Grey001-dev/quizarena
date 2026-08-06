@@ -39,9 +39,7 @@
   transition: all 0.15s ease;
 }
 .backButton:hover {
-  background: #2563eb;
   color: #ffffff;
-  border-color: #3b82f6;
 }
 .toast {
   position: fixed;
@@ -246,7 +244,6 @@
 
 .fieldInput:focus, .fieldInputPassword:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 .inputDisabled {

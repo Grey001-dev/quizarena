@@ -21,22 +21,15 @@ export default function LandingPage() {
 
       <section className={styles.topSection}>
         <div className={styles.topText}>
-          <div className={styles.badgeContainer}>
-            <span className={styles.toptop}>Real-time quiz battles for kids</span>
-          </div>
           <h1 className={styles.topTitle}>
-            The classroom <br />
-            <span className={styles.toptitleAccent}>just got competitive</span>
+            <span className={styles.toptitleAccent}>Real-time quiz battles</span>
           </h1>
           <p className={styles.topSubtitle}>
-            Admins launch a live quiz. Kids join instantly, answer fast, earn points, and climb the leaderboard all in real time.
+            Hosts launch a live quiz. Players join instantly, answer fast, earn points, and climb the leaderboard all in real time.
           </p>
           <div className={styles.topButtons}>
             <button className={styles.createQuizButton} onClick={() => navigate("/register")}>
-              Create a Quiz →
-            </button>
-            <button className={styles.joinRoomButton} onClick={() => navigate("/login")}>
-              Join with a code
+              Create a Quiz 
             </button>
           </div>
         </div>
@@ -55,10 +48,6 @@ export default function LandingPage() {
           <span className={styles.statNumber}>10</span>
           <span className={styles.statLabel}>Question categories</span>
         </div>
-        <div className={styles.statItem}>
-          <span className={styles.statNumber}>1-16</span>
-          <span className={styles.statLabel}>Player age ranges</span>
-        </div>
       </section>
 
       <section className={styles.featureSection}>
@@ -70,7 +59,7 @@ export default function LandingPage() {
             </div>
             <h3 className={styles.featureTitle}>Live battle rooms</h3>
             <p className={styles.featureDescription}>
-              Admins create a room in seconds. Kids join safely with a simple 6 character code.
+              Admins create a room in seconds. Players join safely with a simple 6 character code.
             </p>
           </div>
           <div className={styles.featureCard}>
@@ -91,7 +80,7 @@ export default function LandingPage() {
           Set up your first live arena quiz in under 2 minutes.
         </p>
         <button className={styles.createQuizButton} onClick={() => navigate("/register")}>
-          Start Now for Free →
+          Start Now for Free
         </button>
       </section>
 
@@ -101,7 +90,7 @@ export default function LandingPage() {
           <span className={styles.footerLogo}>QuizArena</span>
         </div>
         <span className={styles.footerTagline}>
-          Built for curious kids everywhere
+          Built for curious players!
         </span>
       </footer>
     </div>

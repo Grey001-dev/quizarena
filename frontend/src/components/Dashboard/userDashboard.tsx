@@ -35,9 +35,10 @@ export default function Dashboard() {
 
   function greetings() {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour >= 17) return "Good evening";
-    return "Good afternoon";
+    const username=user?.username;
+    if (hour < 12) return `Good morning ${username}`;
+    if (hour >= 17) return `Good evening ${username}`;
+    return `Good afternoon ${username}`;
   }
 
   useEffect(() => {

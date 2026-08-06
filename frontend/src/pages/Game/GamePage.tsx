@@ -242,7 +242,7 @@ export default function GamePage() {
         )}
         <div className="styles.Categories">
           <h2>Mode: {isMixed? "Mixed":"Single"}</h2>
-          <p>Questions: {category}</p>
+          <p>Questions: {category.join(", ")}</p>
         </div>
         <div>
 
