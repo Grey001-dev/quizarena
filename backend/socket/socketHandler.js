@@ -249,7 +249,7 @@ export function socketHandlers(io,socket){
         const room = await prisma.room.findUnique({ where: { roomCode } });
         const totalScore = finalResult.reduce((sum, p) => sum + p.score, 0);
         const averageScore = totalScore / finalResult.length;
-// I dont know maths that much....but this is the calculation behind the elo spliting 😭😭
+// I dont know maths that much....but this is my calculation behind the elo spliting 😭😭
         for (let i = 0; i < finalResult.length; i++) {
             const userRow = finalResult[i];
             const roundRank = i + 1;

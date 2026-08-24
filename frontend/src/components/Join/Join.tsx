@@ -26,6 +26,7 @@ export default function JoinRoom() {
 
     try {
       const data = await handleRoomRequest.joinRoom(roomCode);
+      console.log("Join room response:",data)
       navigate("/host", {
         state: {
           roomCode: data.roomCode,

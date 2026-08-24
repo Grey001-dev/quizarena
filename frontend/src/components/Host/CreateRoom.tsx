@@ -78,7 +78,6 @@ export default function HostPage() {
             isHost
         }
     );
-
         socket.on("lobby-update", (updatedPlayers: Player[]) => {
             setPlayers(updatedPlayers);
         });

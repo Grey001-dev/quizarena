@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 export const socket=io("https://quizarena.grey001dev.hackclub.app",{
-    transports:["websocket"]
+    transports:["websocket","polling"]
 });
 
 socket.on("connect",()=>{
