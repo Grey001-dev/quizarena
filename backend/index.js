@@ -33,10 +33,7 @@ app.use(express.json())
 app.use("/api/auth",authRouter)
 app.use("/api/settings",settingsRouter)
 app.use("/api/room",roomRouter);
-app.use("/api/user",userRouter)
-app.get("/test",(req,res)=>{
-    res.json({message:'he is alive'})
-})
+app.use("/api/user",userRouter);
 
 io.on('connection',(socket)=>{
     console.log('Client connected:',socket.id);

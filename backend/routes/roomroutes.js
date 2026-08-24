@@ -8,7 +8,6 @@ import {
   submitAnswer
 } from '../controllers/roomcontrollers.js'
 import { getCategories } from '../controllers/categoryController.js'
-
 export const roomRouter = express.Router();
 
 roomRouter.get("/categories", getCategories)

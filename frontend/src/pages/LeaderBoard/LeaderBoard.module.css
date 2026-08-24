@@ -15,7 +15,6 @@
   top: 0;
   z-index: 100;
 }
-
 .navLogo {
   display: flex;
   align-items: center;
@@ -25,7 +24,6 @@
   color: #ffffff;
   letter-spacing: -0.5px;
 }
-
 .backButton {
   background: #1e293b;
   border: 1px solid #334155;
@@ -40,27 +38,20 @@
   gap: 6px;
   transition: all 0.15s ease;
 }
-
 .backButton:hover {
-  background: #2563eb;
   color: #ffffff;
-  border-color: #3b82f6;
 }
-
-/* Page Layout */
 .content {
   max-width: 640px;
   margin: 0 auto;
   padding: 48px 24px 64px 24px;
 }
-
 .headerGroup {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 28px;
 }
-
 .categoryLabel {
   font-size: 12px;
   font-weight: 700;
@@ -69,7 +60,6 @@
   color: #2563eb;
   margin-bottom: 6px;
 }
-
 .title {
   font-size: 28px;
   font-weight: 850;
@@ -83,8 +73,6 @@
   margin: 6px 0 0 0;
 }
 .trophyIconWrapper {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
   padding: 12px;
   border-radius: 14px;
   display: flex;
@@ -117,7 +105,6 @@
   background: #eff6ff;
   border-bottom-color: transparent;
 }
-
 .rank {
   font-size: 15px;
   font-weight: 800;
@@ -125,7 +112,6 @@
   width: 32px;
   text-align: center;
 }
-
 .userInfo {
   flex: 1;
   display: flex;

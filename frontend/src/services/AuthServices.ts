@@ -1,4 +1,5 @@
-const API_URL = "https://quizarena-br8y.onrender.com/api/auth"
+// const API_URL = "https://quizarena-br8y.onrender.com/api/auth"
+const API_URL="https://quizarena.grey001dev.hackclub.app/api/auth"
 interface UserDetails {
   mode: "login" | "register"
   username?: string

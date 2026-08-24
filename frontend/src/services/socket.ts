@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-export const socket=io("https://quizarena-br8y.onrender.com",{
+export const socket=io("https://quizarena.grey001dev.hackclub.app",{
     transports:["websocket"]
 });
 

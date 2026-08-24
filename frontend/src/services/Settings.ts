@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://quizarena-br8y.onrender.com/api/settings';
+const API_URL = 'https://quizarena.grey001dev.hackclub.app/api/settings';
 
 interface Settings {
     change: "username" | "avatar" | "password";

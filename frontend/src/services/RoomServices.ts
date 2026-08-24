@@ -1,5 +1,5 @@
-const ROOM_URL = 'https://quizarena-br8y.onrender.com/api/room'
-const SOLO_API_URL = "https://quizarena-br8y.onrender.com/api/room/solo"
+const ROOM_URL = 'https://quizarena.grey001dev.hackclub.app/api/room'
+const SOLO_API_URL = "https://quizarena.grey001dev.hackclub.app/api/room/solo"
 
 interface soloDetails {
   category: string[]

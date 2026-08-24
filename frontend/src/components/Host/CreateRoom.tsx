@@ -15,13 +15,11 @@ interface Player {
     elo: number;
     avatar: string;
 }
-
 interface ToastState {
     show: boolean;
     type: 'success' | 'error' | 'info';
     message: string;
 }
-
 interface categoryState{
     isMixed:boolean;
     category:string[]
@@ -41,21 +39,17 @@ export default function HostPage() {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [creatingRoom, setCreatingRoom] = useState(!location.state?.roomCode);
     const [isHost] = useState<boolean>(location.state?.isHost ?? false);
-
     const [toast, setToast] = useState<ToastState>({ show: false, type: 'info', message: '' });
     const showNotification = (type: 'success' | 'error' | 'info', message: string) => {
         setToast({ show: true, type, message });
         setTimeout(() => setToast({ show: false, type: 'info', message: '' }), 4000);
     };
-    
-
     const DIFFICULTIES = [
         { label: 'Easy', sub: 'Warm up', id: 1 },
         { label: 'Medium', sub: 'Standard', id: 2 },
         { label: 'Hard', sub: 'Competitive', id: 3 }
     ];
     const AMOUNT = [5, 10, 15, 25];
-
     useEffect(() => {
         const fetchCategories = async () => {
             const result = await getCategories();
@@ -70,7 +64,6 @@ export default function HostPage() {
         });
         navigate("/dashboard");
     }
-
     useEffect(() => {
         console.log("HostPage mounted/effect ran, roomCode:", roomCode, "isHost:", isHost);
         if (!roomCode) return;
@@ -93,7 +86,7 @@ export default function HostPage() {
         socket.on("game-started", (data: { totalQuestions: number ; isMixed:boolean; category:string[] }) => {
         console.log(isMixed,category)
         navigate(`/game/${roomCode}`, { state: { totalQuestions: data.totalQuestions,isMixed:data.isMixed,category:data.category}});
-    })
+        })
         socket.on("host-left", () => {
             showNotification('error', "The host has left the lobby. Redirecting to Dashboard...");
             setTimeout(() => navigate("/dashboard"), 2500);
@@ -131,7 +124,6 @@ export default function HostPage() {
             showNotification('info', "You need at least 2 players in the lobby to begin.");
             return;
         }
-
         setCreatingRoom(true);
         socket.emit("start-game", {
             roomCode,
@@ -249,6 +241,7 @@ export default function HostPage() {
                     )}
 
                     <div className={styles.rightPanel}>
+                        
                         <div className={styles.codeBox}>
                             <p className={styles.codeLabel}>Room code</p>
                             <p className={styles.codeValue}>{roomCode || "------"}</p>

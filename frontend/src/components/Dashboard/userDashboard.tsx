@@ -13,7 +13,6 @@ interface RecentGame {
   rank: number | null;
   playedAt: string;
 }
-
 interface Stats {
   gamesPlayed: number;
   winRate: number;
@@ -32,7 +31,6 @@ export default function Dashboard() {
     recentGames: [],
   });
   const navigate = useNavigate();
-
   function greetings() {
     const hour = new Date().getHours();
     const username=user?.username;
@@ -45,7 +43,7 @@ export default function Dashboard() {
     const fetchUserStats = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("https://quizarena-br8y.onrender.com/api/user/stats", {
+        const res = await fetch("https://quizarena.grey001dev.hackclub.app/api/user/stats", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -62,12 +60,10 @@ export default function Dashboard() {
     };
     fetchUserStats();
   }, []);
-
   function logout() {
     localStorage.removeItem("token");
     navigate("/login");
   }
-
   const handleCodeGen = async () => {
     setMessage("");
     try {
@@ -87,7 +83,6 @@ export default function Dashboard() {
       setMessage(err.message || "Failed to create room");
     }
   };
-
   return (
     <div className={styles.page}>
       <nav className={styles.navbar}>
@@ -128,7 +123,6 @@ export default function Dashboard() {
           <div className={styles.modeCard} onClick={() => navigate("/solo")}>
             <div className={styles.modeIcon}>
         <Target size={20} strokeWidth={2.5} color="#1d4ed8" /> 
-      
             </div>
             <h2 className={styles.modeTitle}>Solo play</h2>
             <p className={styles.modeDesc}>Play alone. Pick a category and sharpen your skills.</p>
@@ -143,7 +137,6 @@ export default function Dashboard() {
           Create a live room, share a code, and control the match.
             </p>
           </div>
-
           <div className={styles.modeCard} onClick={() => navigate("/join")}>
             <div className={styles.modeIcon}>
               <LogIn size={20} strokeWidth={2.5} color="#1d4ed8" />
@@ -186,6 +179,7 @@ export default function Dashboard() {
           </div>
 
           <div className={styles.panel}>
+
             <p className={styles.panelLabel}>Your stats</p>
             <div className={styles.statsGrid}>
               <div className={styles.statCard}>
@@ -207,6 +201,7 @@ export default function Dashboard() {
                 <p className={styles.statLabel}>Best rank</p>
                 <p className={styles.statNumber}>{stats.bestRank ? `#${stats.bestRank}` : "--"}</p>
               </div>
+              
             </div>
           </div> 
         </div> 

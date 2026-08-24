@@ -9,9 +9,7 @@ export default function JoinRoom() {
   const [loading, setLoading] = useState(false);
   const [roomCode, setRoomCode] = useState<string>("");
   const [errMessage, setErrMessage] = useState("");
-
   const isFormValid = roomCode.trim().length === 6;
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     
     const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
@@ -23,7 +21,6 @@ export default function JoinRoom() {
   async function handleJoin(e: React.FormEvent) {
     e.preventDefault();
     if (!isFormValid || loading) return;
-
     setLoading(true);
     setErrMessage("");
 
@@ -41,9 +38,11 @@ export default function JoinRoom() {
     } finally {
       setLoading(false);
     }
+
   }
 
   return (
+
     <div className={styles.page}>
       <nav className={styles.navbar}>
         <div className={styles.navLogo}>
@@ -58,7 +57,6 @@ export default function JoinRoom() {
       <div className={styles.contentContainer}>
         <h1 className={styles.title}>Join a game</h1>
         <p className={styles.subTitle}>Enter the 6-character room code shared by your host</p>
-
         {errMessage && <div className={styles.errorMessage}>{errMessage}</div>}
 
         <form className={styles.joinForm} onSubmit={handleJoin}>

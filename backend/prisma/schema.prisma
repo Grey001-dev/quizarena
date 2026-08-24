@@ -1,13 +1,11 @@
 generator client {
   provider = "prisma-client-js"
 }
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
-
 model User {
   id         String        @id @default(uuid())
   username   String        @unique
@@ -20,7 +18,6 @@ model User {
   hostedRooms  Room[]
   sessions     GameSession[]
 }
-
 model Room {
   id         String     @id @default(uuid())
   roomCode   String?    @unique
@@ -35,7 +32,6 @@ model Room {
 
   sessions   GameSession[]
 }
-
 model GameSession {
   id        String   @id @default(uuid())
   username  String
@@ -51,7 +47,6 @@ model GameSession {
   roomId    String
   room      Room     @relation(fields: [roomId], references: [id])
 }
-
 enum RoomStatus {
   WAITING
   ACTIVE

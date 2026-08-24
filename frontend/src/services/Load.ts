@@ -1,5 +1,5 @@
-const API_URL="https://quizarena-br8y.onrender.com/api/room";
-
+// const API_URL="https://quizarena-br8y.onrender.com/api/room";
+const API_URL="https://quizarena.grey001dev.hackclub.app/api/room"
 export async function loadQuestion(roomId:string){
     const token=localStorage.getItem("token")
     const res=await fetch(`${API_URL}/${roomId}/question`,{
