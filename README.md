@@ -51,7 +51,7 @@ npm install
 **3. Set up environment variables**
 Create a `.env` file in `/backend` with:
 | Variable | Description | Example |
-
+|----------|--------------|---------|
 |`PORT` | My Backend serve port | `7000` |
 | `DATABASE_URL` |Postgres connection string | `postgresql://postgress:password@localhost:5432/quizarena` |
 | `JWT_SECRET` | Secret for signing auth tokens | `your-secret`|
